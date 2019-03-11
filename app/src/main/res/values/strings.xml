@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">mp</string>
+<string name="app_name">mp</string>
+<string name="button1">1번 버튼</string>
+<string name="button2">2번 버튼</string>
+<string name="button3">3번 버튼</string>
 </resources>
