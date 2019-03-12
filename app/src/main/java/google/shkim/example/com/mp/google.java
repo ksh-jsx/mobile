@@ -13,6 +13,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class google extends FragmentActivity implements OnMapReadyCallback {
@@ -51,11 +52,16 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
                 Log.d(DEBUG_TAG, "id : " + place.getId());
                 Log.d(DEBUG_TAG, "location : " + location.latitude + ", " + location.longitude);
                 //세부정보 가져오기
-
-
+                mMap.clear();
+                int nameLength = place.getAddress().length();
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(location));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, nameLength-1));
+                MarkerOptions makerOptions = new MarkerOptions();
+                makerOptions .position(location)
+                        .title("검색 위치"); // 타이틀.
 
+                // 2. 마커 생성 (마커를 나타냄)
+                mMap.addMarker(makerOptions);
 
             }
 
