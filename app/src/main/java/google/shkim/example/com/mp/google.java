@@ -91,25 +91,24 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
         Button okbtn = (Button)findViewById(R.id.saveBtn);
         Button calcelbtn = (Button)findViewById(R.id.cancelBtn);
         dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
-        dbHelper.delete("delete from markerPoint;");
-        final Cursor cursor1 = dbHelper.select("SELECT * FROM markerPoint;");
-        cursor1.moveToFirst();
-        Log.d(DEBUG_TAG, "db에 저장된 위치 : " + cursor1.getDouble(1));
         okbtn.setOnClickListener(new View.OnClickListener() //확인 버튼 클릭 이벤트
         {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(google.this, index.class);
+                Intent intent = new Intent(google.this, EditPlan.class);
                 startActivity(intent);
                 if(name != "a" && lat !=0)
-                    dbHelper.insert("insert into markerPoint values('"+name+"',"+ lat + ", " + lng + ");");
+                {
+                    dbHelper.delete("delete from markerPoint;");
+                    dbHelper.insert("insert into markerPoint values('" + name + "'," + lat + ", " + lng + ");");
+                }
             }
         });
         calcelbtn.setOnClickListener(new View.OnClickListener() //취소 버튼 클릭 이벤트
         {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(google.this, index.class);
+                Intent intent = new Intent(google.this, EditPlan.class);
                 startActivity(intent);
             }
         });
