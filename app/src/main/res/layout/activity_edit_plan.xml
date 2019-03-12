@@ -10,11 +10,9 @@
         android:id="@+id/placeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="85dp"
-        android:layout_marginBottom="86dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="40dp"
         android:text="장소명"
-        app:layout_constraintBottom_toBottomOf="@+id/date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,103 +20,112 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="171dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="104dp"
         android:text="날짜"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/placeName" />
 
     <TextView
         android:id="@+id/arrivalTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="100dp"
         android:text="도착 시간"
-        app:layout_constraintEnd_toStartOf="@+id/dateValue"
-        app:layout_constraintStart_toStartOf="@+id/date"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date" />
 
     <TextView
         android:id="@+id/setPosition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="67dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="76dp"
         android:text="위치 지정"
-        app:layout_constraintStart_toStartOf="@+id/setPositionLatitude"
-        app:layout_constraintTop_toBottomOf="@+id/arrivalTimeValue" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arrivalTime" />
 
     <EditText
         android:id="@+id/placeNameValue"
-        android:layout_width="wrap_content"
+        android:layout_width="167dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/placeName"
-        app:layout_constraintStart_toEndOf="@+id/placeName" />
+        app:layout_constraintStart_toEndOf="@+id/placeName"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <DatePicker
         android:id="@+id/dateValue"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginBottom="39dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/arrivalTimeValue"
-        app:layout_constraintStart_toEndOf="@+id/date" />
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintStart_toEndOf="@+id/date"
+        app:layout_constraintTop_toBottomOf="@+id/placeNameValue" />
 
-    <EditText
-        android:id="@+id/arrivalTimeValue"
+    <TimePicker
+        android:id="@+id/timeValue"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
-        android:ems="10"
-        android:inputType="time"
-        app:layout_constraintBaseline_toBaselineOf="@+id/arrivalTime"
-        app:layout_constraintStart_toStartOf="@+id/arrivalTime" />
+        android:layout_height="117dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:timePickerMode="spinner"
+        app:layout_constraintStart_toEndOf="@+id/arrivalTime"
+        app:layout_constraintTop_toBottomOf="@+id/dateValue" />
 
     <EditText
         android:id="@+id/setPositionLatitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="104dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/setPositionLogitude"
-        app:layout_constraintTop_toBottomOf="@+id/setPosition" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setPositionLogitude" />
 
     <EditText
         android:id="@+id/setPositionLogitude"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="54dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/help"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setPositionLatitude" />
+        app:layout_constraintStart_toEndOf="@+id/setPosition"
+        app:layout_constraintTop_toBottomOf="@+id/timeValue" />
 
     <Button
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="제출"
-        app:layout_constraintEnd_toEndOf="@+id/setPositionLogitude"
-        app:layout_constraintTop_toBottomOf="@+id/setPositionLogitude" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setPositionLatitude"
+        app:layout_constraintVertical_bias="0.515" />
 
     <Button
         android:id="@+id/help"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="50dp"
+        android:layout_width="43dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="?"
-        app:layout_constraintBaseline_toBaselineOf="@+id/setPositionLogitude"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/setPositionLogitude" />
+        app:layout_constraintHorizontal_bias="0.914"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.723" />
 
 </android.support.constraint.ConstraintLayout>
