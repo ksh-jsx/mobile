@@ -1,4 +1,5 @@
 <resources>
-<string name="app_name">mp</string>
+    <string name="app_name">mp</string>
+    <string name="title_activity_google">Map</string>
 
 </resources>
