@@ -28,8 +28,8 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
     PlaceAutocompleteFragment placeAutoComplete;
     private static final String DEBUG_TAG = "{LOG_ANDROID}";
     private Database dbHelper;
-    char name = 'a';
-    double lat,lng;
+    CharSequence name = "a";
+    double lat,lng = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,7 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
                 mMap.addMarker(makerOptions);// 2. 마커 생성 (마커를 나타냄)
                 lat = location.latitude;
                 lng = location.longitude;
+                name = place.getName();
 
             }
 
@@ -89,8 +90,8 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
         mMap = googleMap;
         Button okbtn = (Button)findViewById(R.id.saveBtn);
         Button calcelbtn = (Button)findViewById(R.id.cancelBtn);
-        dbHelper = new Database(getApplicationContext(), "Marker.db", null, 1);
-
+        dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
+        dbHelper.delete("delete from markerPoint;");
         final Cursor cursor1 = dbHelper.select("SELECT * FROM markerPoint;");
         cursor1.moveToFirst();
         Log.d(DEBUG_TAG, "db에 저장된 위치 : " + cursor1.getDouble(1));
@@ -100,7 +101,8 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
             public void onClick(View v) {
                 Intent intent = new Intent(google.this, index.class);
                 startActivity(intent);
-                dbHelper.insert("insert into markerPoint(Lat, Lng) values("+ lat + ", " + lng + ");");
+                if(name != "a" && lat !=0)
+                    dbHelper.insert("insert into markerPoint values('"+name+"',"+ lat + ", " + lng + ");");
             }
         });
         calcelbtn.setOnClickListener(new View.OnClickListener() //취소 버튼 클릭 이벤트
