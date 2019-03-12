@@ -1,6 +1,7 @@
 package google.shkim.example.com.mp;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Point;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
     PlaceAutocompleteFragment placeAutoComplete;
     private static final String DEBUG_TAG = "{LOG_ANDROID}";
     private Database dbHelper;
+    char name = 'a';
+    double lat,lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +69,9 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
                 makerOptions .position(location)
                         .title("검색 위치"); // 타이틀.
 
-                // 2. 마커 생성 (마커를 나타냄)
-                mMap.addMarker(makerOptions);
+                mMap.addMarker(makerOptions);// 2. 마커 생성 (마커를 나타냄)
+                lat = location.latitude;
+                lng = location.longitude;
 
             }
 
@@ -86,13 +90,17 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
         Button okbtn = (Button)findViewById(R.id.saveBtn);
         Button calcelbtn = (Button)findViewById(R.id.cancelBtn);
         dbHelper = new Database(getApplicationContext(), "Marker.db", null, 1);
+
+        final Cursor cursor1 = dbHelper.select("SELECT * FROM markerPoint;");
+        cursor1.moveToFirst();
+        Log.d(DEBUG_TAG, "db에 저장된 위치 : " + cursor1.getDouble(1));
         okbtn.setOnClickListener(new View.OnClickListener() //확인 버튼 클릭 이벤트
         {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(google.this, index.class);
                 startActivity(intent);
-                dbHelper.insert("insert into markerPoint(PlaceName, Lat, Lng) values('"+ place.getName() +"',"+ latLng.latitude + ", " + latLng.longitude + ");");
+                dbHelper.insert("insert into markerPoint(Lat, Lng) values("+ lat + ", " + lng + ");");
             }
         });
         calcelbtn.setOnClickListener(new View.OnClickListener() //취소 버튼 클릭 이벤트
