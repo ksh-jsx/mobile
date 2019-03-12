@@ -15,11 +15,19 @@ public class index extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
         Button gotoGoogle = (Button)findViewById(R.id.gotoGoogle);
+        Button gotoPlan = (Button)findViewById(R.id.gotoPlan);
 
         gotoGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(index.this, google.class);
+                startActivity(intent);
+            }
+        });
+        gotoPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(index.this, EditPlan.class);
                 startActivity(intent);
             }
         });
