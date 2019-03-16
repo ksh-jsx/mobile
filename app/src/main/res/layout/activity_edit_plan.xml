@@ -13,6 +13,7 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="40dp"
         android:text="장소명"
+        android:gravity="center_horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,6 +24,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="104dp"
         android:text="날짜"
+        android:gravity="center_horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/placeName" />
 
@@ -33,6 +35,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="100dp"
         android:text="도착 시간"
+        android:gravity="center_horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date" />
 
@@ -44,6 +47,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="48dp"
         android:text="위치 지정"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -57,6 +61,7 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:gravity="center_horizontal"
         app:layout_constraintStart_toEndOf="@+id/placeName"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,6 +72,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="40dp"
         android:timePickerMode="spinner"
+        android:gravity="center_horizontal"
         app:layout_constraintStart_toEndOf="@+id/arrivalTime"
         app:layout_constraintTop_toBottomOf="@+id/dateShow" />
 
@@ -78,6 +84,7 @@
         android:layout_marginStart="112dp"
         android:ems="10"
         android:inputType="number"
+        android:gravity="center_horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setPositionLogitude" />
 
@@ -90,6 +97,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="number"
+        android:gravity="center_horizontal"
         app:layout_constraintStart_toEndOf="@+id/setPosition"
         app:layout_constraintTop_toBottomOf="@+id/timeValue" />
 
@@ -102,6 +110,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="제출"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,6 +126,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="지도"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.869"
@@ -132,6 +142,7 @@
         android:layout_marginTop="76dp"
         android:ems="10"
         android:inputType="date"
+        android:gravity="center_horizontal"
         app:layout_constraintStart_toEndOf="@+id/date"
         app:layout_constraintTop_toBottomOf="@+id/placeNameValue" />
 
@@ -143,6 +154,7 @@
         android:layout_marginTop="148dp"
         android:layout_marginEnd="8dp"
         android:text="변경"
+        android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toEndOf="@+id/dateShow"
@@ -157,6 +169,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

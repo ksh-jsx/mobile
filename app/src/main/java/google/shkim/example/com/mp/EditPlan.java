@@ -8,18 +8,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class EditPlan extends AppCompatActivity {
 
     private Database dbHelper;
+    long now = System.currentTimeMillis();
+    Date date = new Date(now);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    TextView dateShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_plan);
+
         Button setDate=(Button)findViewById(R.id.setDate);
         Button submit=(Button)findViewById(R.id.submit);
         Button setLatLng = (Button)findViewById(R.id.setLatLng);
         TextView setaddress = (TextView)findViewById(R.id.setAddress);
+
+        dateShow=(TextView)findViewById(R.id.dateShow);
+        dateShow.setText(getTime());
+
         setDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,5 +61,9 @@ public class EditPlan extends AppCompatActivity {
         if(cursor1.isFirst())
             setaddress.setText(cursor1.getString(0));
 
+    }
+
+    private String getTime() {
+        return sdf.format(date);
     }
 }
