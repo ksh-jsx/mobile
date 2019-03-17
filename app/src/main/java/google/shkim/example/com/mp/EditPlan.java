@@ -60,6 +60,15 @@ public class EditPlan extends Activity {
                 startActivity(intent);
             }
         });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditPlan.this,index.class);
+                startActivity(intent);
+            }
+        });
+
         dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
 
         final Cursor cursor1 = dbHelper.select("SELECT * FROM markerPoint;");
