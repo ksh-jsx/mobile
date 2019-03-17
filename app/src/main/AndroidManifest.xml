@@ -39,7 +39,6 @@
             android:name=".google"
             android:label="@string/title_activity_google" />
         <activity android:name=".EditPlan"></activity>
-        <activity android:name=".setDate"></activity>
     </application>
 
 </manifest>
