@@ -1,179 +1,207 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditPlan">
+    tools:context=".EditPlan"
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <TextView
-        android:id="@+id/placeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="40dp"
-        android:text="장소명"
-        android:gravity="center_horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="104dp"
-        android:text="날짜"
-        android:gravity="center_horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placeName" />
+        <Button
+            android:id="@+id/back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_weight="0.5"
+            android:background="#ffffff"
+            android:text="취소"
+            android:textColor="#585858"
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/arrivalTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="100dp"
-        android:text="도착 시간"
-        android:gravity="center_horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date" />
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_weight="0.5"
+            android:background="#ffffff"
+            android:text="완료"
+            android:textColor="#585858"
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/setPosition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="48dp"
-        android:text="위치 지정"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85" />
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/placeNameValue"
-        android:layout_width="167dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:gravity="center_horizontal"
-        app:layout_constraintStart_toEndOf="@+id/placeName"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@+id/place_area"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.225"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
 
-    <TimePicker
-        android:id="@+id/timeValue"
-        android:layout_width="wrap_content"
-        android:layout_height="117dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="40dp"
-        android:timePickerMode="spinner"
-        android:gravity="center_horizontal"
-        app:layout_constraintStart_toEndOf="@+id/arrivalTime"
-        app:layout_constraintTop_toBottomOf="@+id/dateShow" />
+        <TextView
+            android:id="@+id/placeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:gravity="center_horizontal"
+            android:text="장소명"
+            tools:layout_editor_absoluteX="44dp"
+            tools:layout_editor_absoluteY="56dp" />
+
+        <EditText
+            android:id="@+id/placeNameValue"
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="122dp"
+            tools:layout_editor_absoluteY="30dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/date_area"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.225"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_weight="0.2"
+            android:gravity="center_horizontal"
+            android:text="날짜"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="141dp" />
+
+        <EditText
+            android:id="@+id/dateShow"
+            android:layout_width="177dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.65"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="date"
+            tools:layout_editor_absoluteX="83dp"
+            tools:layout_editor_absoluteY="134dp" />
+
+        <Button
+            android:id="@+id/setDate"
+            android:layout_width="76dp"
+            android:layout_height="46dp"
+            android:layout_weight="0.15"
+            android:gravity="center_horizontal"
+            android:text="변경"
+            tools:layout_editor_absoluteX="327dp"
+            tools:layout_editor_absoluteY="148dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/time_area"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.225"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/arrivalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_weight="0.2"
+            android:text="도착 시간"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="267dp" />
+
+        <TimePicker
+            android:id="@+id/timeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="117dp"
+            android:layout_weight="0.8"
+            android:gravity="center_horizontal"
+            android:timePickerMode="spinner"
+            tools:layout_editor_absoluteX="87dp"
+            tools:layout_editor_absoluteY="236dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/position_area"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.225"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/setPosition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:gravity="center_horizontal"
+            android:text="위치 지정"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="526dp" />
+
+        <TextView
+            android:id="@+id/setAddress"
+            android:layout_width="177dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/edge"
+            android:gravity="center_horizontal"
+            tools:layout_editor_absoluteX="117dp"
+            tools:layout_editor_absoluteY="505dp" />
+
+        <Button
+            android:id="@+id/setLatLng"
+            android:layout_width="54dp"
+            android:layout_height="53dp"
+            android:layout_weight="0.3"
+            android:gravity="center_horizontal"
+            android:text="지도"
+            tools:layout_editor_absoluteX="327dp"
+            tools:layout_editor_absoluteY="505dp" />
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/setPositionLatitude"
         android:layout_width="wrap_content"
-        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginStart="112dp"
         android:ems="10"
-        android:inputType="number"
         android:gravity="center_horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setPositionLogitude" />
+        android:inputType="number"
+        android:visibility="gone"
+         />
 
     <EditText
         android:id="@+id/setPositionLogitude"
         android:layout_width="wrap_content"
-        android:visibility="gone"
         android:layout_height="41dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:inputType="number"
-        android:gravity="center_horizontal"
-        app:layout_constraintStart_toEndOf="@+id/setPosition"
-        app:layout_constraintTop_toBottomOf="@+id/timeValue" />
+        android:visibility="gone"/>
 
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="제출"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.946" />
-
-    <Button
-        android:id="@+id/setLatLng"
-        android:layout_width="54dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="지도"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.869"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.81" />
-
-    <EditText
-        android:id="@+id/dateShow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="76dp"
-        android:ems="10"
-        android:inputType="date"
-        android:gravity="center_horizontal"
-        app:layout_constraintStart_toEndOf="@+id/date"
-        app:layout_constraintTop_toBottomOf="@+id/placeNameValue" />
-
-    <Button
-        android:id="@+id/setDate"
-        android:layout_width="72dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="148dp"
-        android:layout_marginEnd="8dp"
-        android:text="변경"
-        android:gravity="center_horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@+id/dateShow"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/setAddress"
-        android:background="@drawable/edge"
-        android:layout_width="177dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.806" />
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

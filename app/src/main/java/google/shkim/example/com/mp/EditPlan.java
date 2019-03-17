@@ -1,5 +1,6 @@
 package google.shkim.example.com.mp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class EditPlan extends AppCompatActivity {
+public class EditPlan extends Activity {
 
     private Database dbHelper;
     long now = System.currentTimeMillis();
@@ -27,6 +28,7 @@ public class EditPlan extends AppCompatActivity {
 
         Button setDate=(Button)findViewById(R.id.setDate);
         Button submit=(Button)findViewById(R.id.submit);
+        Button back=(Button)findViewById(R.id.back);
         Button setLatLng = (Button)findViewById(R.id.setLatLng);
         TextView setaddress = (TextView)findViewById(R.id.setAddress);
 
