@@ -10,8 +10,8 @@
         android:id="@+id/layout_mapscreen"
         android:layout_width="match_parent"
         android:layout_height="43dp"
-        android:layout_weight="0.15"
         android:layout_alignParentTop="true"
+        android:layout_weight="0.001"
         android:orientation="horizontal">
 
         <Button
@@ -21,7 +21,6 @@
             android:layout_alignParentTop="true"
             android:layout_weight="0.5"
             android:background="#ffffff"
-            android:onClick="back"
             android:text="취소"
             android:textColor="#585858"
             android:textSize="15dp"
@@ -34,7 +33,6 @@
             android:layout_alignParentTop="true"
             android:layout_weight="0.5"
             android:background="#ffffff"
-            android:onClick="ok"
             android:text="완료"
             android:textColor="#585858"
             android:textSize="15dp"
@@ -43,18 +41,49 @@
 
     </LinearLayout>
 
-    <fragment
-        android:id="@+id/place_autocomplete"
+    <LinearLayout
+        android:id="@+id/search_area"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:layout_weight="0.15"
-        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"/>
+        android:layout_height="43dp"
+        android:layout_alignParentTop="true"
+        android:layout_weight="0.01"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    <fragment
-        android:id="@+id/map"
-        class="com.google.android.gms.maps.SupportMapFragment"
+        <fragment
+            android:id="@+id/place_autocomplete"
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_weight="0.13"
+            android:background="#FFFFFF"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.87"
+            android:scaleType="centerInside"
+            android:src="@drawable/gps"
+            android:background="#fafafa"
+            android:padding="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/map_area"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="43dp"
+        android:layout_alignParentTop="true"
+        android:layout_weight="0.989"
+        android:orientation="horizontal"
+        >
 
+        <fragment
+            android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 </LinearLayout>
