@@ -20,6 +20,8 @@ public class EditPlan extends AppCompatActivity {
         Button submit=(Button)findViewById(R.id.submit);
         Button setLatLng = (Button)findViewById(R.id.setLatLng);
         TextView setaddress = (TextView)findViewById(R.id.setAddress);
+        TextView setlat = (TextView)findViewById(R.id.setPositionLatitude);
+        TextView setlng = (TextView)findViewById(R.id.setPositionLatitude);
         setDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,8 +47,11 @@ public class EditPlan extends AppCompatActivity {
 
         final Cursor cursor1 = dbHelper.select("SELECT * FROM markerPoint;");
         cursor1.moveToFirst();
-        if(cursor1.isFirst())
+        if(cursor1.isFirst()) {
             setaddress.setText(cursor1.getString(0));
+            setlat.setText(cursor1.getString(1));
+            setlng.setText(cursor1.getString(2));
+        }
 
     }
 }

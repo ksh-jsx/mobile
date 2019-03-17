@@ -1,13 +1,17 @@
 package google.shkim.example.com.mp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Point;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
@@ -21,6 +25,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.List;
+
 
 public class google extends FragmentActivity implements OnMapReadyCallback {
 
@@ -28,9 +35,8 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
     PlaceAutocompleteFragment placeAutoComplete;
     private static final String DEBUG_TAG = "{LOG_ANDROID}";
     private Database dbHelper;
-    CharSequence name = "a";
+    CharSequence adr = "a";
     double lat,lng = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +78,7 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
                 mMap.addMarker(makerOptions);// 2. 마커 생성 (마커를 나타냄)
                 lat = location.latitude;
                 lng = location.longitude;
-                name = place.getName();
+                adr = place.getAddress();
 
             }
 
@@ -90,17 +96,23 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
         mMap = googleMap;
         Button okbtn = (Button)findViewById(R.id.saveBtn);
         Button calcelbtn = (Button)findViewById(R.id.cancelBtn);
+        final Geocoder mGeocoder = new Geocoder(this);
         dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
         okbtn.setOnClickListener(new View.OnClickListener() //확인 버튼 클릭 이벤트
         {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(google.this, EditPlan.class);
-                startActivity(intent);
-                if(name != "a" && lat !=0)
+
+                if(adr != "a" && lat !=0)
                 {
+                    Intent intent = new Intent(google.this, EditPlan.class);
+                    startActivity(intent);
                     dbHelper.delete("delete from markerPoint;");
-                    dbHelper.insert("insert into markerPoint values('" + name + "'," + lat + ", " + lng + ");");
+                    dbHelper.insert("insert into markerPoint values('" + adr + "'," + lat + ", " + lng + ");");
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "주소가 없어 저장할 수 없습니다.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -119,10 +131,20 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
             public void onMapLongClick(final LatLng latLng)
             {
                 MarkerOptions markerOptions = new MarkerOptions();
+                mMap.clear();
                 mMap.addMarker(new MarkerOptions().position(latLng));
                     markerOptions.position(latLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)); //마커위치설정
                     mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));   // 마커생성위치로 이동
                     mMap.addMarker(markerOptions); //마커 생성
+                try
+                {
+                    List<Address> mResultList = mGeocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                    adr = mResultList.get(0).getAddressLine(0);
+                }
+                catch(IOException e){}
+
+                lat = latLng.latitude;
+                lng = latLng.longitude;
 
             }
 
