@@ -90,7 +90,7 @@
             tools:layout_editor_absoluteY="141dp" />
 
         <EditText
-            android:id="@+id/dateShow"
+            android:id="@+id/dateValue"
             android:layout_width="177dp"
             android:layout_height="40dp"
             android:layout_weight="0.65"
@@ -151,7 +151,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/setPosition"
+            android:id="@+id/Address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
@@ -161,7 +161,7 @@
             tools:layout_editor_absoluteY="526dp" />
 
         <TextView
-            android:id="@+id/setAddress"
+            android:id="@+id/AddressValue"
             android:layout_width="177dp"
             android:layout_height="40dp"
             android:layout_weight="0.5"
@@ -171,7 +171,7 @@
             tools:layout_editor_absoluteY="505dp" />
 
         <Button
-            android:id="@+id/setLatLng"
+            android:id="@+id/setAddress"
             android:layout_width="54dp"
             android:layout_height="53dp"
             android:layout_weight="0.3"
@@ -183,18 +183,17 @@
 
 
     <EditText
-        android:id="@+id/setPositionLatitude"
+        android:id="@+id/latValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="112dp"
         android:ems="10"
         android:gravity="center_horizontal"
         android:inputType="number"
-        android:visibility="gone"
-         />
+        android:visibility="gone" />
 
     <EditText
-        android:id="@+id/setPositionLogitude"
+        android:id="@+id/lngValue"
         android:layout_width="wrap_content"
         android:layout_height="41dp"
         android:layout_marginStart="24dp"
@@ -202,6 +201,6 @@
         android:ems="10"
         android:gravity="center_horizontal"
         android:inputType="number"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>
