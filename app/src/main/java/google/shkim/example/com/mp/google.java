@@ -43,6 +43,8 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
+
         initViews();
     }
 
@@ -94,7 +96,7 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
         Button okbtn = (Button)findViewById(R.id.saveBtn);
         Button calcelbtn = (Button)findViewById(R.id.cancelBtn);
         final Geocoder mGeocoder = new Geocoder(this);
-        dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
+        dbHelper = new Database(getApplicationContext(), "SQLite3.db", null, 1);
         okbtn.setOnClickListener(new View.OnClickListener() //확인 버튼 클릭 이벤트
         {
             @Override

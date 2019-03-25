@@ -46,7 +46,7 @@ public class EditPlan extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_plan);
-
+        dbHelper = new Database(getApplicationContext(), "SQLite3.db", null, 1);
         Button setDate=(Button)findViewById(R.id.setDate);
         Button setAddress = (Button)findViewById(R.id.setAddress);
         Button submit=(Button)findViewById(R.id.submit);
@@ -59,6 +59,16 @@ public class EditPlan extends Activity {
         final TextView getlat = (TextView)findViewById(R.id.latValue);
         final TextView getlng = (TextView)findViewById(R.id.lngValue);
 
+        final Cursor cursor2 = dbHelper.select("SELECT * FROM tempSave;");
+
+        cursor2.moveToFirst();
+        if(cursor2.isFirst()) {
+            getName.setText(cursor2.getString(0));
+            getDate.setText(cursor2.getString(1));
+            getTime.setHour(cursor2.getInt(2));
+            getTime.setMinute(cursor2.getInt(3));
+        }
+        dbHelper.delete("delete from tempSave;");
         if(month<10 && date<10)
             getDate.setText(year+"년 "+"0"+month+"월 "+"0"+date+"일");
         else if(month<10 && date>10)
@@ -77,6 +87,16 @@ public class EditPlan extends Activity {
         setAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String nameValue = getName.getText().toString();
+                String fullDatevalue = getDate.getText().toString();
+                String yearValue = fullDatevalue.substring(0,4);
+                String monthValue =  fullDatevalue.substring(6,8);
+                String dateValue =  fullDatevalue.substring(10,12);
+                int hourValue = getTime.getHour();
+                int minuteValue = getTime.getMinute();
+
+
+                dbHelper.insert("insert into tempSave values('" + nameValue + "','" + fullDatevalue + "', " + hourValue + ", " + minuteValue + ");");
                 Intent intent = new Intent(EditPlan.this,google.class);
                 startActivity(intent);
             }
@@ -127,7 +147,7 @@ public class EditPlan extends Activity {
             }
         });
 
-        dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
+
 
         final Cursor cursor1 = dbHelper.select("SELECT * FROM markerPoint;");
         cursor1.moveToFirst();
