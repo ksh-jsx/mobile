@@ -101,6 +101,7 @@ public class EditPlan extends Activity {
                 Log.d(DEBUG_TAG, "date : " + dateValue);
                 Log.d(DEBUG_TAG, "hour : " + hourValue);
                 Log.d(DEBUG_TAG, "minute : " + minuteValue);
+
                 Log.d(DEBUG_TAG, "location : " + latString + ", " + lngString);
                 if(nameValue.length() == 0)
                     Toast.makeText(getApplicationContext(), "장소명을 입력해주세요", Toast.LENGTH_SHORT).show();
