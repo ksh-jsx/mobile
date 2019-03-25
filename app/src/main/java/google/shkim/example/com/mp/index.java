@@ -5,6 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -17,96 +23,65 @@ public class index extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
 
-        Button button1 = (Button)findViewById(R.id.button1);
-        Button button2 = (Button)findViewById(R.id.button2);
-        Button button3 = (Button)findViewById(R.id.button3);
-        Button button4 = (Button)findViewById(R.id.button4);
-        Button button5 = (Button)findViewById(R.id.button5);
-        final Dog dog1 = new Dog("강아지1",5);
-        final Dog dog2 = new Dog("강아지2",3);
+        final CheckBox checkBox = (CheckBox)findViewById(R.id.checkBox);
+        final TextView textView = (TextView)findViewById(R.id.textView);
+        final RadioGroup radioGroup = (RadioGroup)findViewById(R.id.rGroup);
+        final RadioButton radioButton1 = (RadioButton)findViewById(R.id.radio1);
+        final RadioButton radioButton2 = (RadioButton)findViewById(R.id.radio2);
+        final RadioButton radioButton3 = (RadioButton)findViewById(R.id.radio3);
+        final Button button = (Button)findViewById(R.id.button);
+        final ImageView image0 = (ImageView)findViewById(R.id.imageView0);
 
-        button1.setOnClickListener(new View.OnClickListener() {
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                Date now = new Date();
-                SimpleDateFormat sFormat = new SimpleDateFormat("yyyyMMdd");
-                Toast.makeText(getApplicationContext(), sFormat.format(now), Toast.LENGTH_LONG).show();
-
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(checkBox.isChecked())
+                {
+                    radioGroup.setVisibility(View.VISIBLE);
+                    textView.setVisibility(View.VISIBLE);
+                    button.setVisibility(View.VISIBLE);
+                    image0.setVisibility(View.VISIBLE);
+                }
             }
         });
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
 
-        button2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Date now = new Date();
-                SimpleDateFormat sFormat = new SimpleDateFormat("HH:mm:ss");
-                Toast.makeText(getApplicationContext(), sFormat.format(now), Toast.LENGTH_LONG).show();
-            }
-        });
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dog1.plusCount();
-                Toast.makeText(getApplicationContext(),"강아지 이름:"+dog1.getName(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dog2.plusCount();
-                Toast.makeText(getApplicationContext(), "강아지 이름:"+dog2.getName(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(dog1.getCount()>dog2.getCount())
-                    Toast.makeText(getApplicationContext(), "강아지1 버튼이 더 많이 눌림", Toast.LENGTH_LONG).show();
-                else if(dog1.getCount()<dog2.getCount())
-                    Toast.makeText(getApplicationContext(), "강아지2 버튼이 더 많이 눌림", Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(getApplicationContext(), "눌린 횟수 동일", Toast.LENGTH_LONG).show();
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+               if(radioButton1.isChecked()) {
+                   image0.setImageResource(R.drawable.pa);
+               }
+               else if(radioButton2.isChecked()) {
+                   image0.setImageResource(R.drawable.kko);
+               }
+               else if(radioButton3.isChecked()) {
+                   image0.setImageResource(R.drawable.lee);
+               }
             }
         });
 
 
 
 
-    }
 
-    public class Dog
-    {
-        String name;
-        int age;
-        int clickCount;
 
-        Dog(String name, int age)
-        {
-            this.name = name;
-            this.age = age;
-        }
-        String getName()
-        {
-            return name;
-        }
-        int getAge()
-        {
-            return age;
-        }
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(radioButton1.isChecked()) {
+                    Toast.makeText(getApplicationContext(), "파이리를 선택하셨습니다.", Toast.LENGTH_LONG).show();
+                }
+                else if(radioButton2.isChecked()) {
+                    Toast.makeText(getApplicationContext(), "꼬부기를 선택하셨습니다.", Toast.LENGTH_LONG).show();
+                }
+                else if(radioButton3.isChecked()) {
+                    Toast.makeText(getApplicationContext(), "이상해씨를 선택하셨습니다.", Toast.LENGTH_LONG).show();
+                }
 
-        int getCount()
-        {
-            return clickCount;
-        }
-        void plusCount()
-        {
-            clickCount++;
-        }
 
+            }
+        });
     }
 }
 
