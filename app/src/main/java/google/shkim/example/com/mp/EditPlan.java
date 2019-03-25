@@ -53,6 +53,7 @@ public class EditPlan extends Activity {
         Button back=(Button)findViewById(R.id.back);
         final EditText getName = (EditText)findViewById(R.id.placeNameValue);
         final EditText getDate = (EditText)findViewById(R.id.dateValue);
+                        getDate.setEnabled(false);
         final TimePicker getTime = (TimePicker)findViewById(R.id.timeValue);
         final TextView getAddress = (TextView)findViewById(R.id.AddressValue);
         final TextView getlat = (TextView)findViewById(R.id.latValue);
@@ -88,8 +89,8 @@ public class EditPlan extends Activity {
                 String yearValue = fullDatevalue.substring(0,4);
                 String monthValue =  fullDatevalue.substring(6,8);
                 String dateValue =  fullDatevalue.substring(10,12);
-                String hourValue = ""; //여기에 시간값(시) get하는 코드 삽입바람 pm이면 13시-24시 형식으로 나오게 전환하는 과정도 필요할듯
-                String minuteValue = ""; //여기에 시간값(분) get하는 코드 삽입바람
+                int hourValue = getTime.getHour();
+                int minuteValue = getTime.getMinute();
                 String latString = getlat.getText().toString();
                 String lngString = getlng.getText().toString();
 
@@ -97,16 +98,14 @@ public class EditPlan extends Activity {
                 Log.d(DEBUG_TAG, "Fulldate : " + fullDatevalue);
                 Log.d(DEBUG_TAG, "year : " + yearValue);
                 Log.d(DEBUG_TAG, "month : " + monthValue);
-                Log.d(DEBUG_TAG, "date : " + hourValue);
-                Log.d(DEBUG_TAG, "hour : " + minuteValue);
-                Log.d(DEBUG_TAG, "minute : " + dateValue);
+                Log.d(DEBUG_TAG, "date : " + dateValue);
+                Log.d(DEBUG_TAG, "hour : " + hourValue);
+                Log.d(DEBUG_TAG, "minute : " + minuteValue);
                 Log.d(DEBUG_TAG, "location : " + latString + ", " + lngString);
                 if(nameValue.length() == 0)
                     Toast.makeText(getApplicationContext(), "장소명을 입력해주세요", Toast.LENGTH_SHORT).show();
                 else if(fullDatevalue.length() == 0)
                     Toast.makeText(getApplicationContext(), "날짜를 입력해주세요", Toast.LENGTH_SHORT).show();
-                else if(hourValue.length() == 0)
-                    Toast.makeText(getApplicationContext(), "시간을 입력해주세요", Toast.LENGTH_SHORT).show();
                 else if(latString.length() == 0)
                     Toast.makeText(getApplicationContext(), "위치를 입력해주세요", Toast.LENGTH_SHORT).show();
                 else

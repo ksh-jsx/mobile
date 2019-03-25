@@ -117,8 +117,7 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
         {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(google.this, EditPlan.class);
-                startActivity(intent);
+                google.super.onBackPressed();
             }
         });
 
