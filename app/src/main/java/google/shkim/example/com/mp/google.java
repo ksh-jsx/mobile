@@ -32,7 +32,7 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
     PlaceAutocompleteFragment placeAutoComplete;
     private static final String DEBUG_TAG = "{LOG_ANDROID}";
     private Database dbHelper;
-    CharSequence adr = "a";
+    CharSequence adr = "";
     double lat,lng = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +42,7 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
-
+        
         initViews();
     }
 
@@ -102,7 +100,7 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
 
-                if(adr != "a" && lat !=0)
+                if(adr != "" && lat !=0)
                 {
                     Intent intent = new Intent(google.this, EditPlan.class);
                     startActivity(intent);
@@ -137,7 +135,11 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
                 try
                 {
                     List<Address> mResultList = mGeocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-                    adr = mResultList.get(0).getAddressLine(0);
+                    if(mResultList.get(0).getAddressLine(0) == null)
+                        Toast.makeText(getApplicationContext(),"주소가 없는 위치입니다",Toast.LENGTH_SHORT).show();
+                    else
+                        adr = mResultList.get(0).getAddressLine(0);
+
                 }
                 catch(IOException e){}
 

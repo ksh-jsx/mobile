@@ -156,7 +156,11 @@ public class EditPlan extends Activity {
             getlat.setText(cursor1.getString(1));
             getlng.setText(cursor1.getString(2));
         }
-
+    }
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(EditPlan.this,index.class);
+        startActivity(intent);
     }
 }
 
