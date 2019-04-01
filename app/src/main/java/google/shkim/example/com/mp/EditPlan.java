@@ -131,7 +131,8 @@ public class EditPlan extends Activity {
                     Toast.makeText(getApplicationContext(), "위치를 입력해주세요", Toast.LENGTH_SHORT).show();
                 else
                 {
-                    //dbHelper.insert("insert into infos values('" + adr + "'," + lat + ", " + lng + ");");//여긴 건들 ㄴㄴ
+
+                    dbHelper.insert("insert into infos(PlaceName,Year,Month,Date,Hour,Minute,Lat,Lng) values('" + nameValue + "'," + yearValue + ", " + monthValue + ", " + dateValue + ", " + hourValue + ", " + minuteValue+"," +latString + ", " + lngString +");");
                     Intent intent = new Intent(EditPlan.this,index.class);
                     startActivity(intent);
                 }

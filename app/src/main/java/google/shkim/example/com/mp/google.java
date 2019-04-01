@@ -94,6 +94,11 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
         Button okbtn = (Button)findViewById(R.id.saveBtn);
         Button calcelbtn = (Button)findViewById(R.id.cancelBtn);
         final Geocoder mGeocoder = new Geocoder(this);
+
+        LatLng SEOUL = new LatLng(37.56, 126.97);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+
         dbHelper = new Database(getApplicationContext(), "SQLite3.db", null, 1);
         okbtn.setOnClickListener(new View.OnClickListener() //확인 버튼 클릭 이벤트
         {
