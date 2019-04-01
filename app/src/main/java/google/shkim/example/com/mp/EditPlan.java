@@ -62,22 +62,28 @@ public class EditPlan extends Activity {
         final Cursor cursor2 = dbHelper.select("SELECT * FROM tempSave;");
 
         cursor2.moveToFirst();
-        if(cursor2.isFirst()) {
+
+        if(cursor2.getCount()>0) {
+            Log.d(DEBUG_TAG, "name : " + cursor2.getString(0));
+            Log.d(DEBUG_TAG, "Fulldate : " + cursor2.getString(1));
+            Log.d(DEBUG_TAG, "year : " + cursor2.getInt(2));
+            Log.d(DEBUG_TAG, "month : " + cursor2.getInt(3));
             getName.setText(cursor2.getString(0));
             getDate.setText(cursor2.getString(1));
             getTime.setHour(cursor2.getInt(2));
             getTime.setMinute(cursor2.getInt(3));
+            dbHelper.delete("delete from tempSave;");
         }
-        dbHelper.delete("delete from tempSave;");
-        if(month<10 && date<10)
-            getDate.setText(year+"년 "+"0"+month+"월 "+"0"+date+"일");
-        else if(month<10 && date>10)
-            getDate.setText(year+"년 "+"0"+month+"월 "+date+"일");
-        else if(month>10 && date<10)
-            getDate.setText(year+"년 "+month+"월 "+"0"+date+"일");
-        else
-            getDate.setText(year+"년 "+month+"월 "+date+"일");
-
+        else {
+            if (month < 10 && date < 10)
+                getDate.setText(year + "년 " + "0" + month + "월 " + "0" + date + "일");
+            else if (month < 10 && date > 10)
+                getDate.setText(year + "년 " + "0" + month + "월 " + date + "일");
+            else if (month > 10 && date < 10)
+                getDate.setText(year + "년 " + month + "월 " + "0" + date + "일");
+            else
+                getDate.setText(year + "년 " + month + "월 " + date + "일");
+        }
         setDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

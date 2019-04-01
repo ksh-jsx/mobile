@@ -27,7 +27,8 @@ public class index extends Activity {
     private ArrayList<HashMap<String,String>> Data = new ArrayList<HashMap<String, String>>();
     private HashMap<String,String> InputData1 = new HashMap<>();
     private static final String TAG_NAME = "name";
-    private static final String TAG_PHONE ="date";
+    private static final String TAG_DATE ="date";
+    private static final String TAG_TIME ="time";
     ArrayList<HashMap<String, String>> infoList;
     ListAdapter adapter;
     @Override
@@ -39,7 +40,7 @@ public class index extends Activity {
         ListView list = (ListView) findViewById(R.id.List_view);
 
         infoList = new ArrayList<HashMap<String,String>>();
-        Cursor cursor1 = dbHelper.select("select * from infos");
+        Cursor cursor1 = dbHelper.select("select * from infos order by Year asc, Month asc,Date asc,Hour asc,Minute asc");
         cursor1.moveToFirst();
         for(int i=0;i<cursor1.getCount();i++)
         {
@@ -50,12 +51,14 @@ public class index extends Activity {
 
             String name = cursor1.getString(1);
             String date = cursor1.getString(2)+"년"+cursor1.getString(3)+"월"+cursor1.getString(4)+"일";
+            String time = cursor1.getString(5)+"시"+cursor1.getString(6)+"분";
 
 
             HashMap<String,String> infos = new HashMap<String,String>();
 
             infos.put(TAG_NAME,name);
-            infos.put(TAG_PHONE,date);
+            infos.put(TAG_DATE,date);
+            infos.put(TAG_TIME,time);
 
             //ArrayList에 추가합니다..
             infoList.add(infos);
@@ -64,8 +67,8 @@ public class index extends Activity {
 
         adapter = new SimpleAdapter(
                 this, infoList, R.layout.list_item,
-                new String[]{TAG_NAME,TAG_PHONE},
-                new int[]{ R.id.name, R.id.date}
+                new String[]{TAG_NAME,TAG_DATE,TAG_TIME},
+                new int[]{ R.id.name, R.id.date, R.id.time}
         );
 
 
