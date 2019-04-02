@@ -38,31 +38,45 @@ public class index extends Activity {
         Button gotoPlan = (Button)findViewById(R.id.gotoPlan);
         final Database dbHelper = new Database(getApplicationContext(), "SQLite3.db", null, 1);
         ListView list = (ListView) findViewById(R.id.List_view);
-
         infoList = new ArrayList<HashMap<String,String>>();
+        String dateSave = "";
+        String name;
+        String date;
+        String time;
+        int i;
         Cursor cursor1 = dbHelper.select("select * from infos order by Year asc, Month asc,Date asc,Hour asc,Minute asc");
         cursor1.moveToFirst();
-        for(int i=0;i<cursor1.getCount();i++)
+        for(i=0;i<cursor1.getCount();i++)
         {
             Log.d(DEBUG_TAG, "name : " + cursor1.getString(1));
-            Log.d(DEBUG_TAG, "Fulldate : " + cursor1.getString(2)+"년"+cursor1.getString(3)+"월"+cursor1.getString(4)+"일");
+            Log.d(DEBUG_TAG, "time : " + cursor1.getString(5)+"시"+cursor1.getString(6)+"분");
+            Log.d(DEBUG_TAG, "datesave : " + dateSave);
 
 
-
-            String name = cursor1.getString(1);
-            String date = cursor1.getString(2)+"년"+cursor1.getString(3)+"월"+cursor1.getString(4)+"일";
-            String time = cursor1.getString(5)+"시"+cursor1.getString(6)+"분";
-
+            name = cursor1.getString(1);
+            date = cursor1.getString(2)+"년 "+cursor1.getString(3)+"월 "+cursor1.getString(4)+"일";
+            time = cursor1.getString(5)+"시"+cursor1.getString(6)+"분";
+            Log.d(DEBUG_TAG, "date : " + date);
 
             HashMap<String,String> infos = new HashMap<String,String>();
-
-            infos.put(TAG_NAME,name);
-            infos.put(TAG_DATE,date);
-            infos.put(TAG_TIME,time);
+            if(dateSave.equals(date))
+            {
+                infos.put(TAG_NAME,name);
+                infos.put(TAG_TIME,time);
+                cursor1.moveToNext();
+            }
+            else
+            {
+                infos.put(TAG_DATE,date);
+                i--;
+            }
 
             //ArrayList에 추가합니다..
             infoList.add(infos);
-            cursor1.moveToNext();
+
+            dateSave = date;
+
+
         }
 
         adapter = new SimpleAdapter(
