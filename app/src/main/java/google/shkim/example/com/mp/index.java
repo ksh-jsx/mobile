@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
@@ -34,11 +35,16 @@ public class index  extends Activity
         del = (Button)findViewById(R.id.del);
         String dateSave = "a";
         final Database dbHelper = new Database(getApplicationContext(), "SQLite3.db", null, 1);
+        ListView listview = (ListView)findViewById(R.id.List_view);
+        TextView noticeText = (TextView)findViewById(R.id.notice);
         // 데이터 생성.
         Cursor cursor1 = dbHelper.select("SELECT * FROM infos");
         cursor1.moveToFirst();
-
-
+        if(cursor1.getCount() != 0)
+        {
+            listview.setVisibility(View.VISIBLE);
+            noticeText.setVisibility(View.GONE);
+        }
 
         ArrayList<ItemData> oData = new ArrayList<>();
         for (int i=0; i<cursor1.getCount(); ++i)

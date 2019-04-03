@@ -47,5 +47,16 @@
         android:divider="@null"
         android:dividerHeight="0dp"
         android:listSelector="@android:color/transparent"
-        android:visibility="visible"/>
+        android:visibility="gone">
+
+    </ListView>
+    <TextView
+        android:id="@+id/notice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="확인할 일정이 없습니다.\n새로운 일정을 추가해주세요"
+        android:visibility="visible"
+        android:paddingTop="100dp"
+        android:textAlignment="center"
+        android:textSize="20dp"/>
 </LinearLayout>
