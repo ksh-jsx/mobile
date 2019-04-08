@@ -17,12 +17,12 @@ public class index extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
-        final EditText editUrl = (EditText)findViewById(R.id.editUrl);
+        final  EditText editUrl = (EditText)findViewById(R.id.editUrl);
         final  Button btnGo = (Button)findViewById(R.id.btnGo);
         final  Button btnBack = (Button)findViewById(R.id.btnBack);
         final  WebView web = (WebView)findViewById(R.id.webView1);
 
-        web.setWebViewClient(new CookWebViewCLient());
+        web.setWebViewClient(new CookWebViewClient());
 
         WebSettings webSet = web.getSettings();
         webSet.setBuiltInZoomControls(true);
@@ -41,13 +41,17 @@ public class index extends AppCompatActivity {
             }
         });
     }
-    class CookWebViewCLient extends WebViewClient
+    class CookWebViewClient extends WebViewClient
     {
-
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             return super.shouldOverrideUrlLoading(view, request);
         }
+
+        /*@Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return super.shouldOverrideUrlLoading(view, url);
+        }*/
 
     }
 }
