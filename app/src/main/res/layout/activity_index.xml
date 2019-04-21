@@ -4,43 +4,36 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".index"
-    android:orientation="vertical">
-    <LinearLayout
+    android:orientation="vertical"
+    android:id="@+id/base">
+
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="10"
-        android:orientation="horizontal">
-        <EditText
-            android:id="@+id/editUrl"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="60"
-            android:hint="URL을 입력하세요">
-        </EditText>
-
-        <Button
-            android:id="@+id/btnGo"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="20"
-            android:text="이동">
-
-        </Button>
-
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="20"
-            android:text="이전"></Button>
-    </LinearLayout>
-    <WebView
-        android:id="@+id/webView1"
+        android:text="선택한 포켓몬 이름"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:textAlignment="center"/>
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="90">
+        android:layout_height="wrap_content"
+        android:text="aaa"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:textAlignment="center"
+        android:visibility="gone"/>
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선택 버튼"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+       />
 
-    </WebView>
+
 
 
 </LinearLayout>
