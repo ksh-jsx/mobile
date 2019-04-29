@@ -94,28 +94,8 @@ public class index  extends Activity
 
         tabhost.setCurrentTab(1);
 
-        for (int i = 0; i < tabhost.getTabWidget().getChildCount(); i++) {
 
-            tabhost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#FFFFFF"));
-            tabhost.getTabWidget().setStripEnabled(false);
 
-        }
-        tabhost.getTabWidget().getChildAt(1).setBackgroundColor(Color.parseColor("#2196F3"));
-        tabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            @Override
-            public void onTabChanged(String s) {
-
-                for (int i = 0; i < tabhost.getTabWidget().getChildCount(); i++) {
-                    tabhost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#FFFFFF"));
-                }
-                tabhost.getTabWidget().getChildTabViewAt(tabhost.getCurrentTab()).setBackgroundColor(Color.parseColor("#2196F3"));
-
-                if(tabhost.getCurrentTab() == 0)
-                {
-                    Log.d(DEBUG_TAG, "hello");
-                }
-            }
-        });
 
         // 데이터 생성.
         Cursor cursor1 = dbHelper.select("SELECT * FROM infos");
