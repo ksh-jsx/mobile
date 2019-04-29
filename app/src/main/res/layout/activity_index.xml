@@ -113,51 +113,149 @@
                     <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TableRow android:paddingTop="100dp">
-                            <ImageButton android:id="@+id/imgBtn1"
-                                android:src="@drawable/chat"
-                                android:layout_weight="1"
-                                android:background="#00ff0000" />
-                            <ImageButton android:id="@+id/imgBtn2"
-                                android:src="@drawable/restaurant"
-                                android:layout_weight="1"
-                                android:background="#00ff0000" />
-                            <ImageButton android:id="@+id/imgBtn3"
-                                android:src="@drawable/work"
-                                android:layout_weight="1"
-                                android:background="#00ff0000" />
-                        </TableRow>
-                        <TableRow android:paddingTop="100dp">
-                            <ImageButton android:id="@+id/imgBtn4"
-                                android:src="@drawable/metro"
-                                android:layout_weight="1"
-                                android:background="#00ff0000" />
-                            <ImageButton android:id="@+id/imgBtn5"
-                                android:src="@drawable/shopping"
-                                android:layout_weight="1"
-                                android:background="#00ff0000" />
-                            <ImageButton android:id="@+id/imgBtn6"
-                                android:src="@drawable/bed"
-                                android:layout_weight="1"
-                                android:background="#00ff0000" />
-                        </TableRow>
-                        <TableRow android:paddingTop="100dp">
-                            <ImageButton android:id="@+id/imgBtn7"
-                                android:src="@drawable/alarm"
-                                android:layout_weight="1"
-                                android:background="#00ff0000" />
-                            <ImageButton android:id="@+id/imgBtn8"
-                                android:src="@drawable/work"
-                                android:layout_weight="1"
-                                android:background="#00ff0000" />
-                            <ImageButton android:id="@+id/imgBtn9"
-                                android:src="@drawable/medical"
-                                android:layout_weight="1"
-                                android:background="#00ff0000" />
-                        </TableRow>
+                        <TableRow android:paddingTop="70dp">
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical"  android:layout_weight="1">
+                                <Button android:id="@+id/imgBtn1"
+                                    android:layout_height="match_parent"
+                                    android:layout_width="match_parent"
+                                    android:text="기본 회화"
+                                    android:drawableBottom="@drawable/chat"
+                                    android:background="#00ff0000"/>
 
+                                <Spinner
+                                    android:id="@+id/spinner1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:visibility="gone">
+                                </Spinner>
+                            </LinearLayout>
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical"  android:layout_weight="1">
+                                <Button android:id="@+id/imgBtn2"
+                                    android:layout_height="match_parent"
+                                    android:layout_width="match_parent"
+                                    android:text="식당"
+                                    android:drawableBottom="@drawable/restaurant"
+                                    android:layout_weight="1"
+                                    android:background="#00ff0000" />
+                                <Spinner
+                                    android:id="@+id/spinner2"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:visibility="gone">
+                                </Spinner>
+                            </LinearLayout>
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical"  android:layout_weight="1">
+                            <Button android:id="@+id/imgBtn3"
+                                android:layout_height="match_parent"
+                                android:layout_width="match_parent"
+                                android:text="에베베벱"
+                                android:drawableBottom="@drawable/work"
+                                android:layout_weight="1"
+                                android:background="#00ff0000" />
+                            <Spinner
+                                android:id="@+id/spinner3"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:visibility="gone">
+                            </Spinner>
+                        </LinearLayout>
+                        </TableRow>
+                        <TableRow android:paddingTop="70dp">
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical"  android:layout_weight="1">
+                                <Button android:id="@+id/imgBtn4"
+                                    android:layout_height="match_parent"
+                                    android:layout_width="match_parent"
+                                    android:text="교통"
+                                    android:drawableBottom="@drawable/metro"
+                                    android:layout_weight="1"
+                                    android:background="#00ff0000" />
+                                <Spinner
+                                    android:id="@+id/spinner4"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:visibility="gone">
+                                </Spinner>
+                            </LinearLayout>
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical"  android:layout_weight="1">
+                                <Button android:id="@+id/imgBtn5"
+                                    android:layout_height="match_parent"
+                                    android:layout_width="match_parent"
+                                    android:text="쇼핑"
+                                    android:drawableBottom="@drawable/shopping"
+                                    android:layout_weight="1"
+                                    android:background="#00ff0000" />
+                                <Spinner
+                                    android:id="@+id/spinner5"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:visibility="gone">
+                                </Spinner>
+                            </LinearLayout>
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical"  android:layout_weight="1">
+                                <Button android:id="@+id/imgBtn6"
+                                    android:layout_height="match_parent"
+                                    android:layout_width="match_parent"
+                                    android:text="숙박시설"
+                                    android:drawableBottom="@drawable/bed"
+                                    android:layout_weight="1"
+                                    android:background="#00ff0000" />
+                                <Spinner
+                                    android:id="@+id/spinner6"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:visibility="gone">
+                                </Spinner>
+                            </LinearLayout>
+                        </TableRow>
+                        <TableRow android:paddingTop="70dp">
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical"  android:layout_weight="1">
+                                <Button android:id="@+id/imgBtn7"
+                                    android:layout_height="match_parent"
+                                    android:layout_width="match_parent"
+                                    android:src="@drawable/alarm"
+                                    android:layout_weight="1"
+                                    android:background="#00ff0000"
+                                    android:text="긴급 상황"
+                                    android:drawableBottom="@drawable/alarm"/>
+                                <Spinner
+                                    android:id="@+id/spinner7"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:visibility="gone">
+                                </Spinner>
+                            </LinearLayout>
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical"  android:layout_weight="1">
+                                <Button android:id="@+id/imgBtn8"
+                                    android:layout_height="match_parent"
+                                    android:layout_width="match_parent"
+                                    android:text="길묻기"
+                                    android:drawableBottom="@drawable/work"
+                                    android:layout_weight="1"
+                                    android:background="#00ff0000" />
+                                <Spinner
+                                    android:id="@+id/spinner8"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:visibility="gone">
+                                </Spinner>
+                            </LinearLayout>
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical"  android:layout_weight="1">
+                                <Button android:id="@+id/imgBtn9"
+                                    android:layout_height="match_parent"
+                                    android:layout_width="match_parent"
+                                    android:text="병원/약국"
+                                    android:drawableBottom="@drawable/medical"
+                                    android:layout_weight="1"
+                                    android:background="#00ff0000" />
+                                <Spinner
+                                    android:id="@+id/spinner9"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:visibility="gone">
+                                </Spinner>
+                            </LinearLayout>
+                        </TableRow>
                     </TableLayout>
-
                 </LinearLayout>
             </FrameLayout>
             <View

@@ -46,7 +46,7 @@ public class EditPlan extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_plan);
-        dbHelper = new Database(getApplicationContext(), "SQLite3.db", null, 1);
+        dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
         Button setDate=(Button)findViewById(R.id.setDate);
         Button setAddress = (Button)findViewById(R.id.setAddress);
         Button submit=(Button)findViewById(R.id.submit);

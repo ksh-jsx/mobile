@@ -11,10 +11,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +32,8 @@ public class index  extends Activity
     private long   backPressedTime = 0;
     Button gotoPlan;
     Button del;
+    ArrayList arrayList;
+    String selectedItem;
     private static final String DEBUG_TAG = "{LOG_ANDROID}";
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,7 +43,7 @@ public class index  extends Activity
         gotoPlan = (Button)findViewById(R.id.gotoPlan);
         del = (Button)findViewById(R.id.del);
         String dateSave = "a";
-        final Database dbHelper = new Database(getApplicationContext(), "SQLite3.db", null, 1);
+        final Database dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
         ListView listview = (ListView)findViewById(R.id.List_view);
         TextView noticeText = (TextView)findViewById(R.id.notice);
 
@@ -48,6 +53,23 @@ public class index  extends Activity
         tabWidget1.setImageResource(R.drawable.tab_01);
         ImageView tabWidget2 = new ImageView(this);
         tabWidget2.setImageResource(R.drawable.tab_02);
+
+        final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+        final Button button1 = (Button) findViewById(R.id.imgBtn1);
+        final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        final Button button2 = (Button) findViewById(R.id.imgBtn2);
+        final Spinner spinner4 = (Spinner) findViewById(R.id.spinner4);
+        final Button button4 = (Button) findViewById(R.id.imgBtn4);
+        final Spinner spinner5 = (Spinner) findViewById(R.id.spinner5);
+        final Button button5 = (Button) findViewById(R.id.imgBtn5);
+        final Spinner spinner6 = (Spinner) findViewById(R.id.spinner6);
+        final Button button6 = (Button) findViewById(R.id.imgBtn6);
+        final Spinner spinner7 = (Spinner) findViewById(R.id.spinner7);
+        final Button button7 = (Button) findViewById(R.id.imgBtn7);
+        final Spinner spinner8 = (Spinner) findViewById(R.id.spinner8);
+        final Button button8 = (Button) findViewById(R.id.imgBtn8);
+        final Spinner spinner9 = (Spinner) findViewById(R.id.spinner9);
+        final Button button9 = (Button) findViewById(R.id.imgBtn9);
 
 
         final TabHost tabhost = (TabHost)findViewById(R.id.tabHost1);
@@ -145,6 +167,522 @@ public class index  extends Activity
             }
         });
 
+        //회화 화면 클릭리스터
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinner1.setVisibility(View.VISIBLE);
+                spinner1.performClick();
+                spinner2.setVisibility(View.GONE);
+                spinner4.setVisibility(View.GONE);
+                spinner5.setVisibility(View.GONE);
+                spinner6.setVisibility(View.GONE);
+                spinner7.setVisibility(View.GONE);
+                spinner8.setVisibility(View.GONE);
+                spinner9.setVisibility(View.GONE);
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinner2.performClick();
+                spinner2.setVisibility(View.VISIBLE);
+                spinner1.setVisibility(View.GONE);
+                spinner4.setVisibility(View.GONE);
+                spinner5.setVisibility(View.GONE);
+                spinner6.setVisibility(View.GONE);
+                spinner7.setVisibility(View.GONE);
+                spinner8.setVisibility(View.GONE);
+                spinner9.setVisibility(View.GONE);
+            }
+        });
+
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinner4.performClick();
+                spinner4.setVisibility(View.VISIBLE);
+                spinner1.setVisibility(View.GONE);
+                spinner2.setVisibility(View.GONE);
+                spinner5.setVisibility(View.GONE);
+                spinner6.setVisibility(View.GONE);
+                spinner7.setVisibility(View.GONE);
+                spinner8.setVisibility(View.GONE);
+                spinner9.setVisibility(View.GONE);
+            }
+        });
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinner5.performClick();
+                spinner5.setVisibility(View.VISIBLE);
+                spinner1.setVisibility(View.GONE);
+                spinner2.setVisibility(View.GONE);
+                spinner4.setVisibility(View.GONE);
+                spinner6.setVisibility(View.GONE);
+                spinner7.setVisibility(View.GONE);
+                spinner8.setVisibility(View.GONE);
+                spinner9.setVisibility(View.GONE);
+            }
+        });
+        button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinner6.performClick();
+                spinner6.setVisibility(View.VISIBLE);
+                spinner1.setVisibility(View.GONE);
+                spinner2.setVisibility(View.GONE);
+                spinner4.setVisibility(View.GONE);
+                spinner5.setVisibility(View.GONE);
+                spinner7.setVisibility(View.GONE);
+                spinner8.setVisibility(View.GONE);
+                spinner9.setVisibility(View.GONE);
+            }
+        });
+        button7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinner7.performClick();
+                spinner7.setVisibility(View.VISIBLE);
+                spinner1.setVisibility(View.GONE);
+                spinner2.setVisibility(View.GONE);
+                spinner4.setVisibility(View.GONE);
+                spinner5.setVisibility(View.GONE);
+                spinner6.setVisibility(View.GONE);
+                spinner8.setVisibility(View.GONE);
+                spinner9.setVisibility(View.GONE);
+            }
+        });
+        button8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinner8.performClick();
+                spinner8.setVisibility(View.VISIBLE);
+                spinner1.setVisibility(View.GONE);
+                spinner2.setVisibility(View.GONE);
+                spinner4.setVisibility(View.GONE);
+                spinner5.setVisibility(View.GONE);
+                spinner6.setVisibility(View.GONE);
+                spinner7.setVisibility(View.GONE);
+                spinner9.setVisibility(View.GONE);
+            }
+        });
+        button9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinner9.performClick();
+                spinner9.setVisibility(View.VISIBLE);
+                spinner1.setVisibility(View.GONE);
+                spinner2.setVisibility(View.GONE);
+                spinner4.setVisibility(View.GONE);
+                spinner5.setVisibility(View.GONE);
+                spinner6.setVisibility(View.GONE);
+                spinner7.setVisibility(View.GONE);
+                spinner8.setVisibility(View.GONE);
+
+            }
+        });
+
+        //스피너 내용 삽입
+        {
+
+            arrayList = new ArrayList();
+            arrayList.add("선택하세요");
+            arrayList.add("인사");
+            arrayList.add("부탁/요청");
+            arrayList.add("감사/축하");
+            arrayList.add("사과/용서");
+            arrayList.add("질문/응답");
+
+
+            ArrayAdapter<String> adapter1 = new ArrayAdapter<String>
+                    (this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+            spinner1.setAdapter(adapter1);
+
+
+            spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    dbHelper.delete("delete from spinnerSelect;");
+                    selectedItem = (String) parent.getItemAtPosition(position);
+                    if (selectedItem.equals("인사")) {
+                        String A1 = "A1";
+                        dbHelper.insert("insert into spinnerSelect values('" + A1 + "');");
+                        gotoLanguageView();
+                    } else if (selectedItem.equals("부탁/요청")) {
+                        dbHelper.insert("insert into spinnerSelect values('" + "A2" + "');");
+                        gotoLanguageView();
+                    } else if (selectedItem.equals("감사/축하")) {
+                        dbHelper.insert("insert into spinnerSelect values('" + "A3" + "');");
+                        gotoLanguageView();
+                    } else if (selectedItem.equals("사과/용서")) {
+                        dbHelper.insert("insert into spinnerSelect values('" + "A4" + "');");
+                        gotoLanguageView();
+                    } else if (selectedItem.equals("질문/응답")) {
+                        dbHelper.insert("insert into spinnerSelect values('" + "A5" + "');");
+                        gotoLanguageView();
+
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+
+            });
+
+
+        }
+        {
+            arrayList = new ArrayList();
+            arrayList.add("선택하세요");
+            arrayList.add("주문");
+            arrayList.add("예약/출입구");
+            arrayList.add("계산");
+            arrayList.add("컴플레인");
+
+
+            ArrayAdapter<String> adapter2 = new ArrayAdapter<String>
+                    (this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+            spinner2.setAdapter(adapter2);
+
+            spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    selectedItem = (String) parent.getItemAtPosition(position);
+                    if (selectedItem.equals("주문")) {
+
+                        Intent intent = new Intent(index.this, languageView.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("예약/출입구")) {
+
+                        Intent intent = new Intent(index.this, languageView.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("계산")) {
+
+                        Intent intent = new Intent(index.this, languageView.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("컴플레인")) {
+
+                        Intent intent = new Intent(index.this, languageView.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+
+            });
+
+        }
+
+        {
+            arrayList = new ArrayList();
+            arrayList.add("선택하세요");
+            arrayList.add("택시");
+            arrayList.add("버스");
+            arrayList.add("지하철(모노레일)");
+            arrayList.add("기차/배");
+            arrayList.add("운전");
+
+
+            ArrayAdapter<String> adapter4 = new ArrayAdapter<String>
+                    (this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+            spinner4.setAdapter(adapter4);
+
+            spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    selectedItem = (String) parent.getItemAtPosition(position);
+                    if (selectedItem.equals("택시")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("버스")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("지하철(모노레일)")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("기차/배")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("운전")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+
+            });
+
+        }
+        {
+            arrayList = new ArrayList();
+            arrayList.add("선택하세요");
+
+            arrayList.add("마트");
+            arrayList.add("문구/서점");
+            arrayList.add("의류상점");
+            arrayList.add("물건 찾기");
+            arrayList.add("가격/구매");
+            arrayList.add("계산/포장/배달");
+            arrayList.add("교환/환불");
+
+
+            ArrayAdapter<String> adapter5 = new ArrayAdapter<String>
+                    (this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+            spinner5.setAdapter(adapter5);
+
+            spinner5.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    selectedItem = (String) parent.getItemAtPosition(position);
+                    if (selectedItem.equals("마트")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("문구/서점")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("의류상점")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("물건 찾기")) {
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("가격/구매")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("계산/포장/배달")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("교환/환불")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+
+            });
+
+        }
+        {
+            arrayList = new ArrayList();
+            arrayList.add("선택하세요");
+            arrayList.add("예약");
+            arrayList.add("서비스/식사");
+            arrayList.add("체크인/체크아웃");
+
+
+
+            ArrayAdapter<String> adapter6 = new ArrayAdapter<String>
+                    (this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+            spinner6.setAdapter(adapter6);
+
+            spinner6.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    selectedItem = (String) parent.getItemAtPosition(position);
+                    if (selectedItem.equals("예약")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("서비스/식사")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("체크인/체크아웃")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+
+            });
+
+        }
+        {
+            arrayList = new ArrayList();
+            arrayList.add("선택하세요");
+            arrayList.add("응급상황");
+            arrayList.add("분실/도난");
+            arrayList.add("재난");
+            arrayList.add("교통 사고/위반");
+
+
+            ArrayAdapter<String> adapter7 = new ArrayAdapter<String>
+                    (this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+            spinner7.setAdapter(adapter7);
+
+            spinner7.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    selectedItem = (String) parent.getItemAtPosition(position);
+                    if (selectedItem.equals("응급상황")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("분실/도난")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("재난")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("교통 사고/위반")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+
+            });
+
+        }
+
+        {
+            arrayList = new ArrayList();
+            arrayList.add("선택하세요");
+            arrayList.add("예약/진찰");
+            arrayList.add("약 구매/설명");
+
+
+            ArrayAdapter<String> adapter9 = new ArrayAdapter<String>
+                    (this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+            spinner9.setAdapter(adapter9);
+
+            spinner9.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    selectedItem = (String) parent.getItemAtPosition(position);
+                    if (selectedItem.equals("예약/진찰")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("약 구매/설명")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+
+            });
+
+        }
+        {
+            arrayList = new ArrayList();
+            arrayList.add("선택하세요");
+            arrayList.add("길 묻기");
+            arrayList.add("소요시간 묻기");
+
+
+            ArrayAdapter<String> adapter8 = new ArrayAdapter<String>
+                    (this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+            spinner8.setAdapter(adapter8);
+
+            spinner8.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    selectedItem = (String) parent.getItemAtPosition(position);
+                    if (selectedItem.equals("길 묻기")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectedItem.equals("소요시간 묻기")) {
+
+                        Intent intent = new Intent(index.this, EditPlan.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+
+            });
+
+        }
+
     }
     public void onBackPressed()
     {
@@ -162,6 +700,12 @@ public class index  extends Activity
         }
 
     }
+    public void gotoLanguageView()
+    {
+        Intent intent = new Intent(index.this, languageView.class);
+        startActivity(intent);
+        finish();
     }
+}
 
 

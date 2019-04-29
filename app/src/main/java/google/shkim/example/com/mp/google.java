@@ -99,7 +99,7 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
 
-        dbHelper = new Database(getApplicationContext(), "SQLite3.db", null, 1);
+        dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
         okbtn.setOnClickListener(new View.OnClickListener() //확인 버튼 클릭 이벤트
         {
             @Override
