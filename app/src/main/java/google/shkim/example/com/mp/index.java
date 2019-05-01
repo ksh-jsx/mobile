@@ -92,7 +92,7 @@ public class index  extends Activity
         ts3.setIndicator(tabWidget2);
         tabhost.addTab(ts3) ;
 
-        tabhost.setCurrentTab(1);
+        tabhost.setCurrentTab(2);
 
 
 

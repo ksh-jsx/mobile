@@ -21,7 +21,7 @@ public class ListAdapter extends BaseAdapter
     LayoutInflater inflater = null;
     private ArrayList<ItemData> m_oData = null;
     private int nListCnt = 0;
-    String dateSave = "a";
+    String dateSave = " ";
     private static final String DEBUG_TAG = "{LOG_ANDROID}";
     public ListAdapter(ArrayList<ItemData> _oData)
     {
@@ -51,6 +51,8 @@ public class ListAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
+        if(position ==0)
+            dateSave ="a";
         if (convertView == null)
         {
             final Context context = parent.getContext();
