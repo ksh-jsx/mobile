@@ -260,8 +260,8 @@
             </FrameLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/black"></View>
+                android:layout_height="5dp"
+                android:background="@drawable/shadow"></View>
             <!-- TabWidget의 id값이 반드시 "tabs"로 지정되어야 함. -->
             <TabWidget
                 android:id="@android:id/tabs"

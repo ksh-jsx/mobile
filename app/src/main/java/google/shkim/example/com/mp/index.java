@@ -286,8 +286,7 @@ public class index  extends Activity
                     dbHelper.delete("delete from spinnerSelect;");
                     selectedItem = (String) parent.getItemAtPosition(position);
                     if (selectedItem.equals("인사")) {
-                        String A1 = "A1";
-                        dbHelper.insert("insert into spinnerSelect values('" + A1 + "');");
+                        dbHelper.insert("insert into spinnerSelect values('" + "A1" + "');");
                         gotoLanguageView();
                     } else if (selectedItem.equals("부탁/요청")) {
                         dbHelper.insert("insert into spinnerSelect values('" + "A2" + "');");
