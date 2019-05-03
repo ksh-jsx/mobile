@@ -97,14 +97,32 @@ android:layout_height="80dp">
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2.5" />
-        <Button
-            android:id="@+id/listButton1"
+        <LinearLayout
+            android:id="@+id/btns"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
             android:layout_weight="20"
-            android:text="선택"
-            android:visibility="invisible"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible">
+            <Button
+                android:id="@+id/listButton1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:text="수정"
+                android:textStyle="bold"
+                />
+            <Button
+                android:id="@+id/listButton2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:text="삭제"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"

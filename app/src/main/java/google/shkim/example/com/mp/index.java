@@ -144,14 +144,14 @@ public class index  extends Activity
                 TextView oTextTitle = (TextView) view.findViewById(R.id.textTitle);
                 TextView oimgName = (TextView) view.findViewById(R.id.imgName);
                 ImageView lineImage = (ImageView)view.findViewById(R.id.lineImage);
-                Button listBtn = (Button)view.findViewById(R.id.listButton1);
+                LinearLayout btns = (LinearLayout)view.findViewById(R.id.btns);
                 view.setBackgroundColor(Color.rgb(51, 170, 187));
                 if(count != 0) tempview.setView();
                 if(oimgName.getText().equals("last"))
                     lineImage.setImageResource(R.drawable.line_sky_non_bottom);
                 else
                     lineImage.setImageResource(R.drawable.line_sky);
-                listBtn.setVisibility(View.VISIBLE);
+                btns.setVisibility(View.VISIBLE);
                 oTextTitle.setTextColor(Color.WHITE);
                 //Log.d(DEBUG_TAG, "item: " +pos);
                 Toast.makeText(getApplicationContext(),view+" "+data.get(i).getTitle()+" "+data.get(i).getLat(),Toast.LENGTH_SHORT).show();
