@@ -5,6 +5,8 @@ public class ItemData
     public String strTitle;
     public String strTIme;
     public String strDate;
+    public String strLat;
+    public String strLng;
     public int count1;
     public int count2;
 }

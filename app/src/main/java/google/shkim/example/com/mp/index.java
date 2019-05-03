@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,9 +31,11 @@ public class index  extends Activity
     private ListView m_oListView = null;
     private final long FINISH_INTERVAL_TIME = 2000;
     private long   backPressedTime = 0;
+    private ArrayList<ListItem> data = null;
     Button gotoPlan;
     Button del;
     ArrayList arrayList;
+    private int count = 0;
     String selectedItem;
     private static final String DEBUG_TAG = "{LOG_ANDROID}";
     @Override
@@ -44,9 +47,11 @@ public class index  extends Activity
         del = (Button)findViewById(R.id.del);
         String dateSave = "a";
         final Database dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
+        final TextView TextTitle = (TextView) findViewById(R.id.textTitle);
         ListView listview = (ListView)findViewById(R.id.List_view);
         TextView noticeText = (TextView)findViewById(R.id.notice);
-
+        TextView textTitle = (TextView)findViewById(R.id.textTitle);
+        final tempView tempview = new tempView();
         ImageView tabWidget0 = new ImageView(this);
         tabWidget0.setImageResource(R.drawable.tab_00);
         ImageView tabWidget1 = new ImageView(this);
@@ -92,10 +97,7 @@ public class index  extends Activity
         ts3.setIndicator(tabWidget2);
         tabhost.addTab(ts3) ;
 
-        tabhost.setCurrentTab(2);
-
-
-
+        tabhost.setCurrentTab(1);
 
         // 데이터 생성.
         Cursor cursor1 = dbHelper.select("SELECT * FROM infos");
@@ -105,14 +107,17 @@ public class index  extends Activity
             listview.setVisibility(View.VISIBLE);
             noticeText.setVisibility(View.GONE);
         }
-
+        data = new ArrayList<>();
         ArrayList<ItemData> oData = new ArrayList<>();
+        //데이터 삽입
         for (int i=0; i<cursor1.getCount(); ++i)
         {
             ItemData oItem = new ItemData();
             oItem.strTitle = cursor1.getString(1);
             oItem.strTIme = cursor1.getInt(5)+"시 "+cursor1.getInt(6)+"분";
             oItem.strDate = cursor1.getInt(2)+"년"+cursor1.getInt(3)+"월"+cursor1.getInt(4)+"일";
+            oItem.strLat = cursor1.getString(7);
+            oItem.strLng = cursor1.getString(8);
             oItem.count1 = i+1;
             oItem.count2 = cursor1.getCount();
             if(!dateSave.equals(oItem.strDate))
@@ -122,12 +127,39 @@ public class index  extends Activity
 
             dateSave = oItem.strDate;
             oData.add(oItem);
+
+            ListItem item1 = new ListItem(oItem.strTitle, oItem.strDate,oItem.strTIme,oItem.strLat,oItem.strLng);
+            data.add(item1);
         }
 
         // ListView 생성
         m_oListView = (ListView)findViewById(R.id.List_view);
         ListAdapter oAdapter = new ListAdapter(oData);
         m_oListView.setAdapter(oAdapter);
+
+        // ListView 클릭 이벤트
+        m_oListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView oTextTitle = (TextView) view.findViewById(R.id.textTitle);
+                TextView oimgName = (TextView) view.findViewById(R.id.imgName);
+                ImageView lineImage = (ImageView)view.findViewById(R.id.lineImage);
+                Button listBtn = (Button)view.findViewById(R.id.listButton1);
+                view.setBackgroundColor(Color.rgb(51, 170, 187));
+                if(count != 0) tempview.setView();
+                if(oimgName.getText().equals("last"))
+                    lineImage.setImageResource(R.drawable.line_sky_non_bottom);
+                else
+                    lineImage.setImageResource(R.drawable.line_sky);
+                listBtn.setVisibility(View.VISIBLE);
+                oTextTitle.setTextColor(Color.WHITE);
+                //Log.d(DEBUG_TAG, "item: " +pos);
+                Toast.makeText(getApplicationContext(),view+" "+data.get(i).getTitle()+" "+data.get(i).getLat(),Toast.LENGTH_SHORT).show();
+
+                tempview.getView(view);
+                count++;
+            }
+        });
 
         gotoPlan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -663,6 +695,7 @@ public class index  extends Activity
         }
 
     }
+
     public void onBackPressed()
     {
         long tempTime = System.currentTimeMillis();
@@ -685,6 +718,7 @@ public class index  extends Activity
         startActivity(intent);
         finish();
     }
+
 }
 
 

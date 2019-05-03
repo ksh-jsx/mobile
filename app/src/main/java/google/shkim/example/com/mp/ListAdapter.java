@@ -21,6 +21,7 @@ public class ListAdapter extends BaseAdapter
     LayoutInflater inflater = null;
     private ArrayList<ItemData> m_oData = null;
     private int nListCnt = 0;
+    private int i=0;
     String dateSave = " ";
     private static final String DEBUG_TAG = "{LOG_ANDROID}";
     public ListAdapter(ArrayList<ItemData> _oData)
@@ -51,6 +52,7 @@ public class ListAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
+
         if(position ==0)
             dateSave ="a";
         if (convertView == null)
@@ -66,6 +68,9 @@ public class ListAdapter extends BaseAdapter
         TextView oTextTitle = (TextView) convertView.findViewById(R.id.textTitle);
         TextView oTextTIme = (TextView) convertView.findViewById(R.id.textTime);
         TextView oTextDate = (TextView) convertView.findViewById(R.id.textDate);
+        TextView oTextLat = (TextView) convertView.findViewById(R.id.textLat);
+        TextView oTextLng = (TextView) convertView.findViewById(R.id.textLng);
+        TextView oimgName = (TextView)convertView.findViewById(R.id.imgName);
         LinearLayout dateLinear = (LinearLayout)convertView.findViewById(R.id.dateLinear);
         LinearLayout etc = (LinearLayout)convertView.findViewById(R.id.etc);
         ImageView lineImage = (ImageView)convertView.findViewById(R.id.lineImage);
@@ -79,6 +84,7 @@ public class ListAdapter extends BaseAdapter
             if(m_oData.get(position).count1 == m_oData.get(position).count2)
             {
                 lineImage.setImageResource(R.drawable.line_blue_non_bottom);
+                oimgName.setText("last");
             }
         }
         else
@@ -91,10 +97,15 @@ public class ListAdapter extends BaseAdapter
 
 
         oTextTitle.setText(m_oData.get(position).strTitle);
+        oTextTitle.setTag(position);
         oTextTIme.setText(m_oData.get(position).strTIme);
         oTextDate.setText(m_oData.get(position).strDate);
+        oTextLat.setText(m_oData.get(position).strLat);
+        oTextLng.setText(m_oData.get(position).strLng);
         dateSave = m_oData.get(position).strDate;
         return convertView;
     }
+
+
 }
 

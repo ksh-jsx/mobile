@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="black">#313131</color>
+    <drawable name="focused">#33aabb</drawable>
+    <drawable name="selected">#00ffff</drawable>
 </resources>
