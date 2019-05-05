@@ -70,7 +70,72 @@ public class languageView extends Activity {
         };
         String[][] items1 = {{"a"}};
         if(cursor1.getString(0).equals("A1"))
-            items1 = itmesA_1;
+            items1 = itmesA_1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    ;
         else if (cursor1.getString(0).equals("A2"))
             items1 = itmesA_2;
         else if (cursor1.getString(0).equals("A3"))

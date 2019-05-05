@@ -53,25 +53,27 @@ public class EditPlan extends Activity {
         Button back=(Button)findViewById(R.id.back);
         final EditText getName = (EditText)findViewById(R.id.placeNameValue);
         final EditText getDate = (EditText)findViewById(R.id.dateValue);
-                        getDate.setEnabled(false);
         final TimePicker getTime = (TimePicker)findViewById(R.id.timeValue);
         final TextView getAddress = (TextView)findViewById(R.id.AddressValue);
         final TextView getlat = (TextView)findViewById(R.id.latValue);
         final TextView getlng = (TextView)findViewById(R.id.lngValue);
+        getDate.setEnabled(false);
 
-        final Cursor cursor2 = dbHelper.select("SELECT * FROM tempSave;");
+        Intent intent = getIntent();
+        getName.setText(intent.getStringExtra("Title"));
 
-        cursor2.moveToFirst();
+        final Cursor cursor = dbHelper.select("SELECT * FROM tempSave;");
+        cursor.moveToFirst();
 
-        if(cursor2.getCount()>0) {
-            Log.d(DEBUG_TAG, "name : " + cursor2.getString(0));
-            Log.d(DEBUG_TAG, "Fulldate : " + cursor2.getString(1));
-            Log.d(DEBUG_TAG, "year : " + cursor2.getInt(2));
-            Log.d(DEBUG_TAG, "month : " + cursor2.getInt(3));
-            getName.setText(cursor2.getString(0));
-            getDate.setText(cursor2.getString(1));
-            getTime.setHour(cursor2.getInt(2));
-            getTime.setMinute(cursor2.getInt(3));
+        if(cursor.getCount()>0) {
+            Log.d(DEBUG_TAG, "name : " + cursor.getString(0));
+            Log.d(DEBUG_TAG, "Fulldate : " + cursor.getString(1));
+            Log.d(DEBUG_TAG, "year : " + cursor.getInt(2));
+            Log.d(DEBUG_TAG, "month : " + cursor.getInt(3));
+            getName.setText(cursor.getString(0));
+            getDate.setText(cursor.getString(1));
+            getTime.setHour(cursor.getInt(2));
+            getTime.setMinute(cursor.getInt(3));
             dbHelper.delete("delete from tempSave;");
         }
         else {

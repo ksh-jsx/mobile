@@ -1,8 +1,10 @@
 package google.shkim.example.com.mp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -32,11 +34,13 @@ public class index  extends Activity
     private final long FINISH_INTERVAL_TIME = 2000;
     private long   backPressedTime = 0;
     private ArrayList<ListItem> data = null;
+    private int position;
     Button gotoPlan;
     Button del;
     ArrayList arrayList;
     private int count = 0;
     String selectedItem;
+    final Context context = this;
     private static final String DEBUG_TAG = "{LOG_ANDROID}";
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -51,6 +55,7 @@ public class index  extends Activity
         ListView listview = (ListView)findViewById(R.id.List_view);
         TextView noticeText = (TextView)findViewById(R.id.notice);
         TextView textTitle = (TextView)findViewById(R.id.textTitle);
+
         final tempView tempview = new tempView();
         ImageView tabWidget0 = new ImageView(this);
         tabWidget0.setImageResource(R.drawable.tab_00);
@@ -113,6 +118,7 @@ public class index  extends Activity
         for (int i=0; i<cursor1.getCount(); ++i)
         {
             ItemData oItem = new ItemData();
+            oItem.strId = cursor1.getString(0);
             oItem.strTitle = cursor1.getString(1);
             oItem.strTIme = cursor1.getInt(5)+"시 "+cursor1.getInt(6)+"분";
             oItem.strDate = cursor1.getInt(2)+"년"+cursor1.getInt(3)+"월"+cursor1.getInt(4)+"일";
@@ -128,7 +134,7 @@ public class index  extends Activity
             dateSave = oItem.strDate;
             oData.add(oItem);
 
-            ListItem item1 = new ListItem(oItem.strTitle, oItem.strDate,oItem.strTIme,oItem.strLat,oItem.strLng);
+            ListItem item1 = new ListItem(oItem.strId,oItem.strTitle, oItem.strDate,oItem.strTIme,oItem.strLat,oItem.strLng);
             data.add(item1);
         }
 
@@ -142,24 +148,50 @@ public class index  extends Activity
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView oTextTitle = (TextView) view.findViewById(R.id.textTitle);
-                TextView oimgName = (TextView) view.findViewById(R.id.imgName);
+                TextView oImgName = (TextView) view.findViewById(R.id.imgName);
                 ImageView lineImage = (ImageView)view.findViewById(R.id.lineImage);
                 LinearLayout btns = (LinearLayout)view.findViewById(R.id.btns);
+                Button modifyButton = (Button)view.findViewById(R.id.listButton1);
+                Button deleteButton = (Button)view.findViewById(R.id.listButton2);
+                position = i;
                 view.setBackgroundColor(Color.rgb(51, 170, 187));
                 if(count != 0) tempview.setView();
-                if(oimgName.getText().equals("last"))
+
+                if(oImgName.getText().equals("last"))
                     lineImage.setImageResource(R.drawable.line_sky_non_bottom);
                 else
                     lineImage.setImageResource(R.drawable.line_sky);
+
                 btns.setVisibility(View.VISIBLE);
                 oTextTitle.setTextColor(Color.WHITE);
-                //Log.d(DEBUG_TAG, "item: " +pos);
-                Toast.makeText(getApplicationContext(),view+" "+data.get(i).getTitle()+" "+data.get(i).getLat(),Toast.LENGTH_SHORT).show();
 
                 tempview.getView(view);
                 count++;
+
+                modifyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(),EditPlan.class);
+                        intent.putExtra("Title",data.get(position).getTitle());
+                        intent.putExtra("Date",data.get(position).getDate());
+                        intent.putExtra("Time",data.get(position).getTime());
+                        intent.putExtra("Lat",data.get(position).getLat());
+                        intent.putExtra("Lng",data.get(position).getLng());
+                        startActivity(intent);
+                    }
+                });
+
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        dbHelper.delete("delete from infos where _id = "+data.get(position).getId()+";");
+                    }
+                });
             }
         });
+
 
         gotoPlan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,11 +203,27 @@ public class index  extends Activity
             }
         });
 
+
         del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbHelper.delete("delete from infos;");
-                view.invalidate();
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("정말 삭제하시겠습니까?");
+                //builder.setMessage("AlertDialog Content");
+                builder.setPositiveButton("삭제",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dbHelper.delete("delete from infos;");
+                                onResume();
+                            }
+                        });
+                builder.setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                builder.show();
             }
         });
 
@@ -693,6 +741,11 @@ public class index  extends Activity
             });
 
         }
+
+    }
+
+    public void delShow()
+    {
 
     }
 
