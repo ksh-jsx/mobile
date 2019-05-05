@@ -50,7 +50,7 @@ public class index  extends Activity
         gotoPlan = (Button)findViewById(R.id.gotoPlan);
         del = (Button)findViewById(R.id.del);
         String dateSave = "a";
-        final Database dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
+        final Database dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
         final TextView TextTitle = (TextView) findViewById(R.id.textTitle);
         ListView listview = (ListView)findViewById(R.id.List_view);
         TextView noticeText = (TextView)findViewById(R.id.notice);
@@ -105,7 +105,7 @@ public class index  extends Activity
         tabhost.setCurrentTab(1);
 
         // 데이터 생성.
-        Cursor cursor1 = dbHelper.select("SELECT * FROM infos");
+        Cursor cursor1 = dbHelper.select("select * from infos order by Year asc, Month asc, Date asc, Hour asc, Minute asc");
         cursor1.moveToFirst();
         if(cursor1.getCount() != 0)
         {
@@ -113,17 +113,40 @@ public class index  extends Activity
             noticeText.setVisibility(View.GONE);
         }
         data = new ArrayList<>();
-        ArrayList<ItemData> oData = new ArrayList<>();
+        final ArrayList<ItemData> oData = new ArrayList<>();
         //데이터 삽입
         for (int i=0; i<cursor1.getCount(); ++i)
         {
             ItemData oItem = new ItemData();
             oItem.strId = cursor1.getString(0);
             oItem.strTitle = cursor1.getString(1);
-            oItem.strTIme = cursor1.getInt(5)+"시 "+cursor1.getInt(6)+"분";
-            oItem.strDate = cursor1.getInt(2)+"년"+cursor1.getInt(3)+"월"+cursor1.getInt(4)+"일";
+            if(cursor1.getInt(5) < 10)
+            {
+                if(cursor1.getInt(6) < 10)
+                    oItem.strTIme = "0"+cursor1.getInt(5)+"시 "+"0"+cursor1.getInt(6)+"분";
+                else
+                    oItem.strTIme = "0"+cursor1.getInt(5)+"시 "+cursor1.getInt(6)+"분";
+            }
+            else if (cursor1.getInt(5) > 10 && cursor1.getInt(6) < 10)
+                oItem.strTIme = cursor1.getInt(5)+"시 "+"0"+cursor1.getInt(6)+"분";
+            else
+                oItem.strTIme = cursor1.getInt(5)+"시 "+cursor1.getInt(6)+"분";
+
+            if(cursor1.getInt(3) < 10)
+            {
+                if(cursor1.getInt(4) < 10)
+                    oItem.strDate = cursor1.getInt(2)+"년 "+"0"+cursor1.getInt(3)+"월 "+"0"+cursor1.getInt(4)+"일";
+                else
+                    oItem.strDate = cursor1.getInt(2)+"년 "+"0"+cursor1.getInt(3)+"월 "+cursor1.getInt(4)+"일";
+            }
+            else if (cursor1.getInt(3) > 10 && cursor1.getInt(4) < 10)
+                oItem.strDate = cursor1.getInt(2)+"년 "+cursor1.getInt(3)+"월 "+"0"+cursor1.getInt(4)+"일";
+            else
+                oItem.strDate = cursor1.getInt(2)+"년 "+cursor1.getInt(3)+"월 "+cursor1.getInt(4)+"일";
+
             oItem.strLat = cursor1.getString(7);
             oItem.strLng = cursor1.getString(8);
+            oItem.strAdd = cursor1.getString(9);
             oItem.count1 = i+1;
             oItem.count2 = cursor1.getCount();
             if(!dateSave.equals(oItem.strDate))
@@ -134,19 +157,19 @@ public class index  extends Activity
             dateSave = oItem.strDate;
             oData.add(oItem);
 
-            ListItem item1 = new ListItem(oItem.strId,oItem.strTitle, oItem.strDate,oItem.strTIme,oItem.strLat,oItem.strLng);
+            ListItem item1 = new ListItem(oItem.strId,oItem.strTitle, oItem.strDate,oItem.strTIme,oItem.strLat,oItem.strLng, oItem.strAdd);
             data.add(item1);
         }
 
         // ListView 생성
         m_oListView = (ListView)findViewById(R.id.List_view);
-        ListAdapter oAdapter = new ListAdapter(oData);
+        final ListAdapter oAdapter = new ListAdapter(oData);
         m_oListView.setAdapter(oAdapter);
 
         // ListView 클릭 이벤트
         m_oListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
                 TextView oTextTitle = (TextView) view.findViewById(R.id.textTitle);
                 TextView oImgName = (TextView) view.findViewById(R.id.imgName);
                 ImageView lineImage = (ImageView)view.findViewById(R.id.lineImage);
@@ -167,26 +190,32 @@ public class index  extends Activity
 
                 tempview.getView(view);
                 count++;
-
+                Log.d(DEBUG_TAG, "date0 : " + data.get(position).getDate());
                 modifyButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(View item1) {
                         Intent intent = new Intent(getApplicationContext(),EditPlan.class);
+                        intent.putExtra("bool","1");
+                        intent.putExtra("id",data.get(position).getId());
                         intent.putExtra("Title",data.get(position).getTitle());
                         intent.putExtra("Date",data.get(position).getDate());
                         intent.putExtra("Time",data.get(position).getTime());
                         intent.putExtra("Lat",data.get(position).getLat());
                         intent.putExtra("Lng",data.get(position).getLng());
+                        intent.putExtra("Address",data.get(position).getAddress());
+                        dbHelper.delete("delete from markerPoint;");
+                        dbHelper.delete("delete from tempSave;");
                         startActivity(intent);
+
                     }
                 });
 
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-
-
+                    public void onClick(View item2) {
                         dbHelper.delete("delete from infos where _id = "+data.get(position).getId()+";");
+                        oData.remove(position);
+
                     }
                 });
             }
@@ -199,6 +228,7 @@ public class index  extends Activity
                 dbHelper.delete("delete from markerPoint;");
                 dbHelper.delete("delete from tempSave;");
                 Intent intent = new Intent(index.this, EditPlan.class);
+                intent.putExtra("bool","0");
                 startActivity(intent);
             }
         });
@@ -214,7 +244,7 @@ public class index  extends Activity
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dbHelper.delete("delete from infos;");
-                                onResume();
+
                             }
                         });
                 builder.setNegativeButton("취소",

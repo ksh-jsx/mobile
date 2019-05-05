@@ -46,7 +46,7 @@ public class EditPlan extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_plan);
-        dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
+        dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
         Button setDate=(Button)findViewById(R.id.setDate);
         Button setAddress = (Button)findViewById(R.id.setAddress);
         Button submit=(Button)findViewById(R.id.submit);
@@ -60,8 +60,18 @@ public class EditPlan extends Activity {
         getDate.setEnabled(false);
 
         Intent intent = getIntent();
-        getName.setText(intent.getStringExtra("Title"));
-
+        if(intent.getStringExtra("bool").equals("1"))
+        {
+            getName.setText(intent.getStringExtra("Title"));
+            String intentHour = intent.getStringExtra("Time").substring(0, 2);
+            String intentMinute = intent.getStringExtra("Time").substring(4, 6);
+            getTime.setHour((int) Double.parseDouble(intentHour));
+            getTime.setMinute((int) Double.parseDouble(intentMinute));
+            getlat.setText(intent.getStringExtra("Lat"));
+            getlng.setText(intent.getStringExtra("Lng"));
+            getAddress.setText(intent.getStringExtra("Address"));
+            Log.d(DEBUG_TAG, "id0 : " + intent.getStringExtra("id"));
+        }
         final Cursor cursor = dbHelper.select("SELECT * FROM tempSave;");
         cursor.moveToFirst();
 
@@ -77,7 +87,9 @@ public class EditPlan extends Activity {
             dbHelper.delete("delete from tempSave;");
         }
         else {
-            if (month < 10 && date < 10)
+            if (intent.getStringExtra("bool").equals("1"))
+                getDate.setText(intent.getStringExtra("Date"));
+            else if (month < 10 && date < 10)
                 getDate.setText(year + "년 " + "0" + month + "월 " + "0" + date + "일");
             else if (month < 10 && date > 10)
                 getDate.setText(year + "년 " + "0" + month + "월 " + date + "일");
@@ -85,6 +97,7 @@ public class EditPlan extends Activity {
                 getDate.setText(year + "년 " + month + "월 " + "0" + date + "일");
             else
                 getDate.setText(year + "년 " + month + "월 " + date + "일");
+
         }
         setDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +134,7 @@ public class EditPlan extends Activity {
                 int minuteValue = getTime.getMinute();
                 String latString = getlat.getText().toString();
                 String lngString = getlng.getText().toString();
+                String addValue = getAddress.getText().toString();
 
                 Log.d(DEBUG_TAG, "name : " + nameValue);
                 Log.d(DEBUG_TAG, "Fulldate : " + fullDatevalue);
@@ -139,8 +153,14 @@ public class EditPlan extends Activity {
                     Toast.makeText(getApplicationContext(), "위치를 입력해주세요", Toast.LENGTH_SHORT).show();
                 else
                 {
+                    Intent intent1 = getIntent();
+                    if(intent1.getStringExtra("bool").equals("1"))
+                    {
 
-                    dbHelper.insert("insert into infos(PlaceName,Year,Month,Date,Hour,Minute,Lat,Lng) values('" + nameValue + "'," + yearValue + ", " + monthValue + ", " + dateValue + ", " + hourValue + ", " + minuteValue+"," +latString + ", " + lngString +");");
+                        dbHelper.delete("delete from infos where _id = "+intent1.getStringExtra("id"));
+                    }
+
+                    dbHelper.insert("insert into infos(PlaceName,Year,Month,Date,Hour,Minute,Lat,Lng,PlaceAdd) values('" + nameValue + "'," + yearValue + ", " + monthValue + ", " + dateValue + ", " + hourValue + ", " + minuteValue+"," +latString + ", " + lngString +", '"+addValue+"');");
                     Intent intent = new Intent(EditPlan.this,index.class);
                     startActivity(intent);
                 }
@@ -170,6 +190,7 @@ public class EditPlan extends Activity {
     {
         Intent intent = new Intent(EditPlan.this,index.class);
         startActivity(intent);
+        finish();
     }
 }
 

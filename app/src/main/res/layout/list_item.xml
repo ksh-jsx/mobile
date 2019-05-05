@@ -91,6 +91,12 @@ android:layout_height="80dp">
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/textAdd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <View

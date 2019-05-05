@@ -8,6 +8,7 @@ public class ItemData
     public String strDate;
     public String strLat;
     public String strLng;
+    public String strAdd;
     public int count1;
     public int count2;
 }

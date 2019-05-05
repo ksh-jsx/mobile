@@ -99,7 +99,7 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
 
-        dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
+        dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
         okbtn.setOnClickListener(new View.OnClickListener() //확인 버튼 클릭 이벤트
         {
             @Override
@@ -108,6 +108,7 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
                 if(adr != "" && lat !=0)
                 {
                     Intent intent = new Intent(google.this, EditPlan.class);
+                    intent.putExtra("bool","0");
                     startActivity(intent);
                     dbHelper.delete("delete from markerPoint;");
                     dbHelper.insert("insert into markerPoint values('" + adr + "'," + lat + ", " + lng + ");");
