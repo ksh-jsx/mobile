@@ -59,7 +59,7 @@ public class EditPlan extends Activity {
         final TextView getlng = (TextView)findViewById(R.id.lngValue);
         getDate.setEnabled(false);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         if(intent.getStringExtra("bool").equals("1"))
         {
             getName.setText(intent.getStringExtra("Title"));
@@ -118,8 +118,10 @@ public class EditPlan extends Activity {
 
 
                 dbHelper.insert("insert into tempSave values('" + nameValue + "','" + fullDatevalue + "', " + hourValue + ", " + minuteValue + ");");
-                Intent intent = new Intent(EditPlan.this,google.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(EditPlan.this,google.class);
+                intent1.putExtra("bool",intent.getStringExtra("bool"));
+                intent1.putExtra("id",intent.getStringExtra("id"));
+                startActivity(intent1);
             }
         });
         submit.setOnClickListener(new View.OnClickListener() {
@@ -153,11 +155,11 @@ public class EditPlan extends Activity {
                     Toast.makeText(getApplicationContext(), "위치를 입력해주세요", Toast.LENGTH_SHORT).show();
                 else
                 {
-                    Intent intent1 = getIntent();
-                    if(intent1.getStringExtra("bool").equals("1"))
+                    Intent intent2 = getIntent();
+                    if(!intent2.getStringExtra("bool").equals("0"))
                     {
 
-                        dbHelper.delete("delete from infos where _id = "+intent1.getStringExtra("id"));
+                        dbHelper.delete("delete from infos where _id = "+intent2.getStringExtra("id"));
                     }
 
                     dbHelper.insert("insert into infos(PlaceName,Year,Month,Date,Hour,Minute,Lat,Lng,PlaceAdd) values('" + nameValue + "'," + yearValue + ", " + monthValue + ", " + dateValue + ", " + hourValue + ", " + minuteValue+"," +latString + ", " + lngString +", '"+addValue+"');");
@@ -173,6 +175,7 @@ public class EditPlan extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(EditPlan.this,index.class);
                 startActivity(intent);
+                finish();
             }
         });
 

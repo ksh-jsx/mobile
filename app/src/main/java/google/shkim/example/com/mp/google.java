@@ -107,8 +107,16 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
 
                 if(adr != "" && lat !=0)
                 {
+
                     Intent intent = new Intent(google.this, EditPlan.class);
-                    intent.putExtra("bool","0");
+                    Intent intent1 = getIntent();
+                    if(intent1.getStringExtra("bool").equals("1")){
+                        intent.putExtra("bool","2");
+                        intent.putExtra("id",intent1.getStringExtra("id"));
+                    }
+
+                    else if (intent1.getStringExtra("bool").equals("0"))
+                        intent.putExtra("bool","0");
                     startActivity(intent);
                     dbHelper.delete("delete from markerPoint;");
                     dbHelper.insert("insert into markerPoint values('" + adr + "'," + lat + ", " + lng + ");");
