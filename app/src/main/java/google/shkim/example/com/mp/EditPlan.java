@@ -33,7 +33,7 @@ public class EditPlan extends Activity {
             TextView dateShow=(TextView)findViewById(R.id.dateValue);
             if(month<10 && date<10)
                 dateShow.setText(year+"년 "+"0"+month+"월 "+"0"+date+"일");
-            else if(month<10 && date>10)
+            else if(month<10 && date>=10)
                 dateShow.setText(year+"년 "+"0"+month+"월 "+date+"일");
             else if(month>10 && date<10)
                 dateShow.setText(year+"년 "+month+"월 "+"0"+date+"일");
@@ -91,7 +91,7 @@ public class EditPlan extends Activity {
                 getDate.setText(intent.getStringExtra("Date"));
             else if (month < 10 && date < 10)
                 getDate.setText(year + "년 " + "0" + month + "월 " + "0" + date + "일");
-            else if (month < 10 && date > 10)
+            else if (month < 10 && date >= 10)
                 getDate.setText(year + "년 " + "0" + month + "월 " + date + "일");
             else if (month > 10 && date < 10)
                 getDate.setText(year + "년 " + month + "월 " + "0" + date + "일");
@@ -165,6 +165,7 @@ public class EditPlan extends Activity {
                     dbHelper.insert("insert into infos(PlaceName,Year,Month,Date,Hour,Minute,Lat,Lng,PlaceAdd) values('" + nameValue + "'," + yearValue + ", " + monthValue + ", " + dateValue + ", " + hourValue + ", " + minuteValue+"," +latString + ", " + lngString +", '"+addValue+"');");
                     Intent intent = new Intent(EditPlan.this,index.class);
                     startActivity(intent);
+                    finish();
                 }
 
             }

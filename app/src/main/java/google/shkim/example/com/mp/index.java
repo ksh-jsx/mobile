@@ -14,6 +14,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -170,27 +173,38 @@ public class index  extends Activity
         m_oListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
+                Log.d(DEBUG_TAG, "view: " + view);
                 TextView oTextTitle = (TextView) view.findViewById(R.id.textTitle);
                 TextView oImgName = (TextView) view.findViewById(R.id.imgName);
+                final TextView oLatName = (TextView) view.findViewById(R.id.textLat);
+                final TextView oLngName = (TextView) view.findViewById(R.id.textLng);
                 ImageView lineImage = (ImageView)view.findViewById(R.id.lineImage);
                 LinearLayout btns = (LinearLayout)view.findViewById(R.id.btns);
                 Button modifyButton = (Button)view.findViewById(R.id.listButton1);
                 Button deleteButton = (Button)view.findViewById(R.id.listButton2);
+                Button showButton = (Button)findViewById(R.id.showLocationBtn);
                 position = i;
-                view.setBackgroundColor(Color.rgb(51, 170, 187));
-                if(count != 0) tempview.setView();
+                if(count != 0) tempview.applyView();
+                if(btns.getVisibility() == View.INVISIBLE) {
+                    view.setBackgroundColor(Color.rgb(51, 170, 187));
 
-                if(oImgName.getText().equals("last"))
-                    lineImage.setImageResource(R.drawable.line_sky_non_bottom);
-                else
-                    lineImage.setImageResource(R.drawable.line_sky);
 
-                btns.setVisibility(View.VISIBLE);
-                oTextTitle.setTextColor(Color.WHITE);
+                    if (oImgName.getText().equals("last"))
+                        lineImage.setImageResource(R.drawable.line_sky_non_bottom);
+                    else
+                        lineImage.setImageResource(R.drawable.line_sky);
 
-                tempview.getView(view);
+                    btns.setVisibility(View.VISIBLE);
+                    showButton.setVisibility(view.VISIBLE);
+                    oTextTitle.setTextColor(Color.WHITE);
+                }
+
+                Animation animation = new AlphaAnimation(0, 1);
+                animation.setDuration(500);
+                showButton.setAnimation(animation);
+                tempview.setView(view);
                 count++;
-                Log.d(DEBUG_TAG, "date0 : " + data.get(position).getDate());
+                //Log.d(DEBUG_TAG, "date0 : " + data.get(position).getDate());
                 modifyButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View item1) {
@@ -210,14 +224,18 @@ public class index  extends Activity
                     }
                 });
 
-                deleteButton.setOnClickListener(new View.OnClickListener() {
+                showButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View item2) {
-                        dbHelper.delete("delete from infos where _id = "+data.get(position).getId()+";");
-                        oData.remove(position);
-
+                    public void onClick(View view) {
+                        String gotoGoogle = "tempPoint";
+                        double dLat = Double.parseDouble(oLatName.getText().toString());
+                        double dLng = Double.parseDouble(oLngName.getText().toString());
+                        Intent intent = new Intent(index.this, google.class);
+                        dbHelper.insert("insert into markerPoint values('" + gotoGoogle + "'," + dLat + ", " + dLng + ");");
+                        startActivity(intent);
                     }
                 });
+
             }
         });
 
