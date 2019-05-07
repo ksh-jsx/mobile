@@ -297,7 +297,6 @@ public class index  extends Activity
 
         //스피너 내용 삽입
         {
-
             arrayList = new ArrayList();
             arrayList.add("선택하세요");
             arrayList.add("인사");
@@ -346,6 +345,7 @@ public class index  extends Activity
 
 
         }
+
         {
             arrayList = new ArrayList();
             arrayList.add("선택하세요");
@@ -362,30 +362,21 @@ public class index  extends Activity
             spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                    dbHelper.delete("delete from spinnerSelect;");
                     selectedItem = (String) parent.getItemAtPosition(position);
                     if (selectedItem.equals("주문")) {
-
-                        Intent intent = new Intent(index.this, languageView.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "B1" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("예약/출입구")) {
-
-                        Intent intent = new Intent(index.this, languageView.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "B2" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("계산")) {
-
-                        Intent intent = new Intent(index.this, languageView.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "B3" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("컴플레인")) {
-
-                        Intent intent = new Intent(index.this, languageView.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "B4" + "');");
+                        gotoLanguageView();
                     }
-
                 }
 
                 @Override
@@ -414,35 +405,24 @@ public class index  extends Activity
             spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                    dbHelper.delete("delete from spinnerSelect;");
                     selectedItem = (String) parent.getItemAtPosition(position);
                     if (selectedItem.equals("택시")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "D1" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("버스")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "D2" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("지하철(모노레일)")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "D3" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("기차/배")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "D4" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("운전")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "D5" + "');");
+                        gotoLanguageView();
                     }
-
                 }
 
                 @Override
@@ -473,44 +453,30 @@ public class index  extends Activity
             spinner5.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                    dbHelper.delete("delete from spinnerSelect;");
                     selectedItem = (String) parent.getItemAtPosition(position);
                     if (selectedItem.equals("마트")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "E1" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("문구/서점")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "E2" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("의류상점")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "E3" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("물건 찾기")) {
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "E4" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("가격/구매")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
-                    } else if (selectedItem.equals("계산/포장/배달")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "E5" + "');");
+                        gotoLanguageView();
+                    } else if (selectedItem.equals("계산/배달/포장")) {
+                        dbHelper.insert("insert into spinnerSelect values('" + "E6" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("교환/환불")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "E7" + "');");
+                        gotoLanguageView();
                     }
-
                 }
 
                 @Override
@@ -537,25 +503,18 @@ public class index  extends Activity
             spinner6.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                    dbHelper.delete("delete from spinnerSelect;");
                     selectedItem = (String) parent.getItemAtPosition(position);
                     if (selectedItem.equals("예약")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "F1" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("서비스/식사")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "F2" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("체크인/체크아웃")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "F3" + "');");
+                        gotoLanguageView();
                     }
-
                 }
 
                 @Override
@@ -582,30 +541,21 @@ public class index  extends Activity
             spinner7.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                    dbHelper.delete("delete from spinnerSelect;");
                     selectedItem = (String) parent.getItemAtPosition(position);
                     if (selectedItem.equals("응급상황")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "G1" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("분실/도난")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "G2" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("재난")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "G3" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("교통 사고/위반")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "G4" + "');");
+                        gotoLanguageView();
                     }
-
                 }
 
                 @Override
@@ -631,20 +581,15 @@ public class index  extends Activity
             spinner9.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                    dbHelper.delete("delete from spinnerSelect;");
                     selectedItem = (String) parent.getItemAtPosition(position);
                     if (selectedItem.equals("예약/진찰")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
-                    } else if (selectedItem.equals("약 구매/설명")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "H1" + "');");
+                        gotoLanguageView();
+                    } else if (selectedItem.equals("문구/서점")) {
+                        dbHelper.insert("insert into spinnerSelect values('" + "H2" + "');");
+                        gotoLanguageView();
                     }
-
                 }
 
                 @Override
@@ -669,18 +614,14 @@ public class index  extends Activity
             spinner8.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                    dbHelper.delete("delete from spinnerSelect;");
                     selectedItem = (String) parent.getItemAtPosition(position);
                     if (selectedItem.equals("길 묻기")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "I1" + "');");
+                        gotoLanguageView();
                     } else if (selectedItem.equals("소요시간 묻기")) {
-
-                        Intent intent = new Intent(index.this, EditPlan.class);
-                        startActivity(intent);
-                        finish();
+                        dbHelper.insert("insert into spinnerSelect values('" + "I2" + "');");
+                        gotoLanguageView();
                     }
 
                 }

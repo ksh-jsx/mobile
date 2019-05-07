@@ -292,6 +292,77 @@ public class languageView extends Activity {
         else if (cursor1.getString(0).equals("A5"))
             items1 = itemsA_5;
 
+        else if(cursor1.getString(0).equals("B1"))
+            items1 = itemsB_1;
+        else if (cursor1.getString(0).equals("B2"))
+            items1 = itemsB_2;
+        else if (cursor1.getString(0).equals("B3"))
+            items1 = itemsB_3;
+        else if (cursor1.getString(0).equals("B4"))
+            items1 = itemsB_4;
+
+        else if(cursor1.getString(0).equals("C1"))
+            items1 = itemsC_1;
+        else if (cursor1.getString(0).equals("C2"))
+            items1 = itemsC_2;
+        else if (cursor1.getString(0).equals("C3"))
+            items1 = itemsC_3;
+        else if (cursor1.getString(0).equals("C4"))
+            items1 = itemsC_4;
+
+        else if(cursor1.getString(0).equals("D1"))
+            items1 = itemsD_1;
+        else if (cursor1.getString(0).equals("D2"))
+            items1 = itemsD_2;
+        else if (cursor1.getString(0).equals("D3"))
+            items1 = itemsD_3;
+        else if (cursor1.getString(0).equals("D4"))
+            items1 = itemsD_4;
+        else if (cursor1.getString(0).equals("D5"))
+            items1 = itemsD_5;
+
+        else if(cursor1.getString(0).equals("E1"))
+            items1 = itemsE_1;
+        else if (cursor1.getString(0).equals("E2"))
+            items1 = itemsE_2;
+        else if (cursor1.getString(0).equals("E3"))
+            items1 = itemsE_3;
+        else if (cursor1.getString(0).equals("E4"))
+            items1 = itemsE_4;
+        else if (cursor1.getString(0).equals("E5"))
+            items1=itemsE_5;
+        else if (cursor1.getString(0).equals("E6"))
+            items1 = itemsE_6;
+        else if (cursor1.getString(0).equals("E7"))
+            items1 = itemsE_7;
+
+
+        else if(cursor1.getString(0).equals("F1"))
+            items1 = itemsF_1;
+        else if (cursor1.getString(0).equals("F2"))
+            items1 = itemsF_2;
+        else if (cursor1.getString(0).equals("F3"))
+            items1 = itemsF_3;
+
+        else if(cursor1.getString(0).equals("G1"))
+            items1 = itemsG_1;
+        else if (cursor1.getString(0).equals("G2"))
+            items1 = itemsG_2;
+        else if (cursor1.getString(0).equals("G3"))
+            items1 = itemsG_3;
+        else if (cursor1.getString(0).equals("G4"))
+            items1 = itemsG_4;
+
+        else if(cursor1.getString(0).equals("H1"))
+            items1 = itemsH_1;
+        else if (cursor1.getString(0).equals("H2"))
+            items1 = itemsH_2;
+
+        else if(cursor1.getString(0).equals("I1"))
+            items1 = itemsI_1;
+        else if (cursor1.getString(0).equals("I2"))
+            items1 = itemsI_2;
+
         ArrayAdapter adapter1 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items1[0]) ;
         Button button = (Button)findViewById(R.id.ok);
         final ListView e = (ListView) findViewById(R.id.e);
