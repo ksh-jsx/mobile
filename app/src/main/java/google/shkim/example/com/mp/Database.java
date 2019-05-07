@@ -16,7 +16,7 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // 새로운 테이블 생성
-        db.execSQL("CREATE TABLE IF NOT EXISTS infos (_id INTEGER PRIMARY KEY AUTOINCREMENT, PlaceName TEXT, Year INTERGER, Month INTERGER, Date INTERGER, Hour INTERGER, Minute INTERGER, Lat DOUBLE, Lng DOUBLE);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS infos (_id INTEGER PRIMARY KEY AUTOINCREMENT, PlaceName TEXT, Year INTERGER, Month INTERGER, Date INTERGER, Hour INTERGER, Minute INTERGER, Lat DOUBLE, Lng DOUBLE, PlaceAdd TEXT);");
         db.execSQL("CREATE TABLE IF NOT EXISTS markerPoint (PlaceName TEXT, Lat DOUBLE, Lng DOUBLE);");
         db.execSQL("CREATE TABLE IF NOT EXISTS tempSave (PlaceName TEXT, fULLDATE TEXT, Hour INTERGER, Minute INTERGER);");
         db.execSQL("CREATE TABLE IF NOT EXISTS spinnerSelect (SpinnerName TEXT);");

@@ -89,7 +89,6 @@ public class ListAdapter extends BaseAdapter
         }
         else
         {
-            Log.d(DEBUG_TAG, "hello");
             dateLinear.setVisibility(View.VISIBLE);
             etc.setVisibility(View.GONE);
 

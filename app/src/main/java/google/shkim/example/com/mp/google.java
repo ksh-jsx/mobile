@@ -1,6 +1,7 @@
 package google.shkim.example.com.mp;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -38,11 +39,11 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google);
-
+        dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        
+
         initViews();
     }
 
@@ -95,11 +96,22 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
         Button calcelbtn = (Button)findViewById(R.id.cancelBtn);
         final Geocoder mGeocoder = new Geocoder(this);
 
-        LatLng SEOUL = new LatLng(37.56, 126.97);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+        final Cursor cursor1 = dbHelper.select("select * from markerPoint;");
+        cursor1.moveToFirst();
+        if(cursor1.isFirst()) {
+            //Log.d(DEBUG_TAG, "a : " + cursor1.getDouble(1) );
+            LatLng savePoint = new LatLng(cursor1.getDouble(1), cursor1.getDouble(2));
+            mMap.addMarker(new MarkerOptions().position(savePoint));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(savePoint));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+        }
+        else {
+            LatLng SEOUL = new LatLng(37.56, 126.97);
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+        }
 
-        dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
+        dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
         okbtn.setOnClickListener(new View.OnClickListener() //확인 버튼 클릭 이벤트
         {
             @Override
@@ -107,7 +119,16 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
 
                 if(adr != "" && lat !=0)
                 {
+
                     Intent intent = new Intent(google.this, EditPlan.class);
+                    Intent intent1 = getIntent();
+                    if(intent1.getStringExtra("bool").equals("1")){
+                        intent.putExtra("bool","2");
+                        intent.putExtra("id",intent1.getStringExtra("id"));
+                    }
+
+                    else if (intent1.getStringExtra("bool").equals("0"))
+                        intent.putExtra("bool","0");
                     startActivity(intent);
                     dbHelper.delete("delete from markerPoint;");
                     dbHelper.insert("insert into markerPoint values('" + adr + "'," + lat + ", " + lng + ");");

@@ -33,7 +33,7 @@ public class EditPlan extends Activity {
             TextView dateShow=(TextView)findViewById(R.id.dateValue);
             if(month<10 && date<10)
                 dateShow.setText(year+"년 "+"0"+month+"월 "+"0"+date+"일");
-            else if(month<10 && date>10)
+            else if(month<10 && date>=10)
                 dateShow.setText(year+"년 "+"0"+month+"월 "+date+"일");
             else if(month>10 && date<10)
                 dateShow.setText(year+"년 "+month+"월 "+"0"+date+"일");
@@ -46,43 +46,58 @@ public class EditPlan extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_plan);
-        dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
+        dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
         Button setDate=(Button)findViewById(R.id.setDate);
         Button setAddress = (Button)findViewById(R.id.setAddress);
         Button submit=(Button)findViewById(R.id.submit);
         Button back=(Button)findViewById(R.id.back);
         final EditText getName = (EditText)findViewById(R.id.placeNameValue);
         final EditText getDate = (EditText)findViewById(R.id.dateValue);
-                        getDate.setEnabled(false);
         final TimePicker getTime = (TimePicker)findViewById(R.id.timeValue);
         final TextView getAddress = (TextView)findViewById(R.id.AddressValue);
         final TextView getlat = (TextView)findViewById(R.id.latValue);
         final TextView getlng = (TextView)findViewById(R.id.lngValue);
+        getDate.setEnabled(false);
 
-        final Cursor cursor2 = dbHelper.select("SELECT * FROM tempSave;");
+        final Intent intent = getIntent();
+        if(intent.getStringExtra("bool").equals("1"))
+        {
+            getName.setText(intent.getStringExtra("Title"));
+            String intentHour = intent.getStringExtra("Time").substring(0, 2);
+            String intentMinute = intent.getStringExtra("Time").substring(4, 6);
+            getTime.setHour((int) Double.parseDouble(intentHour));
+            getTime.setMinute((int) Double.parseDouble(intentMinute));
+            getlat.setText(intent.getStringExtra("Lat"));
+            getlng.setText(intent.getStringExtra("Lng"));
+            getAddress.setText(intent.getStringExtra("Address"));
+            Log.d(DEBUG_TAG, "id0 : " + intent.getStringExtra("id"));
+        }
+        final Cursor cursor = dbHelper.select("SELECT * FROM tempSave;");
+        cursor.moveToFirst();
 
-        cursor2.moveToFirst();
-
-        if(cursor2.getCount()>0) {
-            Log.d(DEBUG_TAG, "name : " + cursor2.getString(0));
-            Log.d(DEBUG_TAG, "Fulldate : " + cursor2.getString(1));
-            Log.d(DEBUG_TAG, "year : " + cursor2.getInt(2));
-            Log.d(DEBUG_TAG, "month : " + cursor2.getInt(3));
-            getName.setText(cursor2.getString(0));
-            getDate.setText(cursor2.getString(1));
-            getTime.setHour(cursor2.getInt(2));
-            getTime.setMinute(cursor2.getInt(3));
+        if(cursor.getCount()>0) {
+            Log.d(DEBUG_TAG, "name : " + cursor.getString(0));
+            Log.d(DEBUG_TAG, "Fulldate : " + cursor.getString(1));
+            Log.d(DEBUG_TAG, "year : " + cursor.getInt(2));
+            Log.d(DEBUG_TAG, "month : " + cursor.getInt(3));
+            getName.setText(cursor.getString(0));
+            getDate.setText(cursor.getString(1));
+            getTime.setHour(cursor.getInt(2));
+            getTime.setMinute(cursor.getInt(3));
             dbHelper.delete("delete from tempSave;");
         }
         else {
-            if (month < 10 && date < 10)
+            if (intent.getStringExtra("bool").equals("1"))
+                getDate.setText(intent.getStringExtra("Date"));
+            else if (month < 10 && date < 10)
                 getDate.setText(year + "년 " + "0" + month + "월 " + "0" + date + "일");
-            else if (month < 10 && date > 10)
+            else if (month < 10 && date >= 10)
                 getDate.setText(year + "년 " + "0" + month + "월 " + date + "일");
             else if (month > 10 && date < 10)
                 getDate.setText(year + "년 " + month + "월 " + "0" + date + "일");
             else
                 getDate.setText(year + "년 " + month + "월 " + date + "일");
+
         }
         setDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,8 +118,10 @@ public class EditPlan extends Activity {
 
 
                 dbHelper.insert("insert into tempSave values('" + nameValue + "','" + fullDatevalue + "', " + hourValue + ", " + minuteValue + ");");
-                Intent intent = new Intent(EditPlan.this,google.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(EditPlan.this,google.class);
+                intent1.putExtra("bool",intent.getStringExtra("bool"));
+                intent1.putExtra("id",intent.getStringExtra("id"));
+                startActivity(intent1);
             }
         });
         submit.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +136,7 @@ public class EditPlan extends Activity {
                 int minuteValue = getTime.getMinute();
                 String latString = getlat.getText().toString();
                 String lngString = getlng.getText().toString();
+                String addValue = getAddress.getText().toString();
 
                 Log.d(DEBUG_TAG, "name : " + nameValue);
                 Log.d(DEBUG_TAG, "Fulldate : " + fullDatevalue);
@@ -137,10 +155,17 @@ public class EditPlan extends Activity {
                     Toast.makeText(getApplicationContext(), "위치를 입력해주세요", Toast.LENGTH_SHORT).show();
                 else
                 {
+                    Intent intent2 = getIntent();
+                    if(!intent2.getStringExtra("bool").equals("0"))
+                    {
 
-                    dbHelper.insert("insert into infos(PlaceName,Year,Month,Date,Hour,Minute,Lat,Lng) values('" + nameValue + "'," + yearValue + ", " + monthValue + ", " + dateValue + ", " + hourValue + ", " + minuteValue+"," +latString + ", " + lngString +");");
+                        dbHelper.delete("delete from infos where _id = "+intent2.getStringExtra("id"));
+                    }
+
+                    dbHelper.insert("insert into infos(PlaceName,Year,Month,Date,Hour,Minute,Lat,Lng,PlaceAdd) values('" + nameValue + "'," + yearValue + ", " + monthValue + ", " + dateValue + ", " + hourValue + ", " + minuteValue+"," +latString + ", " + lngString +", '"+addValue+"');");
                     Intent intent = new Intent(EditPlan.this,index.class);
                     startActivity(intent);
+                    finish();
                 }
 
             }
@@ -151,6 +176,7 @@ public class EditPlan extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(EditPlan.this,index.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -168,6 +194,7 @@ public class EditPlan extends Activity {
     {
         Intent intent = new Intent(EditPlan.this,index.class);
         startActivity(intent);
+        finish();
     }
 }
 

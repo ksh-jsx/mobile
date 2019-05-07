@@ -12,17 +12,20 @@ public class tempView {
 
     private View view;
     private int count = 0;
-    public void getView(View view)
+
+    public View getView() { return view; }
+    public void setView(View view)
     {
          this.view = view;
     }
 
-    public void setView()
+    public void applyView()
     {
         TextView oTextTitle = (TextView) view.findViewById(R.id.textTitle);
         TextView oimgName = (TextView) view.findViewById(R.id.imgName);
         ImageView lineImage = (ImageView)view.findViewById(R.id.lineImage);
         LinearLayout btns = (LinearLayout)view.findViewById(R.id.btns);
+        Button showButton = (Button)view.findViewById(R.id.showLocationBtn);
         view.setBackgroundColor(Color.WHITE);
         if(oimgName.getText().equals("last"))
             lineImage.setImageResource(R.drawable.line_blue_non_bottom);
