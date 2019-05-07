@@ -47,7 +47,8 @@
                     android:id="@+id/content2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:weightSum="1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -58,48 +59,71 @@
 
                         <Button
                             android:id="@+id/del"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="내용 삭-제"
-                            android:background="#FFFFFF"
-                            android:textStyle="bold"
-                            android:layout_gravity="left"/>
-
-                        <View
                             android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:text="일정 다시짜기"
+                            android:background="#00ff0000"
+                            android:textStyle="bold"
+                            android:layout_gravity="left"
+                            android:textColor="#33aabb"/>
+
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:background="#00ff0000">
+                        </Button>
 
                         <Button
                             android:id="@+id/gotoPlan"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
                             android:text="일정 추가하기"
-                            android:background="#FFFFFF"
+                            android:background="#00ff0000"
                             android:textStyle="bold"
-                            android:layout_gravity="right" />
+                            android:layout_gravity="right"
+                            android:textColor="#33aabb"/>
 
                     </LinearLayout>
-                    <ListView
-                        android:id="@+id/List_view"
-                        android:drawSelectorOnTop="false"
+                    <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.9"
-                        android:divider="@null"
-                        android:dividerHeight="0dp"
-                        android:visibility="gone">
+                        android:layout_weight="0.9">
+                        <ListView
+                            android:id="@+id/List_view"
+                            android:drawSelectorOnTop="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:divider="@null"
+                            android:dividerHeight="0dp"
+                            android:visibility="gone">
 
-                    </ListView>
-                    <TextView
-                        android:id="@+id/notice"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="확인할 일정이 없습니다.\n새로운 일정을 추가해주세요"
-                        android:visibility="visible"
-                        android:paddingTop="100dp"
-                        android:textAlignment="center"
-                        android:textSize="20dp"/>
+                        </ListView>
+                        <TextView
+                            android:id="@+id/notice"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="확인할 일정이 없습니다.\n새로운 일정을 추가해주세요"
+                            android:visibility="visible"
+                            android:paddingTop="100dp"
+                            android:textAlignment="center"
+                            android:textSize="20dp"/>
+
+                        <Button
+                            android:id="@+id/showLocationBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|bottom"
+                            android:text="위치 보기"
+                            android:background="@drawable/button_style"
+                            android:textColor="#ffffff"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            android:layout_marginBottom="10dp"/>
+                    </FrameLayout>
+
 
                 </LinearLayout>
 
