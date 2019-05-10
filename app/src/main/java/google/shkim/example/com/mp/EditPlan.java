@@ -118,6 +118,14 @@ public class EditPlan extends Activity {
 
 
                 dbHelper.insert("insert into tempSave values('" + nameValue + "','" + fullDatevalue + "', " + hourValue + ", " + minuteValue + ");");
+                if(!getAddress.getText().equals(""))
+                {
+                    String gotoGoogle = "tempPoint";
+                    String dAddr = getAddress.getText().toString();
+                    double dLat = Double.parseDouble(getlat.getText().toString());
+                    double dLng = Double.parseDouble(getlng.getText().toString());
+                    dbHelper.insert("insert into markerPoint values('" + dAddr + "'," + dLat + ", " + dLng + ");");
+                }
                 Intent intent1 = new Intent(EditPlan.this,google.class);
                 intent1.putExtra("bool",intent.getStringExtra("bool"));
                 intent1.putExtra("id",intent.getStringExtra("id"));
@@ -188,6 +196,7 @@ public class EditPlan extends Activity {
             getAddress.setText(cursor1.getString(0));
             getlat.setText(cursor1.getString(1));
             getlng.setText(cursor1.getString(2));
+            dbHelper.select("DELETE FROM markerPoint;");
         }
     }
     public void onBackPressed()

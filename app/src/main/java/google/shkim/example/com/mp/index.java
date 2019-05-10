@@ -46,7 +46,7 @@ public class index  extends Activity
     final Context context = this;
     private static final String DEBUG_TAG = "{LOG_ANDROID}";
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    protected void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
@@ -236,6 +236,16 @@ public class index  extends Activity
                     }
                 });
 
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View item2) {
+                        dbHelper.delete("delete from infos where _id = "+data.get(position).getId()+";");
+                        oData.remove(position);
+                        onCreate(savedInstanceState);
+
+                    }
+                });
+
             }
         });
 
@@ -262,6 +272,7 @@ public class index  extends Activity
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dbHelper.delete("delete from infos;");
+                                onCreate(savedInstanceState);
 
                             }
                         });

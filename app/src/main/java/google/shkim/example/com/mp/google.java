@@ -68,7 +68,7 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
                 mMap.clear();
                 int nameLength = place.getAddress().length();
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(location));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, nameLength-1));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, nameLength-5));
                 MarkerOptions makerOptions = new MarkerOptions();
                 makerOptions .position(location)
                         .title("검색 위치"); // 타이틀.
@@ -92,26 +92,41 @@ public class google extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap)
     {
         mMap = googleMap;
+        dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
         Button okbtn = (Button)findViewById(R.id.saveBtn);
         Button calcelbtn = (Button)findViewById(R.id.cancelBtn);
         final Geocoder mGeocoder = new Geocoder(this);
 
         final Cursor cursor1 = dbHelper.select("select * from markerPoint;");
         cursor1.moveToFirst();
-        if(cursor1.isFirst()) {
-            //Log.d(DEBUG_TAG, "a : " + cursor1.getDouble(1) );
+        if(cursor1.isFirst())
+        {
+            Log.d(DEBUG_TAG, "pont : " + cursor1.getString(0) );
+            if(cursor1.getString(0).equals("tempPoint"))
+            {
+                okbtn.setVisibility(View.GONE);
+                calcelbtn.setText("확인");
+            }
+
             LatLng savePoint = new LatLng(cursor1.getDouble(1), cursor1.getDouble(2));
-            mMap.addMarker(new MarkerOptions().position(savePoint));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(savePoint));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(savePoint));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(savePoint, 15));
+            MarkerOptions makerOptions = new MarkerOptions();
+            makerOptions .position(savePoint)
+                    .title("저장 위치"); // 타이틀.
+            mMap.addMarker(makerOptions);// 2. 마커 생성 (마커를 나타냄)
+            lat = savePoint.latitude;
+            lng = savePoint.longitude;
+            adr = cursor1.getString(0);
+            dbHelper.select("DELETE FROM markerPoint;");
         }
-        else {
+        else
+        {
             LatLng SEOUL = new LatLng(37.56, 126.97);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
         }
 
-        dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
         okbtn.setOnClickListener(new View.OnClickListener() //확인 버튼 클릭 이벤트
         {
             @Override

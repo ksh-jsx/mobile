@@ -46,14 +46,13 @@
                 <LinearLayout
                     android:id="@+id/content2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:weightSum="1">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
+                        android:layout_weight="1"
                         android:orientation="horizontal"
                         android:weightSum="1">
 
@@ -90,7 +89,7 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.9">
+                        android:layout_weight="9">
                         <ListView
                             android:id="@+id/List_view"
                             android:drawSelectorOnTop="false"
@@ -172,8 +171,8 @@
                             <Button android:id="@+id/imgBtn3"
                                 android:layout_height="match_parent"
                                 android:layout_width="match_parent"
-                                android:text="에베베벱"
-                                android:drawableBottom="@drawable/work"
+                                android:text="공항/비행기"
+                                android:drawableBottom="@drawable/airplane"
                                 android:layout_weight="1"
                                 android:background="#00ff0000" />
                             <Spinner
