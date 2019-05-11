@@ -120,7 +120,6 @@ public class EditPlan extends Activity {
                 dbHelper.insert("insert into tempSave values('" + nameValue + "','" + fullDatevalue + "', " + hourValue + ", " + minuteValue + ");");
                 if(!getAddress.getText().equals(""))
                 {
-                    String gotoGoogle = "tempPoint";
                     String dAddr = getAddress.getText().toString();
                     double dLat = Double.parseDouble(getlat.getText().toString());
                     double dLng = Double.parseDouble(getlng.getText().toString());

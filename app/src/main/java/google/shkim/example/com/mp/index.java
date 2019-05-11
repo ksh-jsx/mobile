@@ -227,6 +227,7 @@ public class index  extends Activity
                 showButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        dbHelper.insert("delete from markerPoint");
                         String gotoGoogle = "tempPoint";
                         double dLat = Double.parseDouble(oLatName.getText().toString());
                         double dLng = Double.parseDouble(oLngName.getText().toString());
