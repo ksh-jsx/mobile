@@ -60,6 +60,7 @@ public class google extends FragmentActivity
     private Database dbHelper;
     CharSequence adr = "";
     double lat,lng = 0;
+    private int count = 0;
 
 
     private GoogleMap mGoogleMap = null;
@@ -256,6 +257,7 @@ public class google extends FragmentActivity
         cursor1.moveToFirst();
         if(cursor1.isFirst())
         {
+
             if(cursor1.getString(0).equals("tempPoint"))
             {
                 okbtn.setVisibility(View.GONE);
@@ -512,10 +514,12 @@ public class google extends FragmentActivity
         //currentMarker = mGoogleMap.addMarker(markerOptions);
         final Cursor cursor1 = dbHelper.select("select * from markerPoint;");
         cursor1.moveToFirst();
-        if(!cursor1.isFirst())
+        if(!cursor1.isFirst() && count ==0)
         {
+                count++;
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
                 mGoogleMap.moveCamera(cameraUpdate);
+            Log.d(DEBUG_TAG, "count : " + count);
 
         }
 

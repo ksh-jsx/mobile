@@ -53,11 +53,6 @@ public class index  extends Activity
         gotoPlan = (Button)findViewById(R.id.gotoPlan);
         del = (Button)findViewById(R.id.del);
         String dateSave = "a";
-        final Database dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
-        final TextView TextTitle = (TextView) findViewById(R.id.textTitle);
-        ListView listview = (ListView)findViewById(R.id.List_view);
-        TextView noticeText = (TextView)findViewById(R.id.notice);
-        TextView textTitle = (TextView)findViewById(R.id.textTitle);
 
         final tempView tempview = new tempView();
         ImageView tabWidget0 = new ImageView(this);
@@ -66,6 +61,14 @@ public class index  extends Activity
         tabWidget1.setImageResource(R.drawable.tab_01);
         ImageView tabWidget2 = new ImageView(this);
         tabWidget2.setImageResource(R.drawable.tab_02);
+
+        final Database dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
+        final TextView TextTitle = (TextView) findViewById(R.id.textTitle);
+        ListView listview = (ListView)findViewById(R.id.List_view);
+        TextView noticeText = (TextView)findViewById(R.id.notice);
+        TextView textTitle = (TextView)findViewById(R.id.textTitle);
+
+
 
         final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
         final Button button1 = (Button) findViewById(R.id.imgBtn1);
@@ -106,6 +109,15 @@ public class index  extends Activity
         tabhost.addTab(ts3) ;
 
         tabhost.setCurrentTab(1);
+
+        String[] necessary_items = {"여권","상비약","휴대폰 배터리","지갑","속옷","휴대폰","휴대폰 충전기"
+        };
+
+        ArrayAdapter adapterPackng = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, necessary_items);
+        ListView pakingList = (ListView)findViewById(R.id.pakingList);
+        pakingList.setAdapter(adapterPackng);
+
+
 
         // 데이터 생성.
         Cursor cursor1 = dbHelper.select("select * from infos order by Year asc, Month asc, Date asc, Hour asc, Minute asc");
@@ -287,6 +299,10 @@ public class index  extends Activity
                 builder.show();
             }
         });
+
+
+
+
 
         //회화 화면 클릭리스터
         button1.setOnClickListener(new View.OnClickListener() {
