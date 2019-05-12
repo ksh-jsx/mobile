@@ -28,7 +28,7 @@ public class languageView extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language_view);
-        dbHelper = new Database(getApplicationContext(), "SQLite.db", null, 1);
+        dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
         Cursor cursor1 = dbHelper.select("SELECT * FROM spinnerSelect");
         cursor1.moveToFirst();
         Log.d(DEBUG_TAG, "list : " + cursor1.getString(0));
