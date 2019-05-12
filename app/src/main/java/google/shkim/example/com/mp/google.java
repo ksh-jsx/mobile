@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class google extends AppCompatActivity
+public class google extends FragmentActivity
         implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback{
 
     private GoogleMap mMap;

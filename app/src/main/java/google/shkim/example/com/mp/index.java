@@ -170,10 +170,11 @@ public class index  extends Activity
         m_oListView.setAdapter(oAdapter);
 
         // ListView 클릭 이벤트
+
         m_oListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
-                Log.d(DEBUG_TAG, "view: " + view);
+
                 TextView oTextTitle = (TextView) view.findViewById(R.id.textTitle);
                 TextView oImgName = (TextView) view.findViewById(R.id.imgName);
                 final TextView oLatName = (TextView) view.findViewById(R.id.textLat);

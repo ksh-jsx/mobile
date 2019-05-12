@@ -26,7 +26,7 @@ public class tempView {
         ImageView lineImage = (ImageView)view.findViewById(R.id.lineImage);
         LinearLayout btns = (LinearLayout)view.findViewById(R.id.btns);
         Button showButton = (Button)view.findViewById(R.id.showLocationBtn);
-        view.setBackgroundColor(Color.WHITE);
+        view.setBackgroundColor(Color.argb(0,0,0,0));
         if(oimgName.getText().equals("last"))
             lineImage.setImageResource(R.drawable.line_blue_non_bottom);
         else
