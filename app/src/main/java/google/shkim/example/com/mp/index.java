@@ -110,10 +110,59 @@ public class index  extends Activity
 
         tabhost.setCurrentTab(1);
 
-        String[] necessary_items = {"여권","상비약","휴대폰 배터리","지갑","속옷","휴대폰","휴대폰 충전기"
-        };
+        String[] necessary_items = {"여권","상비약","휴대폰 배터리","지갑","속옷","휴대폰","휴대폰 충전기"};
 
-        ArrayAdapter adapterPackng = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, necessary_items);
+        String[] summer_clothes = {};
+        String[] winter_clothes = {};
+        String[] spring_clothes = {};
+
+        String[] korea = {};    //한국
+        String[] japan = {};    //일본
+        String[] china = {};    //중국
+        String[] america = {};  //아메리카
+        String[] south_america = {};  //남아메리카
+        String[] north_europe = {}; //북유럽
+        String[] south_europe = {}; //남유럽
+        String[] southeast_asia = {};   //동남아시아
+        String[] Middle_east = {};  //중동
+
+        double latitude_ave = 0;
+        int latitude_count = 0;
+        double month_ave = 0;
+        int month_count = 0;
+
+        Cursor latitude = dbHelper.select("select Lat from infos");
+        Cursor month = dbHelper.select("select Month from infos");
+        latitude.moveToFirst();
+        month.moveToFirst();
+        Log.d(DEBUG_TAG, "lat : " + latitude.getString(0));
+        while(!latitude.isLast())
+        {
+            latitude_ave+=latitude.getDouble(0);
+            latitude.moveToNext();
+            latitude_count++;
+        }
+        while(!month.isLast())
+        {
+            month_ave+=month.getInt(0);
+            month.moveToNext();
+            month_count++;
+        }
+        latitude_ave /= latitude_count;
+        month_ave /= month_count;
+        String[] items = {"a"};
+
+        if(true) // latitude_ave가 0~20인 경우
+        {
+            if(true)  // month_ave가 1-3월이면
+            {
+
+            }
+        }
+
+        items = necessary_items;
+
+        ArrayAdapter adapterPackng = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         ListView pakingList = (ListView)findViewById(R.id.pakingList);
         pakingList.setAdapter(adapterPackng);
 
@@ -196,6 +245,7 @@ public class index  extends Activity
                 Button modifyButton = (Button)view.findViewById(R.id.listButton1);
                 Button deleteButton = (Button)view.findViewById(R.id.listButton2);
                 Button showButton = (Button)findViewById(R.id.showLocationBtn);
+                Button empty = (Button)findViewById(R.id.empty);
                 position = i;
                 if(count != 0) tempview.applyView();
                 if(btns.getVisibility() == View.INVISIBLE) {
@@ -213,7 +263,7 @@ public class index  extends Activity
                 }
 
                 Animation animation = new AlphaAnimation(0, 1);
-                animation.setDuration(500);
+                animation.setDuration(400);
                 showButton.setAnimation(animation);
                 tempview.setView(view);
                 count++;
@@ -259,7 +309,7 @@ public class index  extends Activity
 
                     }
                 });
-
+                empty.performClick();
             }
         });
 
