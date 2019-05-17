@@ -112,19 +112,13 @@ public class index  extends Activity
 
         String[] necessary_items = {"여권","상비약","휴대폰 배터리","지갑","속옷","휴대폰","휴대폰 충전기"};
 
-        String[] summer_clothes = {};
-        String[] winter_clothes = {};
-        String[] spring_clothes = {};
+        String[] in_cabin = {"여권","현금","신용카드","바우처","볼펜","수첩","목베개","담요","안대","휴대폰 충전기","보조 배터리","노트북","카메라","귀중품","자물쇠"};
+        String[] clothes = {"옷","속옷","잠옷","양말","여벌 신발","수건"};
+        String[] cosmetics = {"스킨","로션","선크림","렌즈, 세쳑용품"};
 
-        String[] korea = {};    //한국
-        String[] japan = {};    //일본
-        String[] china = {};    //중국
-        String[] america = {};  //아메리카
-        String[] south_america = {};  //남아메리카
-        String[] north_europe = {}; //북유럽
-        String[] south_europe = {}; //남유럽
-        String[] southeast_asia = {};   //동남아시아
-        String[] Middle_east = {};  //중동
+        String[] washing_tools = {"치약","칫솔","클렌징 용품","샴푸","린스","바디 워시","면도기"};
+        String[] props = {"각종 충전기","멀티어댑터","선글라스","셀카봉","상비약"};
+        String[] helpful = {"지퍼백","면봉","비상식량","옷걸이","보조가방","압축팩","손톱깎이","모기향"};
 
         double latitude_ave = 0;
         int latitude_count = 0;
