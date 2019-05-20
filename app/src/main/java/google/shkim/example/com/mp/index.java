@@ -20,6 +20,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -27,6 +28,8 @@ import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Attr;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -67,7 +70,9 @@ public class index  extends Activity
         ListView listview = (ListView)findViewById(R.id.List_view);
         TextView noticeText = (TextView)findViewById(R.id.notice);
         TextView textTitle = (TextView)findViewById(R.id.textTitle);
-
+        TextView Attractions = (TextView)findViewById(R.id.AttractionName);
+        final EditText setLoad = (EditText)findViewById(R.id.setLoad);
+        Button loadBtn = (Button)findViewById(R.id.loadBtn);
 
 
         final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
@@ -127,39 +132,72 @@ public class index  extends Activity
 
         Cursor latitude = dbHelper.select("select Lat from infos");
         Cursor month = dbHelper.select("select Month from infos");
+        Cursor load = dbHelper.select("select * from baggage");
         latitude.moveToFirst();
         month.moveToFirst();
-        Log.d(DEBUG_TAG, "lat : " + latitude.getString(0));
-        while(!latitude.isLast())
+        load.moveToFirst();
+        if(latitude.isFirst())
         {
-            latitude_ave+=latitude.getDouble(0);
-            latitude.moveToNext();
-            latitude_count++;
-        }
-        while(!month.isLast())
-        {
-            month_ave+=month.getInt(0);
-            month.moveToNext();
-            month_count++;
+            while (latitude.getCount() != latitude_count) {
+                latitude_ave += latitude.getDouble(0);
+                latitude.moveToNext();
+                latitude_count++;
+                Log.d(DEBUG_TAG, "latitude_ave : " + latitude_ave);
+            }
+            while (!month.isLast()) {
+                month_ave += month.getInt(0);
+                month.moveToNext();
+                month_count++;
+            }
         }
         latitude_ave /= latitude_count;
         month_ave /= month_count;
-        String[] items = {"a"};
-
-        if(true) // latitude_ave가 0~20인 경우
+        String[] items = {};
+        String[] temp = {};
+        String[] loadSum = {};
+        if(latitude_ave>20) // latitude_ave가 0~20인 경우
         {
             if(true)  // month_ave가 1-3월이면
             {
-
+                Attractions.setText("당신의 여행지는 '동남아' 군요?");
+                temp = new String[in_cabin.length+clothes.length];
+                System.arraycopy(in_cabin,0,temp,0,in_cabin.length);
+                System.arraycopy(clothes,0,temp,in_cabin.length,clothes.length);
+            }
+        }
+        if(load.isFirst())
+        {
+            loadSum = new String[load.getCount()];
+            for(int i=0;i<load.getCount();i++)
+            {
+                loadSum[i] = load.getString(0);
+                load.moveToNext();
             }
         }
 
-        items = necessary_items;
-
+        items = new String[temp.length+loadSum.length];
+        System.arraycopy(temp,0,items,0,temp.length);
+        System.arraycopy(loadSum,0,items,temp.length,loadSum.length);
         ArrayAdapter adapterPackng = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         ListView pakingList = (ListView)findViewById(R.id.pakingList);
         pakingList.setAdapter(adapterPackng);
 
+        loadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(setLoad.getText().toString().length() > 1)
+                {
+                    String getText = setLoad.getText().toString();
+                    dbHelper.insert("insert into baggage values('" + getText + "');");
+                    onCreate(savedInstanceState);
+                }
+                else
+                {
+                    dbHelper.delete("delete from baggage;");
+                    Toast.makeText(getApplicationContext(),"저장 할 내용을 입력해주세요",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
 
         // 데이터 생성.

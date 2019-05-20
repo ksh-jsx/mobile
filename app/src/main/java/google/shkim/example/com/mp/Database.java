@@ -20,6 +20,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS markerPoint (PlaceName TEXT, Lat DOUBLE, Lng DOUBLE);");
         db.execSQL("CREATE TABLE IF NOT EXISTS tempSave (PlaceName TEXT, fULLDATE TEXT, Hour INTERGER, Minute INTERGER);");
         db.execSQL("CREATE TABLE IF NOT EXISTS spinnerSelect (SpinnerName TEXT);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS baggage (item TEXT);");
     }
 
     // DB 업그레이드를 위해 버전이 변경될 때 호출되는 함수

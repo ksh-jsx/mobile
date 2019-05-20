@@ -33,6 +33,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/AttractionName"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="2"
@@ -60,6 +61,7 @@
                         android:orientation="horizontal">
 
                         <Button
+                            android:id="@+id/loadBtn"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
@@ -67,6 +69,7 @@
                             android:text="+"
                             android:textSize="30dp"/>
                         <EditText
+                            android:id="@+id/setLoad"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="8"

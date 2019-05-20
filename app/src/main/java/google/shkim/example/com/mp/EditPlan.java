@@ -123,7 +123,7 @@ public class EditPlan extends Activity {
                     String dAddr = getAddress.getText().toString();
                     double dLat = Double.parseDouble(getlat.getText().toString());
                     double dLng = Double.parseDouble(getlng.getText().toString());
-                    dbHelper.insert("insert into markerPoint values('" + dAddr + "'," + dLat + ", " + dLng + ");");
+
                 }
                 Intent intent1 = new Intent(EditPlan.this,google.class);
                 intent1.putExtra("bool",intent.getStringExtra("bool"));
