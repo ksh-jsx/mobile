@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="google.shkim.example.com.mp">
-<uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/webview_icon"
-        android:logo="@drawable/webview_icon"
         android:label="17101197"
+        android:logo="@drawable/webview_icon"
         android:roundIcon="@drawable/webview_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".index"
+        <activity android:name=".Res"></activity>
+        <activity
+            android:name=".index"
             android:label="17101197">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
