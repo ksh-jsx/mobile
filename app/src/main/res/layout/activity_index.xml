@@ -40,7 +40,7 @@
                         android:background="#00ff0000"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:text="당신의 여행지는 '일본' 이군요?"
+                        android:text=""
                         android:textSize="20dp"
                         android:layout_marginTop="30dp"
                         android:textStyle="bold"

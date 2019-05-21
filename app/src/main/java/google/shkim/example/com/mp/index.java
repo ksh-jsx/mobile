@@ -115,25 +115,41 @@ public class index  extends Activity
 
         tabhost.setCurrentTab(1);
 
-        String[] necessary_items = {"여권","상비약","휴대폰 배터리","지갑","속옷","휴대폰","휴대폰 충전기"};
+        String[] necessary_items = {"여권","현금","신용카드","바우처","볼펜","수첩","목베개","담요",
+                "안대","휴대폰 충전기","보조 배터리  --캐리어에 넣으면 안됨!","노트북","카메라","귀중품",
+                "자물쇠","속옷","잠옷","양말","여분 신발","슬리퍼","수건","스킨","로션","선크림","렌즈, 세쳑용품","치약",
+                "칫솔","클렌징 용품","샴푸","린스","바디 워시","면도기","각종 충전기","멀티어댑터","선글라스",
+                "셀카봉","상비약","지퍼백","면봉","비상식량","옷걸이","보조가방","압축팩","손톱깎이","모기향"};
 
-        String[] in_cabin = {"여권","현금","신용카드","바우처","볼펜","수첩","목베개","담요","안대","휴대폰 충전기","보조 배터리","노트북","카메라","귀중품","자물쇠"};
-        String[] clothes = {"옷","속옷","잠옷","양말","여벌 신발","수건"};
+        String[] japan = {"110V 플로그 어댑터","동전지갑","접을 수 있는 대형가방"};
+
+        String[] Celsius_30 = {"반팔 상의","샌들","반바지"};
+        String[] Celsius_20 = {"얇은 긴팔 상의","셔츠","긴바지","반팔"};
+        String[] Celsius_10 = {"긴팔 상의","긴 바지","겉옷","셔츠"};
+        String[] Celsius_00 = {"긴팔 상의","긴 바지","두꺼운 겉옷"};
+
+        /*String[] in_cabin = {"여권","현금","신용카드","바우처","볼펜","수첩","목베개","담요","안대","휴대폰 충전기","보조 배터리  --캐리어에 넣으면 안됨!","노트북","카메라","귀중품","자물쇠"};
+        String[] clothes = {"옷","속옷","잠옷","양말","신발","수건"};
         String[] cosmetics = {"스킨","로션","선크림","렌즈, 세쳑용품"};
 
         String[] washing_tools = {"치약","칫솔","클렌징 용품","샴푸","린스","바디 워시","면도기"};
         String[] props = {"각종 충전기","멀티어댑터","선글라스","셀카봉","상비약"};
         String[] helpful = {"지퍼백","면봉","비상식량","옷걸이","보조가방","압축팩","손톱깎이","모기향"};
+        */
 
         double latitude_ave = 0;
         int latitude_count = 0;
+        double longitude_ave = 0;
+        int longitude_count = 0;
         double month_ave = 0;
         int month_count = 0;
 
         Cursor latitude = dbHelper.select("select Lat from infos");
+        Cursor longitude = dbHelper.select("select Lng from infos");
         Cursor month = dbHelper.select("select Month from infos");
         Cursor load = dbHelper.select("select * from baggage");
         latitude.moveToFirst();
+        longitude.moveToFirst();
         month.moveToFirst();
         load.moveToFirst();
         if(latitude.isFirst())
@@ -142,28 +158,46 @@ public class index  extends Activity
                 latitude_ave += latitude.getDouble(0);
                 latitude.moveToNext();
                 latitude_count++;
-                Log.d(DEBUG_TAG, "latitude_ave : " + latitude_ave);
+
             }
-            while (!month.isLast()) {
+            while (longitude.getCount() != longitude_count) {
+                longitude_ave += longitude.getDouble(0);
+                longitude.moveToNext();
+                longitude_count++;
+
+            }
+            while (month.getCount() != month_count) {
                 month_ave += month.getInt(0);
                 month.moveToNext();
                 month_count++;
             }
         }
         latitude_ave /= latitude_count;
+        Log.d(DEBUG_TAG, "latitude_ave : " + latitude_ave);
+        longitude_ave /= longitude_count;
+        Log.d(DEBUG_TAG, "longitude_ave : " + longitude_ave);
         month_ave /= month_count;
-        String[] items = {};
-        String[] temp = {};
+        Log.d(DEBUG_TAG, "month_ave : " + month_ave);
+        String[] country = {};
+        String[] temperature = {};
         String[] loadSum = {};
-        if(latitude_ave>20) // latitude_ave가 0~20인 경우
+        String[] items = {};
+
+        if(latitude_ave>=30.02 && latitude_ave <=45.86 && longitude_ave >=128.24 && longitude_ave <=149.27) // 위도,경도가 일본영역
         {
-            if(true)  // month_ave가 1-3월이면
-            {
-                Attractions.setText("당신의 여행지는 '동남아' 군요?");
-                temp = new String[in_cabin.length+clothes.length];
-                System.arraycopy(in_cabin,0,temp,0,in_cabin.length);
-                System.arraycopy(clothes,0,temp,in_cabin.length,clothes.length);
-            }
+            Attractions.setText("당신의 여행지는 '일본' 이군요?");
+            country = japan;
+           if(month_ave==1 || month_ave==2 || month_ave ==12)  // month_ave가 1,2월
+                temperature = Celsius_00;
+            else if(month_ave==3 || month_ave==4 || month_ave ==10 || month_ave==11)  // month_ave가 3,4,10,11월
+                temperature = Celsius_10;
+
+           else if(month_ave==5 || month_ave==9)  // month_ave가 5,9월
+               temperature = Celsius_20;
+
+           else if(month_ave==6 || month_ave==7 || month_ave==8)  // month_ave가 6,7,8월
+               temperature = Celsius_30;
+
         }
         if(load.isFirst())
         {
@@ -175,13 +209,14 @@ public class index  extends Activity
             }
         }
 
-        items = new String[temp.length+loadSum.length];
-        System.arraycopy(temp,0,items,0,temp.length);
-        System.arraycopy(loadSum,0,items,temp.length,loadSum.length);
+        items = new String[necessary_items.length+temperature.length+loadSum.length+country.length];
+        System.arraycopy(country,0,items,0,country.length);
+        System.arraycopy(temperature,0,items,country.length,temperature.length);
+        System.arraycopy(loadSum,0,items,temperature.length,loadSum.length);
+        System.arraycopy(necessary_items,0,items,loadSum.length,necessary_items.length);
         ArrayAdapter adapterPackng = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         ListView pakingList = (ListView)findViewById(R.id.pakingList);
         pakingList.setAdapter(adapterPackng);
-
         loadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -268,6 +303,7 @@ public class index  extends Activity
             @Override
             public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
 
+                LinearLayout dateLinear = (LinearLayout)view.findViewById(R.id.dateLinear) ;
                 TextView oTextTitle = (TextView) view.findViewById(R.id.textTitle);
                 TextView oImgName = (TextView) view.findViewById(R.id.imgName);
                 final TextView oLatName = (TextView) view.findViewById(R.id.textLat);
@@ -289,14 +325,21 @@ public class index  extends Activity
                     else
                         lineImage.setImageResource(R.drawable.line_sky);
 
-                    btns.setVisibility(View.VISIBLE);
-                    showButton.setVisibility(view.VISIBLE);
-                    oTextTitle.setTextColor(Color.WHITE);
+                    if(dateLinear.getVisibility() == View.GONE) {
+                        btns.setVisibility(View.VISIBLE);
+                        showButton.setVisibility(view.VISIBLE);
+                        oTextTitle.setTextColor(Color.WHITE);
+                        Animation animation = new AlphaAnimation(0, 1);
+                        animation.setDuration(400);
+                        showButton.setAnimation(animation);
+                    }
+                   else {
+                        btns.setVisibility(View.GONE);
+                        showButton.setVisibility(view.GONE);
+                    }
                 }
 
-                Animation animation = new AlphaAnimation(0, 1);
-                animation.setDuration(400);
-                showButton.setAnimation(animation);
+
                 tempview.setView(view);
                 count++;
                 //Log.d(DEBUG_TAG, "date0 : " + data.get(position).getDate());
@@ -368,6 +411,7 @@ public class index  extends Activity
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dbHelper.delete("delete from infos;");
+                                dbHelper.delete("delete from baggage;");
                                 onCreate(savedInstanceState);
 
                             }
@@ -873,5 +917,6 @@ public class index  extends Activity
     }
 
 }
+
 
 
