@@ -100,16 +100,18 @@ public class languageView extends Activity {
         };
 
         String[][] itemsC_1 = {
-
+                {"\\n짐은 몇 개까지 부칠 수 있나요?\n\nHow many bags can i check?\n\n하우 매니 백스 캔 아이 체크\\n","\n비상구 근처 자리에 앉을 수 있을까요?\n\nCan i have a seat near the emergency exit?\n\n캔 아이 해브 어 싯 니어 더 이머전시 엑짓\n","\n깨지기 쉬운 물건이니 가방에 표시해 주세요.\n\nPlease mark this bag as 'fragile'.\n\n플리즈 마크 디스 백 에즈 '프레질'\n","\nC2 게이트로 가려면 어디로 가야 하나요?\n\nHow can i get to gate C2?\n\n하우 캔 아이 갯 투 게이트 씨투\n"},
+                {"\n짐은 몇 개까지 부칠 수 있나요?\n\n荷物はいくつまで送ることができますか？\n\n니모츠와 이쿠츠 마데 오쿠루 코토가 데키마스카?\n"},
+                {"\n짐은 몇 개까지 부칠 수 있나요?\n\n我可以携带多少包？\n\n워 커이 지에따이 뚜 샤오 빠오\n"},
+                {"\n짐은 몇 개까지 부칠 수 있나요?\n\nCombien de sacs puis-je porter?\n\n콩비안 드 섹 부비부 바크티\n"},
+                {"\n짐은 몇 개까지 부칠 수 있나요?\n\n¿Cuántas bolsas puedo llevar?\n\n콴타스 볼사스 푸에도 뎨바\n"}
         };
         String[][] itemsC_2 = {
-
-        };
-        String[][] itemsC_3 = {
-
-        };
-        String[][] itemsC_4 = {
-
+                {"\n여기는 제 자리입니다.\n\nThis is my seat\n\n디스 이즈 마이 싯\n","\n짐 올리는 것 좀 도와주세요\n\nCan you help me with my baggage?\n\n캔 유 헬프 미 윗 마이 배기지?\n","\n혹시 담요 한 장만 더 줄 수 있나요?\n\nWould it be possible to have another blanket?\n\n우드 잇 비 파시블 투 해브 어나더 블랭킷?\n"},
+                {"\n\n\n\n\n\n"},
+                {"\n\n\n\n\n\n"},
+                {"\n\n\n\n\n\n"},
+                {"\n\n\n\n\n\n"}
         };
 
         String[][] itemsD_1 = {{"\n택시 승강장이 어디에 있나요?\n\nWhere is a taxi stop?\n\n웨얼 이즈 어 택시 스탑?\n","\n이 주소로 가 주세요\n\nTake me to this address, please\n\n태이크 미 투 디스 어드레스,플리즈\n","\n얼마예요?\n\nHow much is it?\n\n하우 머치 이즈 잇?\n","\n요금이 잘못된 것 같아요\n\nI don't think the fare is right.\n\n아이 돈 띵끄 더 페어 이즈 라잇\n"},
@@ -305,10 +307,6 @@ public class languageView extends Activity {
             items1 = itemsC_1;
         else if (cursor1.getString(0).equals("C2"))
             items1 = itemsC_2;
-        else if (cursor1.getString(0).equals("C3"))
-            items1 = itemsC_3;
-        else if (cursor1.getString(0).equals("C4"))
-            items1 = itemsC_4;
 
         else if(cursor1.getString(0).equals("D1"))
             items1 = itemsD_1;
