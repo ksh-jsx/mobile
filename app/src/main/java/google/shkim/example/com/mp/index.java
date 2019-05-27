@@ -51,6 +51,8 @@ public class index  extends Activity
     ArrayList arrayList;
     private int count = 0;
     String[] items;
+    String[] items1;
+    String[] items2;
     String selectedItem;
     final Context context = this;
     private static final String DEBUG_TAG = "{LOG_ANDROID}";
@@ -195,8 +197,6 @@ public class index  extends Activity
         month_ave /= month_count;
         Log.d(DEBUG_TAG, "month_ave : " + month_ave);
 
-
-
          String countryName = getCountryName(context,latitude_ave,longitude_ave);
 
             if (countryName.equals("Japan")) // 위도,경도가 일본영역
@@ -294,13 +294,16 @@ public class index  extends Activity
                 }
             }
 
-            items = new String[necessary_items.length+temperature.length+loadSum.length+country.length];
-            System.arraycopy(country,0,items,0,country.length);
-            System.arraycopy(temperature,0,items,country.length,temperature.length);
-            System.arraycopy(loadSum,0,items,temperature.length,loadSum.length);
-            System.arraycopy(necessary_items,0,items,loadSum.length,necessary_items.length);
+            items1 = new String[necessary_items.length+country.length];
+            items2 = new String[temperature.length+loadSum.length];
+            System.arraycopy(necessary_items,0,items1,0,necessary_items.length);
+            System.arraycopy(country,0,items1,necessary_items.length,country.length);
+            System.arraycopy(temperature,0,items2,0,temperature.length);
+            System.arraycopy(loadSum,0,items2,temperature.length,loadSum.length);
+            items = new String[items1.length+items2.length];
+            System.arraycopy(items1,0,items,0,items1.length);
+            System.arraycopy(items2,0,items,items1.length,items2.length);
             ArrayAdapter adapterPackng = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-
             pakingList.setAdapter(adapterPackng);
 
 
