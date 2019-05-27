@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,15 +27,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Attr;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class index  extends Activity
 {
@@ -80,8 +84,6 @@ public class index  extends Activity
         final Button button1 = (Button) findViewById(R.id.imgBtn1);
         final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
         final Button button2 = (Button) findViewById(R.id.imgBtn2);
-        final Spinner spinner3 = (Spinner) findViewById(R.id.spinner3);
-        final Button button3 = (Button) findViewById(R.id.imgBtn3);
         final Spinner spinner4 = (Spinner) findViewById(R.id.spinner4);
         final Button button4 = (Button) findViewById(R.id.imgBtn4);
         final Spinner spinner5 = (Spinner) findViewById(R.id.spinner5);
@@ -124,7 +126,11 @@ public class index  extends Activity
                 "칫솔","클렌징 용품","샴푸","린스","바디 워시","면도기","각종 충전기","멀티어댑터","선글라스",
                 "셀카봉","상비약","지퍼백","면봉","비상식량","옷걸이","보조가방","압축팩","손톱깎이","모기향"};
 
+        String[] korea = {"접을 수 있는 대형가방"};
         String[] japan = {"110V 플로그 어댑터","동전지갑","접을 수 있는 대형가방"};
+        String[] china = {"vpn(중국은 sns접속 불가!)","황사마스크"};
+        String[] south_asia = {"모기 퇴치제","자외선 차단제","휴대용 선풍기"};
+        String[] etc = {"전압 변환기"};
 
         String[] Celsius_30 = {"반팔 상의","샌들","반바지"};
         String[] Celsius_20 = {"얇은 긴팔 상의","셔츠","긴바지","반팔"};
@@ -186,22 +192,64 @@ public class index  extends Activity
         String[] loadSum = {};
         String[] items = {};
 
-        if(latitude_ave>=30.02 && latitude_ave <=45.86 && longitude_ave >=128.24 && longitude_ave <=149.27) // 위도,경도가 일본영역
+
+         String countryName = getCountryName(context,latitude_ave,longitude_ave);
+
+        if(countryName.equals("Japan")) // 위도,경도가 일본영역
         {
             Attractions.setText("당신의 여행지는 '일본' 이군요?");
             country = japan;
-           if(month_ave==1 || month_ave==2 || month_ave ==12)  // month_ave가 1,2월
-                temperature = Celsius_00;
-            else if(month_ave==3 || month_ave==4 || month_ave ==10 || month_ave==11)  // month_ave가 3,4,10,11월
-                temperature = Celsius_10;
-
-           else if(month_ave==5 || month_ave==9)  // month_ave가 5,9월
-               temperature = Celsius_20;
-
-           else if(month_ave==6 || month_ave==7 || month_ave==8)  // month_ave가 6,7,8월
-               temperature = Celsius_30;
 
         }
+        else if(countryName.equals("Korea")) // 위도,경도가 한국영역
+        {
+            Attractions.setText("당신의 여행지는 '한국' 이군요?");
+            country = korea;
+        }
+        else if(countryName.equals("China")) // 위도,경도가 한국영역
+        {
+            Attractions.setText("당신의 여행지는 '중국' 이군요?");
+            country = china;
+        }
+        else if(countryName.equals("Thailand") || countryName.equals("Philippine") || countryName.equals("Vietnam") || countryName.equals("Singapore") || countryName.equals("Laos") || countryName.equals("India") || countryName.equals("Bangladesh") || countryName.equals("Nepal") || countryName.equals("Myanmar"))
+        {
+            Attractions.setText("당신의 여행지는 '동남아' 이군요?");
+            country = south_asia;
+        }
+        else
+        {
+            Attractions.setText("당신의 여행지는 '"+countryName+"' 이군요?");
+            country = etc;
+        }
+
+        if(latitude_ave>=30 && latitude_ave <=40)
+        {
+            if (month_ave == 1 || month_ave == 2 || month_ave == 12)  // month_ave가 1,2,12월
+                temperature = Celsius_00;
+            else if (month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11)  // month_ave가 3,4,10,11월
+                temperature = Celsius_10;
+
+            else if (month_ave == 5 || month_ave == 9)  // month_ave가 5,9월
+                temperature = Celsius_20;
+
+            else if (month_ave == 6 || month_ave == 7 || month_ave == 8)  // month_ave가 6,7,8월
+                temperature = Celsius_30;
+        }
+
+        else if(latitude_ave>=20 && latitude_ave <=30)
+        {
+            if (month_ave == 1 || month_ave == 2 || month_ave == 12)  // month_ave가 1,2,12월
+                temperature = Celsius_00;
+            else if (month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11)  // month_ave가 3,4,10,11월
+                temperature = Celsius_10;
+
+            else if (month_ave == 5 || month_ave == 9)  // month_ave가 5,9월
+                temperature = Celsius_20;
+
+            else if (month_ave == 6 || month_ave == 7 || month_ave == 8)  // month_ave가 6,7,8월
+                temperature = Celsius_30;
+        }
+
         if(load.isFirst())
         {
             loadSum = new String[load.getCount()];
@@ -433,14 +481,13 @@ public class index  extends Activity
 
 
 
-        //회화 화면 클릭리스너
+        //회화 화면 클릭리스터
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 spinner1.setVisibility(View.VISIBLE);
                 spinner1.performClick();
                 spinner2.setVisibility(View.GONE);
-                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
@@ -455,29 +502,12 @@ public class index  extends Activity
                 spinner2.performClick();
                 spinner2.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
-                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
                 spinner7.setVisibility(View.GONE);
                 spinner8.setVisibility(View.GONE);
                 spinner9.setVisibility(View.GONE);
-            }
-        });
-
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                spinner3.performClick();
-                spinner3.setVisibility(View.VISIBLE);
-                spinner1.setVisibility(View.GONE);
-                spinner4.setVisibility(View.GONE);
-                spinner5.setVisibility(View.GONE);
-                spinner6.setVisibility(View.GONE);
-                spinner7.setVisibility(View.GONE);
-                spinner8.setVisibility(View.GONE);
-                spinner9.setVisibility(View.GONE);
-                spinner2.setVisibility(View.GONE);
             }
         });
 
@@ -488,7 +518,6 @@ public class index  extends Activity
                 spinner4.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
-                spinner3.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
                 spinner7.setVisibility(View.GONE);
@@ -503,7 +532,6 @@ public class index  extends Activity
                 spinner5.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
-                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
                 spinner7.setVisibility(View.GONE);
@@ -518,7 +546,6 @@ public class index  extends Activity
                 spinner6.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
-                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner7.setVisibility(View.GONE);
@@ -533,7 +560,6 @@ public class index  extends Activity
                 spinner7.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
-                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
@@ -548,7 +574,6 @@ public class index  extends Activity
                 spinner8.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
-                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
@@ -563,7 +588,6 @@ public class index  extends Activity
                 spinner9.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
-                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
@@ -653,40 +677,6 @@ public class index  extends Activity
                         gotoLanguageView();
                     } else if (selectedItem.equals("컴플레인")) {
                         dbHelper.insert("insert into spinnerSelect values('" + "B4" + "');");
-                        gotoLanguageView();
-                    }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-
-            });
-
-        }
-
-        {
-            arrayList = new ArrayList();
-            arrayList.add("선택하세요");
-            arrayList.add("체크인 카운터");
-            arrayList.add("기내");
-
-
-            ArrayAdapter<String> adapter3 = new ArrayAdapter<String>
-                    (this, android.R.layout.simple_spinner_dropdown_item, arrayList);
-            spinner3.setAdapter(adapter3);
-
-            spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    dbHelper.delete("delete from spinnerSelect;");
-                    selectedItem = (String) parent.getItemAtPosition(position);
-                    if (selectedItem.equals("체크인 카운터")) {
-                        dbHelper.insert("insert into spinnerSelect values('" + "C1" + "');");
-                        gotoLanguageView();
-                    } else if (selectedItem.equals("기내")) {
-                        dbHelper.insert("insert into spinnerSelect values('" + "C2" + "');");
                         gotoLanguageView();
                     }
                 }
@@ -947,6 +937,24 @@ public class index  extends Activity
 
         }
 
+    }
+
+    public static String getCountryName(Context context, double lat, double lng) {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(lat, lng, 1);
+            Address result;
+
+            if (addresses != null && !addresses.isEmpty()) {
+                return addresses.get(0).getCountryName();
+            }
+
+        } catch (IOException ignored) {
+            //do something
+        }
+
+        return null;
     }
 
     public void delShow()
