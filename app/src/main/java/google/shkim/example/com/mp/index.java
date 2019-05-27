@@ -93,6 +93,8 @@ public class index  extends Activity
         final Button button1 = (Button) findViewById(R.id.imgBtn1);
         final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
         final Button button2 = (Button) findViewById(R.id.imgBtn2);
+        final Spinner spinner3 = (Spinner)findViewById(R.id.spinner3);
+        final Button button3 = (Button)findViewById(R.id.imgBtn3);
         final Spinner spinner4 = (Spinner) findViewById(R.id.spinner4);
         final Button button4 = (Button) findViewById(R.id.imgBtn4);
         final Spinner spinner5 = (Spinner) findViewById(R.id.spinner5);
@@ -530,6 +532,7 @@ public class index  extends Activity
                 spinner1.setVisibility(View.VISIBLE);
                 spinner1.performClick();
                 spinner2.setVisibility(View.GONE);
+                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
@@ -544,6 +547,23 @@ public class index  extends Activity
                 spinner2.performClick();
                 spinner2.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
+                spinner3.setVisibility(View.GONE);
+                spinner4.setVisibility(View.GONE);
+                spinner5.setVisibility(View.GONE);
+                spinner6.setVisibility(View.GONE);
+                spinner7.setVisibility(View.GONE);
+                spinner8.setVisibility(View.GONE);
+                spinner9.setVisibility(View.GONE);
+            }
+        });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinner3.performClick();
+                spinner3.setVisibility(View.VISIBLE);
+                spinner1.setVisibility(View.GONE);
+                spinner2.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
@@ -560,6 +580,7 @@ public class index  extends Activity
                 spinner4.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
+                spinner3.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
                 spinner7.setVisibility(View.GONE);
@@ -574,6 +595,7 @@ public class index  extends Activity
                 spinner5.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
+                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
                 spinner7.setVisibility(View.GONE);
@@ -588,6 +610,7 @@ public class index  extends Activity
                 spinner6.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
+                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner7.setVisibility(View.GONE);
@@ -602,6 +625,7 @@ public class index  extends Activity
                 spinner7.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
+                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
@@ -616,6 +640,7 @@ public class index  extends Activity
                 spinner8.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
+                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
@@ -630,6 +655,7 @@ public class index  extends Activity
                 spinner9.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
+                spinner3.setVisibility(View.GONE);
                 spinner4.setVisibility(View.GONE);
                 spinner5.setVisibility(View.GONE);
                 spinner6.setVisibility(View.GONE);
@@ -719,6 +745,39 @@ public class index  extends Activity
                         gotoLanguageView();
                     } else if (selectedItem.equals("컴플레인")) {
                         dbHelper.insert("insert into spinnerSelect values('" + "B4" + "');");
+                        gotoLanguageView();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+
+            });
+
+        }
+
+        {
+            arrayList = new ArrayList();
+            arrayList.add("선택하세요");
+            arrayList.add("체크인 카운터");
+            arrayList.add("기내");
+
+            ArrayAdapter<String> adapter3 = new ArrayAdapter<String>
+                    (this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+            spinner3.setAdapter(adapter3);
+
+            spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    dbHelper.delete("delete from spinnerSelect;");
+                    selectedItem = (String) parent.getItemAtPosition(position);
+                    if (selectedItem.equals("체크인 카운터")) {
+                        dbHelper.insert("insert into spinnerSelect values('" + "C1" + "');");
+                        gotoLanguageView();
+                    } else if (selectedItem.equals("기내")) {
+                        dbHelper.insert("insert into spinnerSelect values('" + "C2" + "');");
                         gotoLanguageView();
                     }
                 }

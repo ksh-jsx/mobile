@@ -100,7 +100,7 @@ public class languageView extends Activity {
         };
 
         String[][] itemsC_1 = {
-                {"\\n짐은 몇 개까지 부칠 수 있나요?\n\nHow many bags can i check?\n\n하우 매니 백스 캔 아이 체크\\n",
+                {"\n짐은 몇 개까지 부칠 수 있나요?\n\nHow many bags can i check?\n\n하우 매니 백스 캔 아이 체크\n",
                         "\n비상구 근처 자리에 앉을 수 있을까요?\n\nCan i have a seat near the emergency exit?\n\n캔 아이 해브 어 싯 니어 더 이머전시 엑짓\n",
                         "\n깨지기 쉬운 물건이니 가방에 표시해 주세요.\n\nPlease mark this bag as 'fragile'.\n\n플리즈 마크 디스 백 에즈 '프레질'\n",
                         "\nC2 게이트로 가려면 어디로 가야 하나요?\n\nHow can i get to gate C2?\n\n하우 캔 아이 갯 투 게이트 씨투\n"},
@@ -109,17 +109,17 @@ public class languageView extends Activity {
                         "\n깨지기 쉬운 물건이니 가방에 표시해 주세요.\n\n割れ物だからバッグに表示してください。\n\n와레모노다카라 바그니 효지 시테 쿠다사이\n",
                         "\nC2 게이트로 가려면 어디로 가야 하나요?\n\nどうやってC2ゲートに行くことができますか？\n\n도 얏떼 C2 게토니 이쿠 코토가 데키마스카?\n"},
                 {"\n짐은 몇 개까지 부칠 수 있나요?\n\n我可以携带多少包？\n\n워 커이 지에따이 뚜 샤오 빠오?\n",
-                        "\n비상구 근처 자리에 앉을 수 있을까요?\n\n\n\n\n",
-                        "\n깨지기 쉬운 물건이니 가방에 표시해 주세요.\n\n\n\n\n",
-                        "\nC2 게이트로 가려면 어디로 가야 하나요?\n\n\n\n\n"},
+                        "\n비상구 근처 자리에 앉을 수 있을까요?\n\n我可以坐在紧急出口附近吗？\n\n워 커이 쭈어 짜이 찐찌 츄커우 푸찐 마?\n",
+                        "\n깨지기 쉬운 물건이니 가방에 표시해 주세요.\n\n请在袋子上做标记，因为它很脆弱。\n\n칭짜이 따이찌 샹 쭈 삐야오찌 이웨이 타 흔 츠이뤄\n",
+                        "\nC2 게이트로 가려면 어디로 가야 하나요?\n\n我在哪里去C2门？\n\n워 짜이 나니 취 C2 맨\n"},
                 {"\n짐은 몇 개까지 부칠 수 있나요?\n\nCombien de sacs puis-je porter?\n\n콩비안 드 섹 부비부 바크티?\n",
-                        "\n비상구 근처 자리에 앉을 수 있을까요?\n\n\n\n\n",
-                        "\n깨지기 쉬운 물건이니 가방에 표시해 주세요.\n\n\n\n\n",
-                        "\nC2 게이트로 가려면 어디로 가야 하나요?\n\n\n\n\n"},
+                        "\n비상구 근처 자리에 앉을 수 있을까요?\n\nPuis-je m'asseoir près de la sortie d'urgence?\n\n푸이지 매쑤아 프레 데 라 소티 듀어정스?\n",
+                        "\n깨지기 쉬운 물건이니 가방에 표시해 주세요.\n\nS'il vous plaît marquer sur le sac parce qu'il est fragile.\n\n씨 부 플레 마키 술 레 새크 파씨 킬 레 프라질\n",
+                        "\nC2 게이트로 가려면 어디로 가야 하나요?\n\nOù vais-je à la porte C2?\n\n우 붸제 엘레 보크티 C2?\n"},
                 {"\n짐은 몇 개까지 부칠 수 있나요?\n\n¿Cuántas bolsas puedo llevar?\n\n콴타스 볼사스 푸에도 뎨바?\n",
-                        "\n비상구 근처 자리에 앉을 수 있을까요?\n\n\n\n\n",
-                        "\n깨지기 쉬운 물건이니 가방에 표시해 주세요.\n\n\n\n\n",
-                        "\nC2 게이트로 가려면 어디로 가야 하나요?\n\n\n\n\n"}
+                        "\n비상구 근처 자리에 앉을 수 있을까요?\n\n¿Puedo sentarme cerca de la salida de emergencia?\n\n뿌에도 싼따르메 쎄르카 델 라 살리다 데 에메르쎈띠아\n",
+                        "\n깨지기 쉬운 물건이니 가방에 표시해 주세요.\n\nPor favor marque en la bolsa porque es frágil.\n\n포르 파보르 마르케 엔 라 볼사 포르케 에스 프라킬\n",
+                        "\nC2 게이트로 가려면 어디로 가야 하나요?\n\n¿A dónde voy a la puerta C2?\n\n아 돈데 보이 야 라 푸에르타 C2\n"}
         };
         String[][] itemsC_2 = {
                 {"\n여기는 제 자리입니다.\n\nThis is my seat\n\n디스 이즈 마이 싯\n",
@@ -134,9 +134,9 @@ public class languageView extends Activity {
                 {"\n여기는 제 자리입니다.\n\nCeci est ma place.\n\n스씨 에 마 플라스\n",
                         "\n짐 올리는 것 좀 도와주세요.\n\nS'il vous plaît, aidez-moi à élever mes bagages.\n\n싀 부 풀레 이으디 모아이 아이 일리비 메 베게지\n",
                         "\n혹시 담요 한 장만 더 줄 수 있나요?\n\nPouvez-vous me donner une couverture de plus?\n\n푸헤부 메 두네 운 쿠뱍듀 데 플리스\n"},
-                {"\n여기는 제 자리입니다.\n\n\n\n\n",
-                        "\n짐 올리는 것 좀 도와주세요.\n\n\n\n\n",
-                        "\n혹시 담요 한 장만 더 줄 수 있나요?\n\n\n\n\n"}
+                {"\n여기는 제 자리입니다.\n\nEste es mi asiento\n\n에스테 에즈 미 아씨엔또\n",
+                        "\n짐 올리는 것 좀 도와주세요.\n\nPor favor ayúdame a subir mi equipaje.\n\n뽀르 파보르 아유다메 아 수비어르 미 에키파떼\n",
+                        "\n혹시 담요 한 장만 더 줄 수 있나요?\n\n¿Me puedes dar una manta más?\n\n메 푸에데스 다르 우나 만타 마스?\n"}
         };
 
         String[][] itemsD_1 = {{"\n택시 승강장이 어디에 있나요?\n\nWhere is a taxi stop?\n\n웨얼 이즈 어 택시 스탑?\n","\n이 주소로 가 주세요\n\nTake me to this address, please\n\n태이크 미 투 디스 어드레스,플리즈\n","\n얼마예요?\n\nHow much is it?\n\n하우 머치 이즈 잇?\n","\n요금이 잘못된 것 같아요\n\nI don't think the fare is right.\n\n아이 돈 띵끄 더 페어 이즈 라잇\n"},
