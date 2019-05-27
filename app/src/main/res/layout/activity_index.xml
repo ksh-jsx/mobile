@@ -47,9 +47,19 @@
                         android:textColor="#33aabb"/>
                     <ListView
                         android:id="@+id/pakingList"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="10"></ListView>
+                    <TextView
+                        android:id="@+id/notice2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="일정을 먼저 추가해주세요"
+                        android:visibility="visible"
+                        android:paddingTop="100dp"
+                        android:textAlignment="center"
+                        android:textSize="20dp"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"

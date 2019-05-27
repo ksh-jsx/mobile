@@ -50,6 +50,7 @@ public class index  extends Activity
     Button del;
     ArrayList arrayList;
     private int count = 0;
+    String[] items;
     String selectedItem;
     final Context context = this;
     private static final String DEBUG_TAG = "{LOG_ANDROID}";
@@ -74,11 +75,17 @@ public class index  extends Activity
         final TextView TextTitle = (TextView) findViewById(R.id.textTitle);
         ListView listview = (ListView)findViewById(R.id.List_view);
         TextView noticeText = (TextView)findViewById(R.id.notice);
+        TextView noticeText2 = (TextView)findViewById(R.id.notice2);
         TextView textTitle = (TextView)findViewById(R.id.textTitle);
         TextView Attractions = (TextView)findViewById(R.id.AttractionName);
         final EditText setLoad = (EditText)findViewById(R.id.setLoad);
         Button loadBtn = (Button)findViewById(R.id.loadBtn);
+        ListView pakingList = (ListView)findViewById(R.id.pakingList);
 
+        String[] country = {};
+        String[] temperature = {};
+        String[] loadSum = {};
+        ;
 
         final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
         final Button button1 = (Button) findViewById(R.id.imgBtn1);
@@ -187,111 +194,117 @@ public class index  extends Activity
         Log.d(DEBUG_TAG, "longitude_ave : " + longitude_ave);
         month_ave /= month_count;
         Log.d(DEBUG_TAG, "month_ave : " + month_ave);
-        String[] country = {};
-        String[] temperature = {};
-        String[] loadSum = {};
-        String[] items = {};
+
 
 
          String countryName = getCountryName(context,latitude_ave,longitude_ave);
 
-        if(countryName.equals("Japan")) // 위도,경도가 일본영역
-        {
-            Attractions.setText("당신의 여행지는 '일본' 이군요?");
-            country = japan;
-
-        }
-        else if(countryName.equals("Korea")) // 위도,경도가 한국영역
-        {
-            Attractions.setText("당신의 여행지는 '한국' 이군요?");
-            country = korea;
-        }
-        else if(countryName.equals("China")) // 위도,경도가 한국영역
-        {
-            Attractions.setText("당신의 여행지는 '중국' 이군요?");
-            country = china;
-        }
-        else if(countryName.equals("Thailand") || countryName.equals("Philippine") || countryName.equals("Vietnam") || countryName.equals("Singapore") || countryName.equals("Laos") || countryName.equals("India") || countryName.equals("Bangladesh") || countryName.equals("Nepal") || countryName.equals("Myanmar"))
-        {
-            Attractions.setText("당신의 여행지는 '동남아' 이군요?");
-            country = south_asia;
-        }
-        else
-        {
-            Attractions.setText("당신의 여행지는 '"+countryName+"' 이군요?");
-            country = etc;
-        }
-
-        if(latitude_ave>=0 && latitude_ave <=10)
-        {
-                temperature = Celsius_30;
-        }
-
-        else if(latitude_ave>=10 && latitude_ave <=20)
-        {
-            if (month_ave == 1 || month_ave == 2 || month_ave == 12)  // month_ave가 1,2,12월
-                temperature = Celsius_20;
-
-            else
-                temperature = Celsius_30;
-        }
-
-        else if(latitude_ave>=20 && latitude_ave <=30)
-        {
-            if (month_ave == 1 || month_ave == 2 || month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11 || month_ave == 12)
-                temperature = Celsius_20;
-            else
-                temperature = Celsius_30;
-        }
-
-        else if(latitude_ave>=30 && latitude_ave <=40)
-        {
-            if (month_ave == 1 || month_ave == 2 || month_ave == 12)  // month_ave가 1,2,12월
-                temperature = Celsius_00;
-            else if (month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11)  // month_ave가 3,4,10,11월
-                temperature = Celsius_10;
-
-            else if (month_ave == 5 || month_ave == 9)  // month_ave가 5,9월
-                temperature = Celsius_20;
-
-            else if (month_ave == 6 || month_ave == 7 || month_ave == 8)  // month_ave가 6,7,8월
-                temperature = Celsius_30;
-        }
-
-        else if(latitude_ave>=30 && latitude_ave <=40)
-        {
-            if (month_ave == 1 || month_ave == 2 || month_ave == 12)  // month_ave가 1,2,12월
-                temperature = Celsius_00;
-            else if (month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11)  // month_ave가 3,4,10,11월
-                temperature = Celsius_10;
-
-            else if (month_ave == 5 || month_ave == 9)  // month_ave가 5,9월
-                temperature = Celsius_20;
-
-            else if (month_ave == 6 || month_ave == 7 || month_ave == 8)  // month_ave가 6,7,8월
-                temperature = Celsius_30;
-        }
-
-
-
-        if(load.isFirst())
-        {
-            loadSum = new String[load.getCount()];
-            for(int i=0;i<load.getCount();i++)
+            if (countryName.equals("Japan")) // 위도,경도가 일본영역
             {
-                loadSum[i] = load.getString(0);
-                load.moveToNext();
-            }
-        }
+                Attractions.setText("당신의 여행지는 '일본' 이군요?");
+                country = japan;
 
-        items = new String[necessary_items.length+temperature.length+loadSum.length+country.length];
-        System.arraycopy(country,0,items,0,country.length);
-        System.arraycopy(temperature,0,items,country.length,temperature.length);
-        System.arraycopy(loadSum,0,items,temperature.length,loadSum.length);
-        System.arraycopy(necessary_items,0,items,loadSum.length,necessary_items.length);
-        ArrayAdapter adapterPackng = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        ListView pakingList = (ListView)findViewById(R.id.pakingList);
-        pakingList.setAdapter(adapterPackng);
+            } else if (countryName.equals("Korea")) // 위도,경도가 한국영역
+            {
+                Attractions.setText("당신의 여행지는 '한국' 이군요?");
+                country = korea;
+            } else if (countryName.equals("China")) // 위도,경도가 중국영역
+            {
+                Attractions.setText("당신의 여행지는 '중국' 이군요?");
+                country = china;
+            } else if (countryName.equals("Thailand") || countryName.equals("Philippine") || countryName.equals("Vietnam") || countryName.equals("Singapore") || countryName.equals("Laos") || countryName.equals("India") || countryName.equals("Bangladesh") || countryName.equals("Nepal") || countryName.equals("Myanmar")) {
+                Attractions.setText("당신의 여행지는 '동남아' 이군요?");
+                country = south_asia;
+            } else {
+                Attractions.setText("당신의 여행지는 '" + countryName + "' 이군요?");
+                country = etc;
+            }
+
+            if (latitude_ave >= -10 && latitude_ave <= 10) {
+                temperature = Celsius_30;
+            } else if (latitude_ave >= 10 && latitude_ave <= 20) {
+                if (month_ave == 1 || month_ave == 2 || month_ave == 12)  // month_ave가 1,2,12월
+                    temperature = Celsius_20;
+
+                else
+                    temperature = Celsius_30;
+            } else if (latitude_ave <= -10 && latitude_ave >= -20) {
+                if (month_ave == 6 || month_ave == 7 || month_ave == 8)  // month_ave가 1,2,12월
+                    temperature = Celsius_20;
+
+                else
+                    temperature = Celsius_30;
+            } else if (latitude_ave >= 20 && latitude_ave <= 30) {
+                if (month_ave == 1 || month_ave == 2 || month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11 || month_ave == 12)
+                    temperature = Celsius_20;
+                else
+                    temperature = Celsius_30;
+            } else if (latitude_ave <= -20 && latitude_ave >= -30) {
+                if (month_ave == 1 || month_ave == 2 || month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11 || month_ave == 12)
+                    temperature = Celsius_30;
+                else
+                    temperature = Celsius_20;
+            } else if (latitude_ave >= 30 && latitude_ave <= 40) {
+                if (month_ave == 1 || month_ave == 2 || month_ave == 12)  // month_ave가 1,2,12월
+                    temperature = Celsius_00;
+                else if (month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11)  // month_ave가 3,4,10,11월
+                    temperature = Celsius_10;
+
+                else if (month_ave == 5 || month_ave == 9)  // month_ave가 5,9월
+                    temperature = Celsius_20;
+
+                else if (month_ave == 6 || month_ave == 7 || month_ave == 8)  // month_ave가 6,7,8월
+                    temperature = Celsius_30;
+            } else if (latitude_ave <= -30 && latitude_ave >= -40) {
+                if (month_ave == 6 || month_ave == 7 || month_ave == 8)
+                    temperature = Celsius_00;
+                else if (month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11)
+                    temperature = Celsius_20;
+
+                else if (month_ave == 5 || month_ave == 9)  // month_ave가 5,9월
+                    temperature = Celsius_10;
+
+                else if (month_ave == 12 || month_ave == 1 || month_ave == 2)
+                    temperature = Celsius_30;
+            } else if (latitude_ave >= 40 && latitude_ave <= 50) {
+                if (month_ave == 1 || month_ave == 2 || month_ave == 12 || month_ave == 11 || month_ave == 3)
+                    temperature = Celsius_20;
+                else if (month_ave == 4 || month_ave == 10 || month_ave == 5 || month_ave == 9)
+                    temperature = Celsius_10;
+
+                else if (month_ave == 6 || month_ave == 7 || month_ave == 8)
+                    temperature = Celsius_00;
+            } else if (latitude_ave >= 50 && latitude_ave <= 60) {
+                if (month_ave == 6 || month_ave == 7 || month_ave == 8)
+                    temperature = Celsius_00;
+                else
+                    temperature = Celsius_10;
+
+            } else
+                temperature = Celsius_00;
+
+
+            if(load.isFirst())
+            {
+                loadSum = new String[load.getCount()];
+                for(int i=0;i<load.getCount();i++)
+                {
+                    loadSum[i] = load.getString(0);
+                    load.moveToNext();
+                }
+            }
+
+            items = new String[necessary_items.length+temperature.length+loadSum.length+country.length];
+            System.arraycopy(country,0,items,0,country.length);
+            System.arraycopy(temperature,0,items,country.length,temperature.length);
+            System.arraycopy(loadSum,0,items,temperature.length,loadSum.length);
+            System.arraycopy(necessary_items,0,items,loadSum.length,necessary_items.length);
+            ArrayAdapter adapterPackng = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+
+            pakingList.setAdapter(adapterPackng);
+
+
+
         loadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -303,7 +316,6 @@ public class index  extends Activity
                 }
                 else
                 {
-                    dbHelper.delete("delete from baggage;");
                     Toast.makeText(getApplicationContext(),"저장 할 내용을 입력해주세요",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -316,7 +328,9 @@ public class index  extends Activity
         if(cursor1.getCount() != 0)
         {
             listview.setVisibility(View.VISIBLE);
+            pakingList.setVisibility(View.VISIBLE);
             noticeText.setVisibility(View.GONE);
+            noticeText2.setVisibility(View.GONE);
         }
         data = new ArrayList<>();
         final ArrayList<ItemData> oData = new ArrayList<>();
@@ -455,6 +469,7 @@ public class index  extends Activity
                     public void onClick(View item2) {
                         dbHelper.delete("delete from infos where _id = "+data.get(position).getId()+";");
                         oData.remove(position);
+                        items = new String[0];
                         onCreate(savedInstanceState);
 
                     }
