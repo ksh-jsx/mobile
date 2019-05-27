@@ -222,22 +222,30 @@ public class index  extends Activity
             country = etc;
         }
 
-        if(latitude_ave>=30 && latitude_ave <=40)
+        if(latitude_ave>=0 && latitude_ave <=10)
+        {
+                temperature = Celsius_30;
+        }
+
+        else if(latitude_ave>=10 && latitude_ave <=20)
         {
             if (month_ave == 1 || month_ave == 2 || month_ave == 12)  // month_ave가 1,2,12월
-                temperature = Celsius_00;
-            else if (month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11)  // month_ave가 3,4,10,11월
-                temperature = Celsius_10;
-
-            else if (month_ave == 5 || month_ave == 9)  // month_ave가 5,9월
                 temperature = Celsius_20;
 
-            else if (month_ave == 6 || month_ave == 7 || month_ave == 8)  // month_ave가 6,7,8월
+            else
                 temperature = Celsius_30;
         }
 
         else if(latitude_ave>=20 && latitude_ave <=30)
         {
+            if (month_ave == 1 || month_ave == 2 || month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11 || month_ave == 12)
+                temperature = Celsius_20;
+            else
+                temperature = Celsius_30;
+        }
+
+        else if(latitude_ave>=30 && latitude_ave <=40)
+        {
             if (month_ave == 1 || month_ave == 2 || month_ave == 12)  // month_ave가 1,2,12월
                 temperature = Celsius_00;
             else if (month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11)  // month_ave가 3,4,10,11월
@@ -249,6 +257,22 @@ public class index  extends Activity
             else if (month_ave == 6 || month_ave == 7 || month_ave == 8)  // month_ave가 6,7,8월
                 temperature = Celsius_30;
         }
+
+        else if(latitude_ave>=30 && latitude_ave <=40)
+        {
+            if (month_ave == 1 || month_ave == 2 || month_ave == 12)  // month_ave가 1,2,12월
+                temperature = Celsius_00;
+            else if (month_ave == 3 || month_ave == 4 || month_ave == 10 || month_ave == 11)  // month_ave가 3,4,10,11월
+                temperature = Celsius_10;
+
+            else if (month_ave == 5 || month_ave == 9)  // month_ave가 5,9월
+                temperature = Celsius_20;
+
+            else if (month_ave == 6 || month_ave == 7 || month_ave == 8)  // month_ave가 6,7,8월
+                temperature = Celsius_30;
+        }
+
+
 
         if(load.isFirst())
         {
