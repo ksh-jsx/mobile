@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,7 +43,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class index extends AppCompatActivity{
+public class index extends AppCompatActivity implements View.OnClickListener{
 
     ArrayList<data> myDataArr;
     myadapter adapter;
@@ -80,7 +81,16 @@ public class index extends AppCompatActivity{
         bottomRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         bottomRecyclerView.setAdapter(adapter);
 
-        
+        adapter.setOnItemClick(this);
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        int position = topRecyclerView.getChildAdapterPosition(view);
+        String numValue = myDataArr.get(position).content;
+        Toast.makeText(getApplicationContext(),numValue+"번째 리스트입니다",Toast.LENGTH_SHORT).show();
     }
 }
 
