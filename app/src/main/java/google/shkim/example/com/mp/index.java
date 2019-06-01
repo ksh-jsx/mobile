@@ -46,6 +46,7 @@ public class index  extends Activity
     private long   backPressedTime = 0;
     private ArrayList<ListItem> data = null;
     private int position;
+    int currentTab= 1 ;
     Button gotoPlan;
     Button del;
     ArrayList arrayList;
@@ -82,6 +83,7 @@ public class index  extends Activity
         TextView Attractions = (TextView)findViewById(R.id.AttractionName);
         final EditText setLoad = (EditText)findViewById(R.id.setLoad);
         Button loadBtn = (Button)findViewById(R.id.loadBtn);
+        Button subtractBtn = (Button)findViewById(R.id.subtractBtn);
         ListView pakingList = (ListView)findViewById(R.id.pakingList);
 
         String[] country = {};
@@ -129,7 +131,7 @@ public class index  extends Activity
         ts3.setIndicator(tabWidget2);
         tabhost.addTab(ts3) ;
 
-        tabhost.setCurrentTab(1);
+        tabhost.setCurrentTab(currentTab);
 
         String[] necessary_items = {"여권","현금","신용카드","바우처","볼펜","수첩","목베개","담요",
                 "안대","휴대폰 충전기","보조 배터리  --캐리어에 넣으면 안됨!","노트북","카메라","귀중품",
@@ -315,13 +317,62 @@ public class index  extends Activity
             public void onClick(View view) {
                 if(setLoad.getText().toString().length() > 1)
                 {
-                    String getText = setLoad.getText().toString();
-                    dbHelper.insert("insert into baggage values('" + getText + "');");
-                    onCreate(savedInstanceState);
+                    Cursor bag = dbHelper.select("select * from baggage");
+                    bag.moveToFirst();
+                    boolean istComplete = true;
+                    if(bag.getCount() != 0)
+                    {
+                        for (int i = 0; i < bag.getCount(); i++)
+                        {
+                            if (setLoad.getText().toString().equals(bag.getString(0)))
+                            {
+                                Toast.makeText(getApplicationContext(),"이미 들어있어요",Toast.LENGTH_SHORT).show();
+                                istComplete =false;
+                                break;
+                            }
+                            bag.moveToNext();
+                        }
+                    }
+
+                    if(istComplete)
+                    {
+                        String getText = setLoad.getText().toString();
+                        dbHelper.insert("insert into baggage values('" + getText + "');");
+                        currentTab = 0;
+                        onCreate(savedInstanceState);
+                    }
                 }
                 else
                 {
                     Toast.makeText(getApplicationContext(),"저장 할 내용을 입력해주세요",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        subtractBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String getText = setLoad.getText().toString();
+                boolean delComplete = true;
+                Cursor bag = dbHelper.select("select * from baggage");
+                bag.moveToFirst();
+                if(bag.getCount() != 0)
+                {
+                    for (int i = 0; i < bag.getCount(); i++)
+                    {
+                        if (setLoad.getText().toString().equals(bag.getString(0)))
+                        {
+                            dbHelper.delete("delete from baggage where item = '" + getText + "';");
+                            currentTab = 0;
+                            delComplete = false;
+                            onCreate(savedInstanceState);
+
+                        }
+                        bag.moveToNext();
+                    }
+                }
+                if(delComplete)
+                {
+                    Toast.makeText(getApplicationContext(),"일치하는 짐이 없어요",Toast.LENGTH_SHORT).show();
                 }
             }
         });
