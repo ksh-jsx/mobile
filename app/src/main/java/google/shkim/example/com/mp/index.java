@@ -49,6 +49,8 @@ public class index extends AppCompatActivity{
 
     String temp1;
     String temp2;
+    int count = 0;
+    private static final String DEBUG_TAG = "{LOG_ANDROID}";
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -59,11 +61,11 @@ public class index extends AppCompatActivity{
         final data dbHelper = new data(getApplicationContext(), "project11.db", null, 1);
         final EditText nametxt = (EditText) findViewById(R.id.nametxt);
         final EditText personneltxt = (EditText) findViewById(R.id.personneltxt);
-        Button btn1 = (Button) findViewById(R.id.btn1);
-        Button btn2 = (Button) findViewById(R.id.btn2);
-        Button btn3 = (Button) findViewById(R.id.btn3);
-        Button btn4 = (Button) findViewById(R.id.btn4);
-        Button btn5 = (Button) findViewById(R.id.btn5);
+        final Button btn1 = (Button) findViewById(R.id.btn1);
+        final Button btn2 = (Button) findViewById(R.id.btn2);
+        final Button btn3 = (Button) findViewById(R.id.btn3);
+        final Button btn4 = (Button) findViewById(R.id.btn4);
+        final Button btn5 = (Button) findViewById(R.id.btn5);
 
         final EditText view1 = (EditText) findViewById(R.id.view1);
         final EditText view2 = (EditText) findViewById(R.id.view2);
@@ -79,37 +81,42 @@ public class index extends AppCompatActivity{
                 if (cursor1.isFirst()) {
                     dbHelper.delete("delete from singers;");
                     //onCreate(savedInstanceState);
+                    temp1 = "";
+                    temp2 = "";
                 }
 
-                if (cursor1.isFirst()) {
-                    for (int i = 0; i < cursor1.getCount(); i++) {
-                        temp1 += cursor1.getString(0) + "\n";
-                        temp2 += cursor1.getString(1) + "\n";
-                        cursor1.moveToNext();
-                    }
                     view1.setText("그룹이름\n----------\n" + temp1);
                     view2.setText("인원\n----------\n" + temp2);
-                }
+
             }
         });
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(nametxt.getText().length()>1 && personneltxt.getText().length() > 1)
+                Log.d(DEBUG_TAG, "getname : " + nametxt.getText());
+                Log.d(DEBUG_TAG, "getper : " + personneltxt.getText());
+                if(nametxt.getText().length()>0 && personneltxt.getText().length() > 0)
                     dbHelper.insert("insert into singers(name,personnel) values('" + nametxt.getText().toString() + "'," + personneltxt.getText() + ");");
 
                 Cursor cursor1 = dbHelper.select("select * from singers order by _id");
-                Log
+
                 cursor1.moveToFirst();
                 if (cursor1.isFirst()) {
+                    Log.d(DEBUG_TAG, "name : " + cursor1.getString(1));
+                    Log.d(DEBUG_TAG, "per : " + cursor1.getString(2));
+                    temp1="";
+                    temp2="";
                     for (int i = 0; i < cursor1.getCount(); i++) {
-                        temp1 += cursor1.getString(0) + "\n";
-                        temp2 += cursor1.getString(1) + "\n";
+
+                        temp1 += cursor1.getString(1) + "\n";
+                        temp2 += cursor1.getString(2) + "\n";
                         cursor1.moveToNext();
                     }
                     view1.setText("그룹이름\n----------\n" + temp1);
                     view2.setText("인원\n----------\n" + temp2);
+
+                    Toast.makeText(getApplicationContext(),"입력됨",Toast.LENGTH_SHORT).show();
                 }
                // onCreate(savedInstanceState);
             }
@@ -118,21 +125,22 @@ public class index extends AppCompatActivity{
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dbHelper.insert("update singers set personnel = " + personneltxt.getText() + " where name = '" + nametxt.getText().toString() + "';");
                 Cursor cursor1 = dbHelper.select("select * from singers order by _id");
                 cursor1.moveToFirst();
                 if (cursor1.isFirst()) {
-                    dbHelper.insert("update singers set personnel = " + personneltxt.getText() + " where name = '" + nametxt.getText().toString() + "';");
-                    // onCreate(savedInstanceState);
-                }
+                    temp1="";
+                    temp2="";
 
-                if (cursor1.isFirst()) {
                     for (int i = 0; i < cursor1.getCount(); i++) {
-                        temp1 += cursor1.getString(0) + "\n";
-                        temp2 += cursor1.getString(1) + "\n";
+                        temp1 += cursor1.getString(1) + "\n";
+                        temp2 += cursor1.getString(2) + "\n";
                         cursor1.moveToNext();
                     }
                     view1.setText("그룹이름\n----------\n" + temp1);
                     view2.setText("인원\n----------\n" + temp2);
+
+                    Toast.makeText(getApplicationContext(),"수정됨",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -140,22 +148,27 @@ public class index extends AppCompatActivity{
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dbHelper.delete("delete from singers where name = '" + nametxt.getText() + "' and personnel = " + personneltxt.getText() + ";");
                 Cursor cursor1 = dbHelper.select("select * from singers order by _id");
                 cursor1.moveToFirst();
                 if (cursor1.isFirst()) {
-                    dbHelper.delete("delete from singers where name = '" + nametxt.getText() + "' and personnel = " + personneltxt.getText() + ";");
-                   // onCreate(savedInstanceState);
-                }
+                    temp1="";
+                    temp2="";
 
-                if (cursor1.isFirst()) {
                     for (int i = 0; i < cursor1.getCount(); i++) {
-                        temp1 += cursor1.getString(0) + "\n";
-                        temp2 += cursor1.getString(1) + "\n";
+
+                        temp1 += cursor1.getString(1) + "\n";
+                        temp2 += cursor1.getString(2) + "\n";
                         cursor1.moveToNext();
                     }
                     view1.setText("그룹이름\n----------\n" + temp1);
                     view2.setText("인원\n----------\n" + temp2);
+
+                    Toast.makeText(getApplicationContext(),"삭제됨",Toast.LENGTH_SHORT).show();
+
                 }
+
+
             }
         });
 
@@ -165,10 +178,13 @@ public class index extends AppCompatActivity{
 
                 Cursor cursor1 = dbHelper.select("select * from singers order by _id");
                 cursor1.moveToFirst();
+                temp1="";
+                temp2="";
                 if (cursor1.isFirst()) {
                     for (int i = 0; i < cursor1.getCount(); i++) {
-                        temp1 += cursor1.getString(0) + "\n";
-                        temp2 += cursor1.getString(1) + "\n";
+
+                        temp1 += cursor1.getString(1) + "\n";
+                        temp2 += cursor1.getString(2) + "\n";
                         cursor1.moveToNext();
                     }
                     view1.setText("그룹이름\n----------\n" + temp1);
@@ -177,8 +193,20 @@ public class index extends AppCompatActivity{
             }
         });
 
-        view1.setText("그룹이름\n----------\n");
-        view2.setText("인원\n----------\n");
+        Cursor cursor1 = dbHelper.select("select * from singers order by _id");
+        cursor1.moveToFirst();
+        temp1="";
+        temp2="";
+        if (cursor1.isFirst()) {
+            for (int i = 0; i < cursor1.getCount(); i++) {
+
+                temp1 += cursor1.getString(1) + "\n";
+                temp2 += cursor1.getString(2) + "\n";
+                cursor1.moveToNext();
+            }
+            view1.setText("그룹이름\n----------\n" + temp1);
+            view2.setText("인원\n----------\n" + temp2);
+        }
 
     }
 }
