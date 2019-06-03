@@ -1,14 +1,47 @@
 package google.shkim.example.com.mp;
 
-public class data {
-    int color;
-    String colorName;
-    String content;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
-    public data(int color,String colorName, String content)
-    {
-        this.color = color;
-        this.colorName = colorName;
-        this.content = content;
+public class data extends SQLiteOpenHelper {
+
+    // DBHelper 생성자로 관리할 DB 이름과 버전 정보를 받음
+    public data(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
     }
+
+    // DB를 새로 생성할 때 호출되는 함수
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // 새로운 테이블 생성
+        db.execSQL("CREATE TABLE IF NOT EXISTS singers (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, personnel INTERGER);");
+
+    }
+
+    // DB 업그레이드를 위해 버전이 변경될 때 호출되는 함수
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+
+    public void insert(String _query) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(_query);
+        db.close();
+    }
+
+    public Cursor select(String _query){
+        SQLiteDatabase db = getReadableDatabase();
+        return db.rawQuery(_query,null);
+    }
+
+    public void delete(String _query) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(_query);
+        db.close();
+
+    }
+
 }

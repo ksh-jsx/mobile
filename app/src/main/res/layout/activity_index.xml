@@ -6,44 +6,96 @@
     tools:context=".index"
     android:orientation="vertical"
     android:id="@+id/base">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/main_top_recyclerview"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        >
-
-    </android.support.v7.widget.RecyclerView>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#c3c3c3"
-        />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/main_center_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        >
-
-    </android.support.v7.widget.RecyclerView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#c3c3c3"
-        />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/main_bottom_recyclerview"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="이름 :"
+            android:textSize="30dp"
+            android:gravity="center_vertical"/>
+        <EditText
+            android:id="@+id/nametxt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        >
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="인원 :"
+            android:textSize="30dp"
+            android:gravity="center_vertical"/>
+        <EditText
+            android:id="@+id/personneltxt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
 
-    </android.support.v7.widget.RecyclerView>
-
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="초기화"/>
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="입력"/>
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="수정"/>
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="삭제"/>
+        <Button
+            android:id="@+id/btn5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="조회"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7">
+        <EditText
+            android:id="@+id/view1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            />
+        <EditText
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
 
 </LinearLayout>
 
