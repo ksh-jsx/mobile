@@ -74,7 +74,7 @@ public class index  extends Activity
         ImageView tabWidget2 = new ImageView(this);
         tabWidget2.setImageResource(R.drawable.tab_02);
 
-        final Database dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
+        final Database dbHelper = new Database(getApplicationContext(), "travelHelper.db", null, 1);
         final TextView TextTitle = (TextView) findViewById(R.id.textTitle);
         ListView listview = (ListView)findViewById(R.id.List_view);
         TextView noticeText = (TextView)findViewById(R.id.notice);

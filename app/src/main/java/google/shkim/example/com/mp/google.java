@@ -102,7 +102,7 @@ public class google extends FragmentActivity
         setContentView(R.layout.activity_google);
         mLayout = findViewById(R.id.layout_google);
         setTitle("");
-        dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
+        dbHelper = new Database(getApplicationContext(), "travelHelper.db", null, 1);
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -248,7 +248,7 @@ public class google extends FragmentActivity
     public void onMapReady(GoogleMap googleMap)
     {
         mMap = googleMap;
-        dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
+        dbHelper = new Database(getApplicationContext(), "travelHelper.db", null, 1);
         Button okbtn = (Button)findViewById(R.id.saveBtn);
         Button calcelbtn = (Button)findViewById(R.id.cancelBtn);
         final Geocoder mGeocoder = new Geocoder(this);
@@ -510,7 +510,7 @@ public class google extends FragmentActivity
         markerOptions.snippet(markerSnippet);
         markerOptions.draggable(true);
 
-        dbHelper = new Database(getApplicationContext(), "project.db", null, 1);
+        dbHelper = new Database(getApplicationContext(), "travelHelper.db", null, 1);
         //currentMarker = mGoogleMap.addMarker(markerOptions);
         final Cursor cursor1 = dbHelper.select("select * from markerPoint;");
         cursor1.moveToFirst();
