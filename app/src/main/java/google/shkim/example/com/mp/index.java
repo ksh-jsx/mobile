@@ -573,29 +573,42 @@ public class index  extends Activity
         });
 
 
-
+        final boolean[] countClick ={true,true,true,true,true,true,true,true,true};
 
 
         //회화 화면 클릭리스터
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spinner1.setVisibility(View.VISIBLE);
                 spinner1.performClick();
-                spinner2.setVisibility(View.GONE);
-                spinner3.setVisibility(View.GONE);
-                spinner4.setVisibility(View.GONE);
-                spinner5.setVisibility(View.GONE);
-                spinner6.setVisibility(View.GONE);
-                spinner7.setVisibility(View.GONE);
-                spinner8.setVisibility(View.GONE);
-                spinner9.setVisibility(View.GONE);
+                if(countClick[0]) {
+                    spinner1.setVisibility(View.VISIBLE);
+                    spinner2.setVisibility(View.GONE);
+                    spinner3.setVisibility(View.GONE);
+                    spinner4.setVisibility(View.GONE);
+                    spinner5.setVisibility(View.GONE);
+                    spinner6.setVisibility(View.GONE);
+                    spinner7.setVisibility(View.GONE);
+                    spinner8.setVisibility(View.GONE);
+                    spinner9.setVisibility(View.GONE);
+                    countClick[0] = false;
+                    countClick[1] = true;
+                    countClick[2] = true;
+                    countClick[3] = true;
+                    countClick[4] = true;
+                    countClick[5] = true;
+                    countClick[6] = true;
+                    countClick[7] = true;
+                    countClick[8] = true;
+                    button1.performClick();
+
+                }
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spinner2.performClick();
+
                 spinner2.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner3.setVisibility(View.GONE);
@@ -605,13 +618,27 @@ public class index  extends Activity
                 spinner7.setVisibility(View.GONE);
                 spinner8.setVisibility(View.GONE);
                 spinner9.setVisibility(View.GONE);
+                spinner2.performClick();
+                if(countClick[1]) {
+                    countClick[1] = false;
+                    countClick[0] = true;
+                    countClick[2] = true;
+                    countClick[3] = true;
+                    countClick[4] = true;
+                    countClick[5] = true;
+                    countClick[6] = true;
+                    countClick[7] = true;
+                    countClick[8] = true;
+                    button2.performClick();
+
+                }
             }
         });
 
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spinner3.performClick();
+
                 spinner3.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
@@ -621,13 +648,27 @@ public class index  extends Activity
                 spinner7.setVisibility(View.GONE);
                 spinner8.setVisibility(View.GONE);
                 spinner9.setVisibility(View.GONE);
+                spinner3.performClick();
+                if(countClick[2]) {
+                    countClick[2] = false;
+                    countClick[1] = true;
+                    countClick[0] = true;
+                    countClick[3] = true;
+                    countClick[4] = true;
+                    countClick[5] = true;
+                    countClick[6] = true;
+                    countClick[7] = true;
+                    countClick[8] = true;
+                    button3.performClick();
+
+                }
             }
         });
 
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spinner4.performClick();
+
                 spinner4.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
@@ -637,6 +678,20 @@ public class index  extends Activity
                 spinner7.setVisibility(View.GONE);
                 spinner8.setVisibility(View.GONE);
                 spinner9.setVisibility(View.GONE);
+                spinner4.performClick();
+                if(countClick[3]) {
+                    countClick[3] = false;
+                    countClick[1] = true;
+                    countClick[2] = true;
+                    countClick[0] = true;
+                    countClick[4] = true;
+                    countClick[5] = true;
+                    countClick[6] = true;
+                    countClick[7] = true;
+                    countClick[8] = true;
+                    button4.performClick();
+
+                }
             }
         });
         button5.setOnClickListener(new View.OnClickListener() {
@@ -652,12 +707,25 @@ public class index  extends Activity
                 spinner7.setVisibility(View.GONE);
                 spinner8.setVisibility(View.GONE);
                 spinner9.setVisibility(View.GONE);
+                if(countClick[4]) {
+                    countClick[4] = false;
+                    countClick[1] = true;
+                    countClick[2] = true;
+                    countClick[3] = true;
+                    countClick[0] = true;
+                    countClick[5] = true;
+                    countClick[6] = true;
+                    countClick[7] = true;
+                    countClick[8] = true;
+                    button5.performClick();
+
+                }
             }
         });
         button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spinner6.performClick();
+
                 spinner6.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
@@ -667,12 +735,26 @@ public class index  extends Activity
                 spinner7.setVisibility(View.GONE);
                 spinner8.setVisibility(View.GONE);
                 spinner9.setVisibility(View.GONE);
+                spinner6.performClick();
+                if(countClick[5]) {
+                    countClick[5] = false;
+                    countClick[1] = true;
+                    countClick[2] = true;
+                    countClick[3] = true;
+                    countClick[4] = true;
+                    countClick[0] = true;
+                    countClick[6] = true;
+                    countClick[7] = true;
+                    countClick[8] = true;
+                    button6.performClick();
+
+                }
             }
         });
         button7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spinner7.performClick();
+
                 spinner7.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
@@ -682,12 +764,26 @@ public class index  extends Activity
                 spinner6.setVisibility(View.GONE);
                 spinner8.setVisibility(View.GONE);
                 spinner9.setVisibility(View.GONE);
+                spinner7.performClick();
+                if(countClick[6]) {
+                    countClick[6] = false;
+                    countClick[1] = true;
+                    countClick[2] = true;
+                    countClick[3] = true;
+                    countClick[4] = true;
+                    countClick[5] = true;
+                    countClick[0] = true;
+                    countClick[7] = true;
+                    countClick[8] = true;
+                    button7.performClick();
+
+                }
             }
         });
         button8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spinner8.performClick();
+
                 spinner8.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
@@ -697,12 +793,26 @@ public class index  extends Activity
                 spinner6.setVisibility(View.GONE);
                 spinner7.setVisibility(View.GONE);
                 spinner9.setVisibility(View.GONE);
+                spinner8.performClick();
+                if(countClick[7]) {
+                    countClick[7] = false;
+                    countClick[1] = true;
+                    countClick[2] = true;
+                    countClick[3] = true;
+                    countClick[4] = true;
+                    countClick[5] = true;
+                    countClick[6] = true;
+                    countClick[0] = true;
+                    countClick[8] = true;
+                    button8.performClick();
+
+                }
             }
         });
         button9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spinner9.performClick();
+
                 spinner9.setVisibility(View.VISIBLE);
                 spinner1.setVisibility(View.GONE);
                 spinner2.setVisibility(View.GONE);
@@ -712,12 +822,26 @@ public class index  extends Activity
                 spinner6.setVisibility(View.GONE);
                 spinner7.setVisibility(View.GONE);
                 spinner8.setVisibility(View.GONE);
+                spinner9.performClick();
+                if(countClick[8]) {
+                    countClick[8] = false;
+                    countClick[1] = true;
+                    countClick[2] = true;
+                    countClick[3] = true;
+                    countClick[4] = true;
+                    countClick[5] = true;
+                    countClick[6] = true;
+                    countClick[7] = true;
+                    countClick[0] = true;
+                    button9.performClick();
+
+                }
 
             }
         });
 
         //스피너 내용 삽입
-        {
+
             arrayList = new ArrayList();
             arrayList.add("선택하세요");
             arrayList.add("인사");
@@ -765,9 +889,9 @@ public class index  extends Activity
             });
 
 
-        }
 
-        {
+
+
             arrayList = new ArrayList();
             arrayList.add("선택하세요");
             arrayList.add("주문");
@@ -807,9 +931,9 @@ public class index  extends Activity
 
             });
 
-        }
 
-        {
+
+
             arrayList = new ArrayList();
             arrayList.add("선택하세요");
             arrayList.add("체크인 카운터");
@@ -840,9 +964,9 @@ public class index  extends Activity
 
             });
 
-        }
 
-        {
+
+
             arrayList = new ArrayList();
             arrayList.add("선택하세요");
             arrayList.add("택시");
@@ -886,8 +1010,8 @@ public class index  extends Activity
 
             });
 
-        }
-        {
+
+
             arrayList = new ArrayList();
             arrayList.add("선택하세요");
 
@@ -940,8 +1064,8 @@ public class index  extends Activity
 
             });
 
-        }
-        {
+
+
             arrayList = new ArrayList();
             arrayList.add("선택하세요");
             arrayList.add("예약");
@@ -978,8 +1102,8 @@ public class index  extends Activity
 
             });
 
-        }
-        {
+
+
             arrayList = new ArrayList();
             arrayList.add("선택하세요");
             arrayList.add("응급상황");
@@ -1019,9 +1143,9 @@ public class index  extends Activity
 
             });
 
-        }
 
-        {
+
+
             arrayList = new ArrayList();
             arrayList.add("선택하세요");
             arrayList.add("예약/진찰");
@@ -1053,8 +1177,8 @@ public class index  extends Activity
 
             });
 
-        }
-        {
+
+
             arrayList = new ArrayList();
             arrayList.add("선택하세요");
             arrayList.add("길 묻기");
@@ -1089,7 +1213,7 @@ public class index  extends Activity
 
         }
 
-    }
+
 
     public static String getCountryName(Context context, double lat, double lng) {
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
