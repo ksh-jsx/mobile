@@ -1250,7 +1250,7 @@ public class index  extends Activity
         else
         {
             backPressedTime = tempTime;
-            Toast.makeText(getApplicationContext(), "한번 더 뒤로가기 누르면 꺼짐.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "뒤로가기 한번 더  누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
 
     }
