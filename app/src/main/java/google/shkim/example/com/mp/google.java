@@ -213,7 +213,7 @@ public class google extends FragmentActivity
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.place_autocomplete);
         autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID,Place.Field.NAME));
-        Log.d(DEBUG_TAG, "a");
+        Log.d(TAG, "a");
 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
@@ -221,10 +221,10 @@ public class google extends FragmentActivity
                 // TODO: Get info about the selected place.
 
                 final LatLng location = place.getLatLng();
-                Log.d(DEBUG_TAG, "name : " + place.getName());
-                Log.d(DEBUG_TAG, "address : " + place.getAddress());
-                Log.d(DEBUG_TAG, "id : " + place.getId());
-                Log.d(DEBUG_TAG, "location : " + location.latitude + ", " + location.longitude);
+                Log.d(TAG, "name : " + place.getName());
+                Log.d(TAG, "address : " + place.getAddress());
+                Log.d(TAG, "id : " + place.getId());
+                Log.d(TAG, "location : " + location.latitude + ", " + location.longitude);
                 //세부정보 가져오기
                 mMap.clear();
                 int nameLength = place.getAddress().length();

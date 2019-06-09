@@ -14,16 +14,17 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue "string","google_maps_key","AIzaSyD6zR09u-q1u7nKV-nA6N3sff_cYiZ2KV0"
+            resValue "string", "google_maps_key", "AIzaSyD6zR09u-q1u7nKV-nA6N3sff_cYiZ2KV0"
+            debuggable true
         }
         debug {
-            resValue "string","google_maps_key","AIzaSyA-in3Y0CT92qW8ecSkzeyyQb28BZvOkiQ"
+            resValue "string", "google_maps_key", "AIzaSyA-in3Y0CT92qW8ecSkzeyyQb28BZvOkiQ"
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.android.gms:play-services-places:16.0.0'
