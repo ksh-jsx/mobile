@@ -31,9 +31,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,9 +42,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.security.Permission;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -124,6 +129,7 @@ public class google extends FragmentActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        Places.initialize(getApplicationContext(),"AIzaSyD6zR09u-q1u7nKV-nA6N3sff_cYiZ2KV0");
         initViews();
 
 
@@ -204,15 +210,14 @@ public class google extends FragmentActivity
 
 
     private void initViews() {
-        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
-                getFragmentManager().findFragmentById(R.id.place_autocomplete);
-
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.place_autocomplete);
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID,Place.Field.NAME));
         Log.d(DEBUG_TAG, "a");
 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            public void onPlaceSelected(Place place) {
-
+            public void onPlaceSelected(@NonNull Place place) {
                 // TODO: Get info about the selected place.
 
                 final LatLng location = place.getLatLng();
@@ -233,11 +238,10 @@ public class google extends FragmentActivity
                 lat = location.latitude;
                 lng = location.longitude;
                 adr = place.getAddress();
-
             }
 
             @Override
-            public void onError(Status status) {
+            public void onError(@NonNull Status status) {
                 // TODO: Handle the error.
                 Log.i("LOG", "An error occurred: " + status);
             }

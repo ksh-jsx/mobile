@@ -53,7 +53,7 @@
 
         <fragment
             android:id="@+id/place_autocomplete"
-            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
             android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_weight="1"
